@@ -121,6 +121,35 @@
                                             </div><!-- end card body -->
                                         </div><!-- end card -->
 
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Portfolio</h5>
+                                                <div class="d-flex flex-wrap gap-2">
+
+
+
+                                                   @if($profileData->registration_number)
+    <div class="card ribbon-box border shadow-none overflow-hidden">
+        <div class="card-body text-muted">
+            <div class="ribbon ribbon-primary ribbon-shape trending-ribbon">
+                <span class="trending-ribbon-text">Registration Number</span> 
+                <i class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+            </div>
+            <h5 class="fs-14 text-end mb-3">
+                {{ $profileData->registration_number }}
+            </h5>
+            <p class="mb-0">
+                Please note that your registration number is assigned based on your initial country of registration and cannot be changed or reset if you update your country information. This number is generated only once and remains the same throughout your membership.
+            </p>
+        </div>
+    </div>
+@endif
+
+
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div>
+
 
                                     </div>
                                     <!--end col-->

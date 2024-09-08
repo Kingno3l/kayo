@@ -86,6 +86,15 @@
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
 
+                                        @if ($errors->any())
+                                    <div class="alert alert-danger">
+<ul>
+    @foreach ($errors->all() as $error)
+        <li>{{$error}}</li>
+    @endforeach
+</ul>
+@endif
+
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Email</label>
                                             <input type="email" class="form-control" id="email" name="email"

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Redirect;
+
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('authentication.register');
     }
 
     /**
@@ -45,6 +47,14 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect with success message
+        $notification = array(
+            'message' => 'Registration Completed!',
+            'alert-type' => 'success'
+        );
+        
+        return Redirect()->route('dashboard')->with($notification);
+
+        // return redirect(route('dashboard', absolute: false));
     }
 }

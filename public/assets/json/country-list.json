@@ -1,0 +1,12 @@
+[
+    {
+        "flagImg": "path/to/flag1.svg",
+        "countryName": "Algeria",
+        "countryCode": "+234"
+    },
+    {
+        "flagImg": "path/to/flag2.svg",
+        "countryName": "France",
+        "countryCode": "+456"
+    }
+]

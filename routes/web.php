@@ -34,16 +34,34 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
     Route::get('/user/logout', [UserController::class, 'userLogout'])->name('user.logout');
 
     Route::get('/user/change/password', [UserController::class, 'userChangePassword'])->name('user.change.password');
-
+    
     Route::post('/user/password/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
-
+    
+    Route::get('/users', [UserController::class, 'userChangePassword'])->name('user.change.password');
 });
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.admin_dashboard');
 });
 
-Route::get('/test-alert', function () {
-    return view('test-alert');
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+
+    Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+
+    Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
+
+    Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
+
+    Route::get('admin/profile/edit', [UserController::class, 'userProfileEdit'])->name('user.profile.edit');
+
+    Route::post('/admin/profile/save', [AdminController::class, 'adminProfileSave'])->name('admin.profile.save');
+
+    Route::get('/admin/change/password', [AdminController::class, 'adminChangePassword'])->name('admin.change.password');
+
+    Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
+
+
 });
+
+//end of admin 
 

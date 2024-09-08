@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\User\UserController;
 
 
@@ -41,10 +42,8 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::get('admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.admin_dashboard');
-});
 
-Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.admin_dashboard');
 
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
 
@@ -52,13 +51,22 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
 
-    Route::get('admin/profile/edit', [UserController::class, 'userProfileEdit'])->name('user.profile.edit');
+    Route::get('admin/profile/edit', [UserController::class, 'adminProfileEdit'])->name('admin.profile.edit');
 
     Route::post('/admin/profile/save', [AdminController::class, 'adminProfileSave'])->name('admin.profile.save');
 
     Route::get('/admin/change/password', [AdminController::class, 'adminChangePassword'])->name('admin.change.password');
 
     Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
+
+    //users All Routes...
+    Route::controller(UserManagementController::class)->group(function () {
+
+        Route::get('/all/users', 'allUsers')->name('all.users');
+
+        Route::post('/update/user/status', 'updateUserStatus')->name('update.user.status');
+
+    });
 
 
 });

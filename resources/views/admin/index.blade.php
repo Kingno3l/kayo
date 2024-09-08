@@ -1,5 +1,10 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+    @php
+        $id = Auth::user()->id;
+        $profileData = App\Models\User::find($id);
+    @endphp
+
     <div class="page-content">
         <div class="container-fluid">
 
@@ -17,6 +22,34 @@
                         </div>
 
                     </div>
+                </div>
+
+                <div class="row mb-3 pb-1">
+                    <div class="col-12">
+                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+                            <div class="flex-grow-1">
+                                @php
+                                    // Get the current hour in 24-hour format
+                                    $currentHour = date('H');
+
+                                    // Determine the part of the day based on the current hour
+                                    if ($currentHour >= 5 && $currentHour < 12) {
+                                        $greeting = 'Good Morning';
+                                    } elseif ($currentHour >= 12 && $currentHour < 17) {
+                                        $greeting = 'Good Afternoon';
+                                    } else {
+                                        $greeting = 'Good Evening';
+                                    }
+                                @endphp
+
+                                <h4 class="fs-16 mb-1">{{ $greeting }}, {{ $profileData->name }}!</h4>
+                                <p class="text-muted mb-0">Here's what's happening with your store
+                                    today.</p>
+                            </div>
+
+                        </div><!-- end card header -->
+                    </div>
+                    <!--end col-->
                 </div>
             </div>
             <!-- end page title -->

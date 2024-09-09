@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\User\UserController;
 
@@ -73,3 +74,6 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
 //end of admin 
 
+Route::get('/pay', [PaymentController::class, 'pay']);
+Route::post('/pay', [PaymentController::class, 'make_payment'])->name('pay');
+Route::get('/pay/callback', [PaymentController::class, 'payment_callback'])->name('pay.callback');

@@ -69,7 +69,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails" role="tab">
                                         <i class="fas fa-home"></i>
-                                        Personal Details
+                                        Profile Details
                                     </a>
                                 </li>
                                

@@ -42,31 +42,13 @@
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Menu</span>
                 </li>
 
-                {{-- <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button"
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{route('profile.management')}}" role="button"
                         aria-expanded="false" aria-controls="sidebarAuth">
-                        <i data-feather="users" class="icon-dual"></i> <span data-key="t-authentication">Members
-                            Directory</span>
+                        <i data-feather="user-check" class="icon-dual"></i> <span data-key="t-authentication">Profile Management </span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarAuth">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="#allUsers" class="nav-link" data-key="t-all-users"> View All Registered
-                                    Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#completedUsers" class="nav-link" data-key="t-completed-users"> View Users with
-                                    Completed Registrations</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#financialUsers" class="nav-link" data-key="t-financial-users"> View Users with
-                                    Financial Transactions</a>
-                            </li>
-
-
-                        </ul>
-                    </div>
-                </li> --}}
+                   
+                </li>
 
 
 

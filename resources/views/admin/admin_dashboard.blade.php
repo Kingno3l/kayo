@@ -40,7 +40,14 @@
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+        <!-- Sweet Alerts js -->
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
 
+    <!-- Sweet alert init js-->
+    <script src="{{ asset('assets/js/pages/sweetalerts.init.js')}}"></script>
+
+<!-- Sweet Alert css-->
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
 
 </head>

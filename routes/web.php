@@ -3,9 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\ProfileManagementController;
 
 
 Route::get('/', function () {
@@ -40,13 +41,37 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
     Route::post('/user/password/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
     
     Route::get('/users', [UserController::class, 'userChangePassword'])->name('user.change.password');
+
+    //users All Routes...
+    Route::controller(PaymentController::class)->group(function () {
+
+        Route::get('/all/users', 'allUsers')->name('all.users');
+
+        Route::post('/update/user/status', 'updateUserStatus')->name('update.user.status');
+
+        Route::get('/pay', 'pay')->name('pay.view');
+        Route::post('/pay', 'make_payment')->name('pay');
+        Route::get('/pay/callback', 'payment_callback')->name('pay.callback');
+
+    });
+
+
+    //Personal Details All Routes...
+    Route::controller(ProfileManagementController::class)->group(function () {
+
+        Route::get('/profile-management', 'profileManagement')->name('profile.management');
+
+
+        
+
+    });
 });
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
-    Route::get('admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.admin_dashboard');
+    // Route::get('admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.admin_dashboard');
 
-    Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.admin_dashboard');
 
     Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
 
@@ -74,6 +99,3 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
 //end of admin 
 
-Route::get('/pay', [PaymentController::class, 'pay']);
-Route::post('/pay', [PaymentController::class, 'make_payment'])->name('pay');
-Route::get('/pay/callback', [PaymentController::class, 'payment_callback'])->name('pay.callback');

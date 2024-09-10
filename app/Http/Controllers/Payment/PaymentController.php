@@ -4,18 +4,37 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Payment\Payment;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
+
 
 class PaymentController extends Controller
 {
     public function pay()
     {
-        return view('pay.index');
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+
+        // Get the current year
+        $currentYear = Carbon::now()->year;
+
+        // Check if the user has made a payment for the current year
+        $hasPaid = Payment::where('user_id', $id)
+            ->whereYear('created_at', $currentYear)
+            ->exists();
+
+        // Pass both profileData and hasPaid to the view
+        return view('pay.index', compact('profileData', 'hasPaid'));
     }
+
     public function make_payment()
     {
         $formData = [
             'email' => request('email'),
-            'amount' => request('amount') * 100,
+            'amount' => 5000000,
             'callback_url' => route('pay.callback')
         ];
         $pay = json_decode($this->initiate_payment($formData));
@@ -36,7 +55,19 @@ class PaymentController extends Controller
         if ($response) {
             if ($response->status) {
                 $data = $response->data;
-                return view('pay.callback_page')->with(compact(['data']));
+
+                // Save the payment data to the model here
+                Payment::create([
+                    'user_id' => Auth::user()->id, // Assuming the user is authenticated
+                    'purpose' => 'Membership Yearly Dues', // Define the purpose of the payment
+                    'amount' => $data->amount / 100, // Amount in Naira (Paystack returns in kobo)
+                    'reference' => $data->reference,
+                    'email' => $data->customer->email, // Email from the Paystack response
+                ]);
+
+                // return view('pay.callback_page')->with(compact(['data']));
+                return view('pay.callback_page')->with(['paymentSuccess' => true]);
+
             } else {
                 return back()->withError($response->message);
             }

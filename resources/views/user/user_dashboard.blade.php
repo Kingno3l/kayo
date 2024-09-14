@@ -10,32 +10,39 @@
     <meta content="YIPS Africa" name="description" />
     <meta content="Themesbrand" name="author" />
 
-     <!-- multi.js css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/multi.js/multi.min.css') }}" />
-    <!-- autocomplete css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/@tarekraafat/autocomplete.js/css/autoComplete.css') }}">
+  <!-- App favicon -->
+<link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
+<!-- Bootstrap Css -->
+<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+<!-- Icons Css -->
+<link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- Layout config Js -->
-    <script src="{{ asset('assets/js/layout.js') }}"></script>
+<!-- App Css -->
+<link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- Bootstrap Css -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- Custom Css -->
+<link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    <!-- App Css -->
-    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- Filepond css -->
+<link rel="stylesheet" href="{{ asset('assets/libs/filepond/filepond.min.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ asset('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css') }}">
 
-    <!-- Custom Css -->
-    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- dropzone css -->
+<link rel="stylesheet" href="{{ asset('assets/libs/dropzone/dropzone.css') }}" type="text/css" />
 
-      <!-- Toastr CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<!-- multi.js css -->
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/multi.js/multi.min.css') }}" />
+
+<!-- autocomplete css -->
+<link rel="stylesheet" href="{{ asset('assets/libs/@tarekraafat/autocomplete.js/css/autoComplete.css') }}">
+
+<!-- Layout config Js -->
+<script src="{{ asset('assets/js/layout.js') }}"></script>
 
 
 </head>
@@ -115,40 +122,58 @@
 
     
 
+<!-- JAVASCRIPT -->
+<script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+<script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+<script src="{{ asset('assets/js/plugins.js') }}"></script>
 
-    <!-- JAVASCRIPT -->
-    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+<!-- dropzone -->
+<script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
 
-     <!-- multi.js -->
-    <script src="{{ asset('assets/libs/multi.js/multi.min.js') }}"></script>
-    <!-- autocomplete js -->
-    <script src="{{ asset('assets/libs/@tarekraafat/autocomplete.js/autoComplete.min.js') }}"></script>
 
-    <!-- init js -->
-    <script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
-    <!-- input spin init -->
-    <script src="{{ asset('assets/js/pages/form-input-spin.init.js') }}"></script>
-	<!-- input flag init -->
-    <script src="{{ asset('assets/js/pages/flag-input.init.js') }}"></script>
+<!-- filepond js -->
+<script src="{{ asset('assets/libs/filepond/filepond.min.js') }}"></script>
+<script src="{{ asset('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') }}"></script>
+<script src="{{ asset('assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}"></script>
+<script src="{{ asset('assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}"></script>
+<script src="{{ asset('assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
 
-    <!-- ApexCharts -->
-    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/form-file-upload.init.js') }}"></script>
 
-    <!-- Dashboard init -->
-    <script src="{{ asset('assets/js/pages/dashboard-crm.init.js') }}"></script>
 
-    <!-- App JS -->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+<!-- App JS -->
+<script src="{{ asset('assets/js/app.js') }}"></script>
 
-     <!-- jQuery (required for Toastr) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- Toastr JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+<!-- multi.js -->
+<script src="{{ asset('assets/libs/multi.js/multi.min.js') }}"></script>
+<!-- autocomplete js -->
+<script src="{{ asset('assets/libs/@tarekraafat/autocomplete.js/autoComplete.min.js') }}"></script>
+
+<!-- init js -->
+<script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
+<!-- input spin init -->
+<script src="{{ asset('assets/js/pages/form-input-spin.init.js') }}"></script>
+<!-- input flag init -->
+<script src="{{ asset('assets/js/pages/flag-input.init.js') }}"></script>
+
+<!-- ApexCharts -->
+<script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+
+<!-- Dashboard init -->
+<script src="{{ asset('assets/js/pages/dashboard-crm.init.js') }}"></script>
+
+
+<!-- jQuery (required for Toastr) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
 
     <script>
         @if (Session::has('message'))

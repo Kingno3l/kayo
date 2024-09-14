@@ -59,8 +59,13 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
     //Personal Details All Routes...
     Route::controller(ProfileManagementController::class)->group(function () {
 
-        Route::get('/profile-management', 'profileManagement')->name('profile.management');
+        Route::get('/profile-management', 'profileManagement')->name('profile-management');
 
+        Route::post('/profile-management', 'profileManagementStore')->name('profile-management.store');
+
+        Route::get('/profile-management/academic-qualification', 'profileManagementAcademicQualification')->name('profile-management.academic-qualification');
+
+        Route::post('/profile-management/academic-qualification', 'profileManagementAcademicQualificationStore')->name('profile-management.academic-qualification.store');
 
         
 

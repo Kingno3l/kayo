@@ -121,78 +121,76 @@
                                         </div>
 
 
-                                        <!-- Qualification Container -->
-                                        <div class="row" id="qualifications-container">
-                                            <div class="qualification-item">
+                                        <form action="{{ route('profile-management.store') }}" method="POST">
+                                            @csrf
+
+                                            <!-- Academic Qualifications Section -->
+                                            <div class="row" id="qualifications-container">
                                                 <div class="col-lg-12">
                                                     <div class="card">
                                                         <div class="card-header align-items-center d-flex">
                                                             <h4 class="card-title mb-0 flex-grow-1">Academic Qualifications
                                                             </h4>
-                                                        </div><!-- end card header -->
+                                                            <button type="button" class="btn btn-success ms-auto"
+                                                                onclick="addQualification()">Add Qualification</button>
+                                                        </div>
                                                         <div class="card-body">
                                                             <div class="live-preview">
-                                                                <div class="row">
-                                                                    <!-- Degree Dropdown -->
+                                                                <div class="row qualification-item">
                                                                     <div class="col-lg-6">
-                                                                        <div class="mb-3">
-                                                                            <label for="degreeInput"
-                                                                                class="form-label">Degree</label>
-                                                                            <select class="form-select mb-3"
-                                                                                id="degreeInput" name="degree[]"
-                                                                                aria-label="Select your Degree">
-                                                                                <option value="">Select your Degree
-                                                                                </option>
-                                                                                <option value="Bachelor's">Bachelor's
-                                                                                </option>
-                                                                                <option value="Master's">Master's</option>
-                                                                                <option value="Ph.D.">Ph.D.</option>
-                                                                                <option value="Diploma">Diploma</option>
-                                                                                <option value="Associate Degree">Associate
-                                                                                    Degree</option>
-                                                                            </select>
-                                                                        </div>
+                                                                        <label for="degreeInput"
+                                                                            class="form-label">Degree</label>
+                                                                        <select name="degree[]" class="form-control"
+                                                                            id="degreeInput">
+                                                                            <option value="" disabled selected>Select
+                                                                                Degree</option>
+                                                                            <option value="Bachelor of Science">Bachelor of
+                                                                                Science (B.Sc.)</option>
+                                                                            <option value="Bachelor of Arts">Bachelor of
+                                                                                Arts (B.A.)</option>
+                                                                            <option value="Master of Science">Master of
+                                                                                Science (M.Sc.)</option>
+                                                                            <option value="Master of Arts">Master of Arts
+                                                                                (M.A.)</option>
+                                                                            <option value="Doctor of Philosophy">Doctor of
+                                                                                Philosophy (Ph.D.)</option>
+                                                                            <option value="Diploma">Diploma</option>
+                                                                            <option value="Other">Other</option>
+                                                                        </select>
                                                                     </div>
 
-                                                                    <!-- Institution -->
                                                                     <div class="col-lg-6">
-                                                                        <div>
-                                                                            <label for="institutionInput"
-                                                                                class="form-label">Institution</label>
-                                                                            <input type="text" name="institution[]"
-                                                                                class="form-control"
-                                                                                id="institutionInput">
-                                                                        </div>
+                                                                        <label for="institutionInput"
+                                                                            class="form-label">Institution</label>
+                                                                        <input type="text" name="institution[]"
+                                                                            class="form-control" id="institutionInput">
                                                                     </div>
 
-                                                                    <!-- Year of Graduation Dropdown -->
                                                                     <div class="col-lg-6">
-                                                                        <div class="mb-3">
-                                                                            <label for="graduationYearInput"
-                                                                                class="form-label">Year of
-                                                                                Graduation</label>
-                                                                            <select class="form-select mb-3"
-                                                                                id="graduationYearInput"
-                                                                                name="graduation_year[]"
-                                                                                aria-label="Select Year of Graduation">
-                                                                                <option value="">Select Year of
-                                                                                    Graduation</option>
-                                                                                @for ($year = date('Y'); $year >= 1970; $year--)
-                                                                                    <option value="{{ $year }}">
-                                                                                        {{ $year }}</option>
-                                                                                @endfor
-                                                                            </select>
-                                                                        </div>
+                                                                        <label for="graduationYearInput"
+                                                                            class="form-label">Graduation Year</label>
+                                                                        <select name="graduation_year[]"
+                                                                            class="form-control" id="graduationYearInput">
+                                                                            <option value="" disabled selected>Select
+                                                                                Graduation Year</option>
+                                                                            <!-- Dynamically populate the last 50 years -->
+                                                                            <script>
+                                                                                const graduationYearSelect = document.getElementById('graduationYearInput');
+                                                                                const currentYear = new Date().getFullYear();
+                                                                                for (let year = currentYear; year >= currentYear - 50; year--) {
+                                                                                    let option = document.createElement('option');
+                                                                                    option.value = year;
+                                                                                    option.text = year;
+                                                                                    graduationYearSelect.appendChild(option);
+                                                                                }
+                                                                            </script>
+                                                                        </select>
                                                                     </div>
-
-                                                                    <!-- Grade/Award -->
                                                                     <div class="col-lg-6">
-                                                                        <div>
-                                                                            <label for="gradeInput"
-                                                                                class="form-label">Grade/Award</label>
-                                                                            <input type="text" name="grade[]"
-                                                                                class="form-control" id="gradeInput">
-                                                                        </div>
+                                                                        <label for="gradeInput"
+                                                                            class="form-label">Grade</label>
+                                                                        <input type="text" name="grade[]"
+                                                                            class="form-control" id="gradeInput">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -200,131 +198,225 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <!--end row-->
+                                            <!-- Employment History Section -->
+                                            <div class="row" id="employment-history-container">
+                                                <div class="col-lg-12">
+                                                    <div class="card">
+                                                        <div class="card-header align-items-center d-flex">
+                                                            <h4 class="card-title mb-0 flex-grow-1">Employment History</h4>
+                                                            <button type="button" class="btn btn-success ms-auto"
+                                                                onclick="addEmploymentHistory()">Add Employment</button>
+                                                        </div>
+                                                        <div class="row employment-history-item">
+                                                            <!-- Existing fields... -->
+                                                            <div class="col-lg-12">
+                                                                <button type="button"
+                                                                    class="btn btn-danger remove-btn d-none">Remove</button>
+                                                            </div>
+                                                        </div>
 
-                                        <!-- Add Qualification Button -->
-                                        <div class="col-lg-12 mb-3">
-                                            <button type="button" class="btn btn-primary" id="addQualificationBtn">Add
-                                                More
-                                                Qualification</button>
-                                        </div>
-                                    </div>
-                                    <!--end tab-pane-->
+                                                        <div class="row qualification-item">
+                                                            <!-- Existing fields... -->
+                                                            <div class="col-lg-12">
+                                                                <button type="button"
+                                                                    class="btn btn-danger remove-btn d-none">Remove</button>
+                                                            </div>
+                                                        </div>
 
-                                    <!-- Employment History -->
-<div class="row" id="employment-history-container">
-    <div class="employment-history-item">
+                                                        <div class="card-body">
+                                                            <div class="live-preview">
+                                                                <div class="row employment-history-item">
+                                                                    <div class="col-lg-6">
+                                                                        <label for="jobTitleInput" class="form-label">Job
+                                                                            Title</label>
+                                                                        <input type="text" name="job_title[]"
+                                                                            class="form-control" id="jobTitleInput">
+                                                                    </div>
+
+                                                                    <div class="col-lg-6">
+                                                                        <label for="companyInput"
+                                                                            class="form-label">Company</label>
+                                                                        <input type="text" name="company[]"
+                                                                            class="form-control" id="companyInput">
+                                                                    </div>
+
+                                                                    <div class="col-lg-6">
+                                                                        <label for="startDateInput"
+                                                                            class="form-label">Start Date</label>
+                                                                        <input type="date" name="start_date[]"
+                                                                            class="form-control" id="startDateInput">
+                                                                    </div>
+
+                                                                    <div class="col-lg-6">
+                                                                        <label for="endDateInput" class="form-label">End
+                                                                            Date</label>
+                                                                        <input type="date" name="end_date[]"
+                                                                            class="form-control" id="endDateInput">
+                                                                    </div>
+
+                                                                    <div class="col-lg-12">
+                                                                        <label for="responsibilitiesInput"
+                                                                            class="form-label">Responsibilities</label>
+                                                                        <textarea name="responsibilities[]" class="form-control" id="responsibilitiesInput" rows="3"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="col-lg-12">
+                                                <button type="submit" class="btn btn-primary">Save Profile</button>
+                                            </div>
+                                        </form>
+
+                                        <script>
+                                            // Function to add a new qualification entry
+                                            function addQualification() {
+                                                const qualificationsContainer = document.getElementById('qualifications-container');
+                                                const newQualificationItem = document.createElement('div');
+                                                newQualificationItem.classList.add('row', 'qualification-item');
+                                                newQualificationItem.innerHTML = `
+        <div class="col-lg-6">
+            <label for="degreeInput" class="form-label">Degree</label>
+            <select name="degree[]" class="form-control">
+                <option value="" disabled selected>Select Degree</option>
+                <!-- Degree options... -->
+            </select>
+        </div>
+        <div class="col-lg-6">
+            <label for="institutionInput" class="form-label">Institution</label>
+            <input type="text" name="institution[]" class="form-control">
+        </div>
+        <div class="col-lg-6">
+            <label for="graduationYearInput" class="form-label">Graduation Year</label>
+            <select name="graduation_year[]" class="form-control">
+                <!-- Graduation year options... -->
+            </select>
+        </div>
+        <div class="col-lg-6">
+            <label for="gradeInput" class="form-label">Grade</label>
+            <input type="text" name="grade[]" class="form-control">
+        </div>
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Employment History</h4>
-                </div><!-- end card header -->
-                <div class="card-body">
-                    <div class="live-preview">
-                        <div class="row">
-                            <!-- Job Title -->
-                            <div class="col-lg-6">
-                                <div>
-                                    <label for="jobTitleInput" class="form-label">Job Title</label>
-                                    <input type="text" name="job_title[]" class="form-control" id="jobTitleInput" placeholder="Enter Job Title">
-                                </div>
-                            </div>
-
-                            <!-- Company -->
-                            <div class="col-lg-6">
-                                <div>
-                                    <label for="companyInput" class="form-label">Company</label>
-                                    <input type="text" name="company[]" class="form-control" id="companyInput" placeholder="Enter Company Name">
-                                </div>
-                            </div>
-
-                            <!-- Start Date -->
-                            <div class="col-lg-6">
-                                <div>
-                                    <label for="startDateInput" class="form-label">Start Date</label>
-                                    <input type="date" name="start_date[]" class="form-control" id="startDateInput">
-                                </div>
-                            </div>
-
-                            <!-- End Date -->
-                            <div class="col-lg-6">
-                                <div>
-                                    <label for="endDateInput" class="form-label">End Date</label>
-                                    <input type="date" name="end_date[]" class="form-control" id="endDateInput">
-                                </div>
-                            </div>
-
-                            <!-- Responsibilities -->
-                            <div class="col-lg-12">
-                                <div>
-                                    <label for="responsibilitiesTextarea" class="form-label">Responsibilities</label>
-                                    <textarea class="form-control" name="responsibilities[]" id="responsibilitiesTextarea" rows="3" placeholder="Describe your responsibilities"></textarea>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button type="button" class="btn btn-danger remove-btn">Remove</button>
         </div>
-    </div>
-</div>
+    `;
+                                                qualificationsContainer.appendChild(newQualificationItem);
+                                                updateRemoveButtons();
+                                            }
 
-<!-- Add Employment Button -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="hstack gap-2 justify-content-end">
-            <button type="button" class="btn btn-secondary" id="addEmploymentHistory">Add Employment History</button>
+                                            // Function to add a new employment history entry
+                                            function addEmploymentHistory() {
+                                                const employmentHistoryContainer = document.getElementById('employment-history-container');
+                                                const newEmploymentItem = document.createElement('div');
+                                                newEmploymentItem.classList.add('row', 'employment-history-item');
+                                                newEmploymentItem.innerHTML = `
+        <div class="col-lg-6">
+            <label for="jobTitleInput" class="form-label">Job Title</label>
+            <input type="text" name="job_title[]" class="form-control">
         </div>
-    </div>
-</div>
+        <div class="col-lg-6">
+            <label for="companyInput" class="form-label">Company</label>
+            <input type="text" name="company[]" class="form-control">
+        </div>
+        <div class="col-lg-6">
+            <label for="startDateInput" class="form-label">Start Date</label>
+            <input type="date" name="start_date[]" class="form-control">
+        </div>
+        <div class="col-lg-6">
+            <label for="endDateInput" class="form-label">End Date</label>
+            <input type="date" name="end_date[]" class="form-control">
+        </div>
+        <div class="col-lg-12">
+            <label for="responsibilitiesInput" class="form-label">Responsibilities</label>
+            <textarea name="responsibilities[]" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-danger remove-btn">Remove</button>
+        </div>
+    `;
+                                                employmentHistoryContainer.appendChild(newEmploymentItem);
+                                                updateRemoveButtons();
+                                            }
+
+                                            // Function to update the visibility of remove buttons
+                                            function updateRemoveButtons() {
+                                                const qualificationItems = document.querySelectorAll('#qualifications-container .qualification-item');
+                                                const employmentItems = document.querySelectorAll('#employment-history-container .employment-history-item');
+
+                                                // Update qualification items
+                                                qualificationItems.forEach((item, index) => {
+                                                    item.querySelector('.remove-btn').classList.toggle('d-none', index === 0);
+                                                });
+
+                                                // Update employment history items
+                                                employmentItems.forEach((item, index) => {
+                                                    item.querySelector('.remove-btn').classList.toggle('d-none', index === 0);
+                                                });
+                                            }
+
+                                            // Event delegation for remove buttons
+                                            document.addEventListener('click', function(event) {
+                                                if (event.target.classList.contains('remove-btn')) {
+                                                    const item = event.target.closest('.row');
+                                                    item.remove();
+                                                    updateRemoveButtons();
+                                                }
+                                            });
+
+                                            // Initial call to ensure existing entries have correct remove button visibility
+                                            updateRemoveButtons();
+                                        </script>
 
 
 
 
 
-                                    <!--end tab-pane-->
+                                        <!--end tab-pane-->
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!--end col-->
                     </div>
-                    <!--end col-->
+                    <!--end row-->
+
                 </div>
-                <!--end row-->
+                <!-- container-fluid -->
+            </div><!-- End Page-content -->
 
-            </div>
-            <!-- container-fluid -->
-        </div><!-- End Page-content -->
+            <script>
+                // JavaScript to clone qualification fields
+                document.getElementById('addQualificationBtn').addEventListener('click', function() {
+                    // Find the first qualification item and clone it
+                    let container = document.getElementById('qualifications-container');
+                    let newQualification = container.querySelector('.qualification-item').cloneNode(true);
 
-        <script>
-            // JavaScript to clone qualification fields
-            document.getElementById('addQualificationBtn').addEventListener('click', function() {
-                // Find the first qualification item and clone it
-                let container = document.getElementById('qualifications-container');
-                let newQualification = container.querySelector('.qualification-item').cloneNode(true);
+                    // Clear the input values in the cloned item
+                    newQualification.querySelectorAll('input, select').forEach(input => input.value = '');
 
-                // Clear the input values in the cloned item
-                newQualification.querySelectorAll('input, select').forEach(input => input.value = '');
-
-                // Append the new qualification item to the container
-                container.appendChild(newQualification);
-            });
+                    // Append the new qualification item to the container
+                    container.appendChild(newQualification);
+                });
 
 
-<!-- JavaScript to Duplicate Employment History Section -->
-            document.getElementById('addEmploymentHistory').addEventListener('click', function() {
-        // Clone the first employment history item
-        var originalSection = document.querySelector('.employment-history-item');
-        var clonedSection = originalSection.cloneNode(true);
+                <
+                !--JavaScript to Duplicate Employment History Section-- >
+                document.getElementById('addEmploymentHistory').addEventListener('click', function() {
+                    // Clone the first employment history item
+                    var originalSection = document.querySelector('.employment-history-item');
+                    var clonedSection = originalSection.cloneNode(true);
 
-        // Clear input fields in the cloned section
-        clonedSection.querySelectorAll('input').forEach(input => input.value = '');
-        clonedSection.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+                    // Clear input fields in the cloned section
+                    clonedSection.querySelectorAll('input').forEach(input => input.value = '');
+                    clonedSection.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
 
-        // Append cloned section to the container
-        document.getElementById('employment-history-container').appendChild(clonedSection);
-    });
-        </script>
-    @endsection
+                    // Append cloned section to the container
+                    document.getElementById('employment-history-container').appendChild(clonedSection);
+                });
+            </script>
+        @endsection

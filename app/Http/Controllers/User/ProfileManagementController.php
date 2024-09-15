@@ -104,7 +104,16 @@ class ProfileManagementController extends Controller
         $id = Auth::user()->id;
         $profileData = User::find($id);
 
-        return view('user.profile.academic_qualification', compact('profileData'));
+        // Retrieve the academic qualifications for the specified user
+        $qualifications = AcademicQualification::where('user_id', $id)->get();
+        
+
+        // Optionally, you can include the associated document if needed
+        $document = Document::where('user_id', $id)
+            ->where('documentable_type', 'academic qualification')
+            ->first();
+
+        return view('user.profile.academic_qualification', compact('profileData', 'qualifications', 'document'));
 
     }
 

@@ -5,16 +5,16 @@ namespace App\Models\ProfileManagement;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AcademicQualification extends Model
+class Document extends Model
 {
     use HasFactory;
 
-
     protected $guarded = [];
 
-    public function documents()
+    // Define the polymorphic relationship
+    public function documentable()
     {
-        return $this->morphMany(Document::class, 'documentable');
+        return $this->morphTo();
     }
 
 }

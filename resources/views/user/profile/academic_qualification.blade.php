@@ -158,9 +158,6 @@
                                                 </div>
                                             </div>
 
-                                            <input type="file" name="document">
-
-
 
                                             {{-- <div class="row">
                                                 <div class="col-lg-12">
@@ -267,7 +264,7 @@
                                             <!-- end row -->
 
 
-
+<input type="file" name="document" id="">
 
                                             <!-- Submit Button -->
                                             <div class="col-lg-12 mt-4">
@@ -294,75 +291,94 @@
                 <!-- container-fluid -->
             </div><!-- End Page-content -->
 
-            <script>
-                // Function to add a new qualification entry
-                function addQualification() {
-                    const qualificationsContainer = document.getElementById('qualifications-container');
-                    const newQualificationItem = document.createElement('div');
-                    newQualificationItem.classList.add('row', 'qualification-item');
-                    newQualificationItem.innerHTML = `
-        <div class="col-lg-6">
-            <label for="degreeInput" class="form-label">Degree</label>
-            <select name="degree[]" class="form-control" id="degreeInput">
-                <option value="" disabled selected>Select Degree</option>
-                <option value="Bachelor of Science">Bachelor of Science (B.Sc.)</option>
-                <option value="Bachelor of Arts">Bachelor of Arts (B.A.)</option>
-                <option value="Master of Science">Master of Science (M.Sc.)</option>
-                <option value="Master of Arts">Master of Arts (M.A.)</option>
-                <option value="Doctor of Philosophy">Doctor of Philosophy (Ph.D.)</option>
-                <option value="Diploma">Diploma</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        <div class="col-lg-6">
-            <label for="institutionInput" class="form-label">Institution</label>
-            <input type="text" name="institution[]" class="form-control">
-        </div>
-        <div class="col-lg-6 mt-2">
-            <label for="graduationYearInput" class="form-label">Graduation Year</label>
-            <select name="graduation_year[]" class="form-control" id="graduationYearInput">
-            </select>
-        </div>
-        <div class="col-lg-6 mt-2">
-            <label for="gradeInput" class="form-label">Grade</label>
-            <input type="text" name="grade[]" class="form-control">
-        </div>
-        <div class="col-lg-12 mt-2">
-            <button type="button" class="btn btn-danger remove-btn">Remove</button>
-        </div>
-    `;
-                    qualificationsContainer.appendChild(newQualificationItem);
-                    populateGraduationYear(newQualificationItem.querySelector('#graduationYearInput'));
-                    updateRemoveButtons();
-                }
+          <script>
+    // Function to add a new qualification entry
+    function addQualification() {
+        const qualificationsContainer = document.getElementById('qualifications-container');
+        const newQualificationItem = document.createElement('div');
+        newQualificationItem.classList.add('col-lg-12');
+        newQualificationItem.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <div class="row qualification-item">
+                        <div class="col-lg-6">
+                            <label for="degreeInput" class="form-label">Degree</label>
+                            <select name="degree[]" class="form-control">
+                                <option value="" disabled selected>Select Degree</option>
+                                <option value="Bachelor of Science">Bachelor of Science (B.Sc.)</option>
+                                <option value="Bachelor of Arts">Bachelor of Arts (B.A.)</option>
+                                <option value="Master of Science">Master of Science (M.Sc.)</option>
+                                <option value="Master of Arts">Master of Arts (M.A.)</option>
+                                <option value="Doctor of Philosophy">Doctor of Philosophy (Ph.D.)</option>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="institutionInput" class="form-label">Institution</label>
+                            <input type="text" name="institution[]" class="form-control">
+                        </div>
+                        <div class="col-lg-6 mt-2">
+                            <label for="graduationYearInput" class="form-label">Graduation Year</label>
+                            <select name="graduation_year[]" class="form-control">
+                            </select>
+                        </div>
+                        <div class="col-lg-6 mt-2">
+                            <label for="gradeInput" class="form-label">Grade</label>
+                            <input type="text" name="grade[]" class="form-control">
+                        </div>
+                        <div class="col-lg-12 mt-2">
+                            <button type="button" class="btn btn-danger remove-btn">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        qualificationsContainer.appendChild(newQualificationItem);
+        populateGraduationYear(newQualificationItem.querySelector('select[name="graduation_year[]"]'));
+        updateRemoveButtons();
+    }
 
-                // Function to populate the Graduation Year dropdown dynamically
-                function populateGraduationYear(selectElement) {
-                    const currentYear = new Date().getFullYear();
-                    const startYear = 1980; // You can adjust this to your preferred starting year
+    // Function to populate the Graduation Year dropdown dynamically
+    function populateGraduationYear(selectElement) {
+        const currentYear = new Date().getFullYear();
+        const startYear = 1980; // You can adjust this to your preferred starting year
 
-                    for (let year = currentYear; year >= startYear; year--) {
-                        const option = document.createElement('option');
-                        option.value = year;
-                        option.textContent = year;
-                        selectElement.appendChild(option);
-                    }
-                }
+        for (let year = currentYear; year >= startYear; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            selectElement.appendChild(option);
+        }
+    }
 
+    // Function to update remove buttons' event listeners
+    function updateRemoveButtons() {
+        document.querySelectorAll('.remove-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.qualification-item').remove();
+            });
+        });
+    }
 
-                // JavaScript to clone qualification fields
-                document.getElementById('addQualificationBtn').addEventListener('click', function() {
-                    // Find the first qualification item and clone it
-                    let container = document.getElementById('qualifications-container');
-                    let newQualification = container.querySelector('.qualification-item').cloneNode(true);
+    // Initialize remove buttons event listeners on page load
+    document.addEventListener('DOMContentLoaded', updateRemoveButtons);
 
-                    // Clear the input values in the cloned item
-                    newQualification.querySelectorAll('input, select').forEach(input => input.value = '');
+    // JavaScript to clone qualification fields
+    document.getElementById('addQualificationBtn').addEventListener('click', function() {
+        // Find the first qualification item and clone it
+        let container = document.getElementById('qualifications-container');
+        let newQualification = container.querySelector('.qualification-item').cloneNode(true);
 
-                    // Append the new qualification item to the container
-                    container.appendChild(newQualification);
-                });
-            </script>
+        // Clear the input values in the cloned item
+        newQualification.querySelectorAll('input, select').forEach(input => input.value = '');
+
+        // Append the new qualification item to the container
+        container.appendChild(newQualification);
+        populateGraduationYear(newQualification.querySelector('select[name="graduation_year[]"]'));
+        updateRemoveButtons();
+    });
+</script>
 
 
         @endsection

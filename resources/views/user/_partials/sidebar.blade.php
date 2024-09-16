@@ -62,6 +62,9 @@
                              <li class="nav-item">
                                 <a href="{{route('profile-management.next-of-kin-and-referee')}}" class="nav-link" data-key="t-all-users"> Next of Kin & Referee Information</a>
                             </li>
+                              <li class="nav-item">
+                                <a href="{{route('profile-management.document-upload')}}" class="nav-link" data-key="t-all-users"> Document Uploads</a>
+                            </li>
                            
 
                         </ul>

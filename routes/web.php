@@ -74,7 +74,10 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
         Route::get('/profile-management/next-of-kin-and-referee', 'nextOfKinAndReferee')->name('profile-management.next-of-kin-and-referee');
 
         Route::post('/profile-management/next-of-kin-and-referee', 'nextOfKinAndRefereeStore')->name('profile-management.next-of-kin-and-referee.store');
+        
+        Route::get('/profile-management/document-upload', 'documentUpload')->name('profile-management.document-upload');
 
+        Route::post('/profile-management/document-upload', 'documentUploadStore')->name('profile-management.document-upload.store');
 
 
     });

@@ -50,7 +50,17 @@
                     <div class="collapse menu-dropdown" id="sidebarAuth">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
+                                <a href="{{ route('user.profile') }}" class="nav-link" data-key="t-all-users"> Manage Profile</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{route('profile-management.academic-qualification')}}" class="nav-link" data-key="t-all-users"> Academic Qualification</a>
+                            </li>
+
+                             <li class="nav-item">
+                                <a href="{{route('profile-management.employment-history')}}" class="nav-link" data-key="t-all-users"> Employment History</a>
+                            </li>
+                             <li class="nav-item">
+                                <a href="{{route('profile-management.next-of-kin-and-referee')}}" class="nav-link" data-key="t-all-users"> Next of Kin & Referee Information</a>
                             </li>
                            
 

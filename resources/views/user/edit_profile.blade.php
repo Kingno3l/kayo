@@ -110,6 +110,39 @@
                                         <!--end col-->
 
                                         <div class="col-lg-4">
+    <div class="mb-3">
+        <label for="maritalStatusInput" class="form-label">Marital Status</label>
+        <select class="form-select mb-3" id="maritalStatusInput" name="marital_status" aria-label="Marital Status">
+            <option value="" {{ $profileData->marital_status == '' ? 'selected' : '' }}>Select Marital Status</option>
+            <option value="Single" {{ $profileData->marital_status == 'Single' ? 'selected' : '' }}>Single</option>
+            <option value="Married" {{ $profileData->marital_status == 'Married' ? 'selected' : '' }}>Married</option>
+            <option value="Divorced" {{ $profileData->marital_status == 'Divorced' ? 'selected' : '' }}>Divorced</option>
+            <option value="Widowed" {{ $profileData->marital_status == 'Widowed' ? 'selected' : '' }}>Widowed</option>
+        </select>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="mb-3">
+        <label for="genderInput" class="form-label">Gender</label>
+        <select class="form-select mb-3" id="genderInput" name="gender" aria-label="Gender">
+            <option value="" {{ $profileData->gender == '' ? 'selected' : '' }}>Select Gender</option>
+            <option value="Male" {{ $profileData->gender == 'Male' ? 'selected' : '' }}>Male</option>
+            <option value="Female" {{ $profileData->gender == 'Female' ? 'selected' : '' }}>Female</option>
+        </select>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="mb-3">
+        <label for="dobInput" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" id="dobInput" name="date_of_birth" value="{{ $profileData->date_of_birth }}" aria-label="Date of Birth">
+    </div>
+</div>
+
+
+
+                                        <div class="col-lg-4">
                                             <div class="mb-3">
                                                 <label for="educationInput" class="form-label">Education</label>
                                                 <select class="form-select mb-3" id="educationInput" name="education"

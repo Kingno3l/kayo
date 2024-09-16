@@ -22,10 +22,9 @@
                             <p class="text-white text-opacity-75">Member</p>
                             <div class="hstack text-white-50 gap-1">
                                 <div class="me-2"><i
-                                        class="ri-map-pin-user-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>California,
-                                    United States</div>
+                                        class="ri-map-pin-user-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>   {!! !empty($profileData->country) ? $profileData->country : '<em> Update your profile </em>' !!}</div>
                                 <div><i
-                                        class="ri-building-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>Themesbrand
+                                        class="ri-building-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>   {!! !empty($profileData->employer) ? $profileData->employer : '<em>Update your profile</em>' !!}
                                 </div>
                             </div>
                         </div>
@@ -81,8 +80,9 @@
                                                             <tr>
                                                                 <th class="ps-0" scope="row">Mobile:</th>
                                                                 <td class="text-muted">
-                                                                    {!! !empty($profileData->phone) ? $profileData->phone : '<em>Update your profile</em>' !!}
-                                                                </td>
+    {!! !empty($profileData->phone) && !empty($profileData->country_code) ? $profileData->country_code . ' ' . $profileData->phone : '<em>Update your profile</em>' !!}
+</td>
+
                                                             </tr>
                                                             <tr>
                                                                 <th class="ps-0" scope="row">Country:</th>

@@ -82,6 +82,9 @@ class UserController extends Controller
         $data->short_bio = $request->short_bio;
         $data->country = $request->country;
         $data->phone = $request->phone;
+        $data->marital_status = $request->marital_status;
+        $data->gender = $request->gender;
+        $data->date_of_birth = $request->date_of_birth;
 
         // Ensure that 'country_code' is used to generate the registration number
         $country = $request->country;

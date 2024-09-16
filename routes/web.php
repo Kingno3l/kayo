@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
     
     Route::post('/user/password/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
     
-    Route::get('/users', [UserController::class, 'userChangePassword'])->name('user.change.password');
+    // Route::get('/users', [UserController::class, 'userChangePassword'])->name('user.change.password');
 
     //users All Routes...
     Route::controller(PaymentController::class)->group(function () {
@@ -67,7 +67,15 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
 
         Route::post('/profile-management/academic-qualification', 'profileManagementAcademicQualificationStore')->name('profile-management.academic-qualification.store');
 
-        
+        Route::get('/profile-management/employment-history', 'profileManagementEmploymentHistory')->name('profile-management.employment-history');
+
+        Route::post('/profile-management/employment-history', 'profileManagementEmploymentHistoryStore')->name('profile-management.employment-history.store');
+
+        Route::get('/profile-management/next-of-kin-and-referee', 'nextOfKinAndReferee')->name('profile-management.next-of-kin-and-referee');
+
+        Route::post('/profile-management/next-of-kin-and-referee', 'nextOfKinAndRefereeStore')->name('profile-management.next-of-kin-and-referee.store');
+
+
 
     });
 });

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\ProfileManagement;
 use App\Models\ProfileManagement\AcademicQualification;
+use App\Models\ProfileManagement\NextOfKinAndReferee;
+use App\Models\ProfileManagement\EmploymentHistory;
 use App\Models\ProfileManagement\Document;
 use Carbon\Carbon;
 
@@ -30,11 +32,6 @@ class ProfileManagementController extends Controller
         $employmentHistory = ProfileManagement::where('user_id', $id)
             ->where('type', 'employment_history')
             ->get();
-
-        // return view('edit-profile', [
-        //     'qualifications' => $qualifications,
-        //     'employmentHistory' => $employmentHistory
-        // ]);
 
 
         return view('user.manage_profile', compact('profileData', 'qualifications', 'employmentHistory'));
@@ -96,87 +93,27 @@ class ProfileManagementController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
-
+        
     }
-
+    
     public function profileManagementAcademicQualification()
     {
         $id = Auth::user()->id;
         $profileData = User::find($id);
-
+        
         // Retrieve the academic qualifications for the specified user
         $qualifications = AcademicQualification::where('user_id', $id)->get();
         
-
+        
         // Optionally, you can include the associated document if needed
         $document = Document::where('user_id', $id)
-            ->where('documentable_type', 'academic qualification')
-            ->first();
-
+        ->where('documentable_type', 'academic qualification')
+        ->first();
+        
         return view('user.profile.academic_qualification', compact('profileData', 'qualifications', 'document'));
-
+        
     }
-
-    // public function profileManagementAcademicQualificationStore(Request $request)
-    // {
-    //     // Validate incoming request
-    //     $request->validate([
-    //         'degree.*' => 'required|string',
-    //         'institution.*' => 'required|string',
-    //         'graduation_year.*' => 'required|integer',
-    //         'grade.*' => 'nullable|string',
-    //         'document' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Single file upload validation
-
-    //     ]);
-
-    //     // Retrieve the currently authenticated user (assuming academic qualifications belong to the user)
-    //     $user = auth()->user();
-
-    //     // Delete the user's current academic qualifications if you're updating them
-    //     AcademicQualification::where('user_id', $user->id)->delete();
-
-    //     // Loop through each qualification and store them
-    //     $degrees = $request->degree;
-    //     $institutions = $request->institution;
-    //     $graduation_years = $request->graduation_year;
-    //     $grades = $request->grade;
-    //     $document = $request->file('document'); // Get the uploaded file
-
-
-    //     for ($i = 0; $i < count($degrees); $i++) {
-    //         // Create a new academic qualification
-    //         $qualification = new AcademicQualification();
-    //         $qualification->user_id = $user->id;
-    //         $qualification->degree = $degrees[$i];
-    //         $qualification->institution = $institutions[$i];
-    //         $qualification->graduation_year = $graduation_years[$i];
-    //         $qualification->grade = $grades[$i] ?? null; // Allow nullable grade
-
-    //         if ($request->file('document')) {
-    //             // Delete the old photo if it exists
-    //             if ($qualification->document) {
-    //                 @unlink(public_path('profile_management/academic_qualification/' . $qualification->document));
-    //             }
-
-    //             // Save the new photo
-    //             $file = $request->file('document');
-    //             $filename = date('YmdHi') . $file->getClientOriginalName();
-    //             $file->move(public_path('profile_management/academic_qualification'), $filename);
-    //             $qualification->document = $filename;
-    //         }
-
-    //         // Save the qualification
-    //         $qualification->save();
-    //     }
-
-    //     $notification = array(
-    //         'message' => 'Academic Qualifications Updated Successfully!',
-    //         'alert-type' => 'success'
-    //     );
-    //     return redirect()->back()->with($notification);
-
-    // }
-
+    
     public function profileManagementAcademicQualificationStore(Request $request)
     {
         // Validate incoming request
@@ -247,183 +184,195 @@ class ProfileManagementController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function profileManagementEmploymentHistory()
+    {
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
 
+        // Retrieve the employment history for the specified user
+        $employmentHistories = EmploymentHistory::where('user_id', $id)->get();
 
-    // public function profileManagementAcademicQualificationStore(Request $request)
-    // {
+        // Optionally, you can include the associated document if needed
+        $document = Document::where('user_id', $id)
+            ->where('documentable_type', 'employment history')
+            ->first();
 
-    //     $request->validate([
-    //         'degree.*' => 'required|string',
-    //         'institution.*' => 'required|string',
-    //         'graduation_year.*' => 'required|integer',
-    //         'grade.*' => 'nullable|string',
-    //         'document' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Single file upload validation
-    //     ]);
+        return view('user.profile.employment_history', compact('profileData', 'employmentHistories', 'document'));
+    }
 
-    //     // Retrieve the currently authenticated user (assuming academic qualifications belong to the user)
-    //     $user = auth()->user();
+    public function profileManagementEmploymentHistoryStore(Request $request)
+    {
+        // Validate incoming request
+        $request->validate([
+            'job_title.*' => 'required|string',
+            'company.*' => 'required|string',
+            'start_date.*' => 'required|date',
+            'end_date.*' => 'nullable|date|after_or_equal:start_date.*',
+            'responsibilities.*' => 'nullable|string',
+            'document' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Single file upload validation
+        ]);
 
-    //     // Delete the user's current academic qualifications if you're updating them
-    //     AcademicQualification::where('user_id', $user->id)->delete();
+        // Retrieve the currently authenticated user
+        $user = auth()->user();
 
-    //     // Retrieve all fields from the request
-    //     $degrees = $request->degree;
-    //     $institutions = $request->institution;
-    //     $graduation_years = $request->graduation_year;
-    //     $grades = $request->grade;
-    //     $document = $request->file('document'); // Get the uploaded file
+        // Delete the user's current employment history if you're updating them
+        EmploymentHistory::where('user_id', $user->id)->delete();
 
-    //     for ($i = 0; $i < count($degrees); $i++) {
-    //         // Create a new academic qualification
-    //         $qualification = new AcademicQualification();
-    //         $qualification->user_id = $user->id;
-    //         $qualification->degree = $degrees[$i];
-    //         $qualification->institution = $institutions[$i];
-    //         $qualification->graduation_year = $graduation_years[$i];
-    //         $qualification->grade = $grades[$i] ?? null; // Allow nullable grade
+        // Loop through each employment history entry and store them
+        $job_titles = $request->job_title;
+        $companies = $request->company;
+        $start_dates = $request->start_date;
+        $end_dates = $request->end_date;
+        $responsibilities = $request->responsibilities;
+        $document = $request->file('document'); // Get the uploaded file
 
+        for ($i = 0; $i < count($job_titles); $i++) {
+            // Create a new employment history entry
+            $employment = new EmploymentHistory();
+            $employment->user_id = $user->id;
+            $employment->job_title = $job_titles[$i];
+            $employment->company = $companies[$i];
+            $employment->start_date = $start_dates[$i];
+            $employment->end_date = $end_dates[$i] ?? null; // Allow nullable end_date
+            $employment->responsibilities = $responsibilities[$i] ?? null; // Allow nullable responsibilities
+            $employment->save();
+        }
 
-    //         if ($request->file('document')) {
-    //             // Delete the old photo if it exists
-    //             if ($qualification->document) {
-    //                 @unlink(public_path('profile_management/academic_qualification/' . $qualification->document));
-    //             }
+        if ($document) {
+            // Find the existing document entry for the user with the type 'employment history'
+            $existingDoc = Document::where('user_id', $user->id)
+                ->where('documentable_type', 'employment history')
+                ->first();
 
-    //             // Save the new photo
-    //             $file = $request->file('document');
-    //             $filename = date('YmdHi') . $file->getClientOriginalName();
-    //             $file->move(public_path('profile_management/academic_qualification'), $filename);
-    //             $qualification->document = $filename;
-    //         }
+            // If an existing document is found, delete it from the storage
+            if ($existingDoc) {
+                // Remove the old file from the storage
+                @unlink(public_path('profile_management/employment_history/' . $existingDoc->document));
 
-    //         // Save the qualification
-    //         $qualification->save();
-    //     }
+                // Optionally, delete the entry from the documents table
+                $existingDoc->delete();
+            }
 
-    //     $notification = array(
-    //         'message' => 'Academic Qualifications Updated Successfully!',
-    //         'alert-type' => 'success'
-    //     );
-    //     return redirect()->back()->with($notification);
+            // Save the new document
+            $filename = date('YmdHi') . $document->getClientOriginalName();
+            $document->move(public_path('profile_management/employment_history'), $filename);
+
+            // Create a new document record
+            $doc = new Document();
+            $doc->user_id = $user->id;
+            $doc->documentable_type = 'employment history';
+            $doc->document = $filename;
+            $doc->save();
+        }
+
+        $notification = array(
+            'message' => 'Employment History Updated Successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    // public function nextOfKinAndReferee(){
+    //     $id = Auth::user()->id;
+    //     $profileData = User::find($id);
+    //     return view('user.profile.next_of_kin_and_referee', compact('profileData'));
 
     // }
+    public function nextOfKinAndReferee()
+    {
+        $userId = Auth::user()->id;
+        // Fetch existing record or create a new instance if not found
+        $profileData = NextOfKinAndReferee::where('user_id', $userId)->first();
 
-    // public function profileManagementAcademicQualificationStore(Request $request)
+        // If no record found, create a new instance with default values (optional)
+        if (!$profileData) {
+            $profileData = new NextOfKinAndReferee;
+        }
+
+        return view('user.profile.next_of_kin_and_referee', compact('profileData'));
+    }
+
+
+    // public function nextOfKinAndRefereeStore(Request $request)
     // {
-    //     $request->validate([
-    //         'degree.*' => 'required|string',
-    //         'institution.*' => 'required|string',
-    //         'graduation_year.*' => 'required|integer',
-    //         'grade.*' => 'nullable|string',
-    //         'document' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Single file upload validation
-    //     ]);
+    //     // Find the authenticated user
+    //     $id = Auth::user()->id;
+    //     $data = NextOfKinAndReferee::find($id);
 
-    //     // Retrieve the currently authenticated user
-    //     $user = auth()->user();
-
-    //     // Delete the user's current academic qualifications if you're updating them
-    //     AcademicQualification::where('user_id', $user->id)->each(function ($qualification) {
-    //         // Delete the old document if it exists
-    //         if ($qualification->document && file_exists(public_path('profile_management/academic_qualification/' . $qualification->document))) {
-    //             unlink(public_path('profile_management/academic_qualification/' . $qualification->document));
-    //         }
-    //     });
-
-    //     // Retrieve all fields from the request
-    //     $degrees = $request->degree;
-    //     $institutions = $request->institution;
-    //     $graduation_years = $request->graduation_year;
-    //     $grades = $request->grade;
-    //     $document = $request->file('document'); // Get the uploaded file
-
-    //     foreach ($degrees as $i => $degree) {
-    //         // Create a new academic qualification
-    //         $qualification = new AcademicQualification();
-    //         $qualification->user_id = $user->id;
-    //         $qualification->degree = $degree;
-    //         $qualification->institution = $institutions[$i];
-    //         $qualification->graduation_year = $graduation_years[$i];
-    //         $qualification->grade = $grades[$i] ?? null; // Allow nullable grade
-
-    //         // Save the new document if available
-    //         if ($document) {
-    //             $filename = date('YmdHi') . '_' . $document->getClientOriginalName();
-    //             $document->move(public_path('profile_management/academic_qualification'), $filename);
-    //             $qualification->document = $filename;
-    //         }
-
-    //         // Save the qualification
-    //         $qualification->save();
+    //     if (!$data) {
+    //         $notification = array(
+    //             'message' => 'User not found.',
+    //             'alert-type' => 'error'
+    //         );
+    //         return redirect()->back()->with($notification);
     //     }
 
+    //     // Assign values directly from the request, matching the form field names and database column names
+    //     $data->next_of_kin_full_name = $request->input('next_of_kin_full_name');
+    //     $data->next_of_kin_relationship = $request->input('next_of_kin_relationship');
+    //     $data->next_of_kin_email = $request->input('next_of_kin_email', null);
+    //     $data->next_of_kin_phone = $request->input('next_of_kin_phone', null);
+    //     $data->next_of_kin_address = $request->input('next_of_kin_address', null);
+
+    //     $data->referee1_full_name = $request->input('referee1_fullname', null);
+    //     $data->referee1_relationship = $request->input('referee1_relationship', null);
+    //     $data->referee1_email = $request->input('referee1_email', null);
+    //     $data->referee1_phone = $request->input('referee1_phone', null);
+    //     $data->referee1_address = $request->input('referee1_address', null);
+
+    //     $data->referee2_full_name = $request->input('referee2_fullname', null);
+    //     $data->referee2_relationship = $request->input('referee2_relationship', null);
+    //     $data->referee2_email = $request->input('referee2_email', null);
+    //     $data->referee2_phone = $request->input('referee2_phone', null);
+    //     $data->referee2_address = $request->input('referee2_address', null);
+
+    //     // Save the data into the database
+    //     $data->save();
+
+    //     // Redirect with success message
     //     $notification = array(
-    //         'message' => 'Academic Qualifications Updated Successfully!',
-    //         'alert-type' => 'success'
-    //     );
-    //     return redirect()->back()->with($notification);
-    // }
-
-    // public function profileManagementAcademicQualificationStore(Request $request)
-    // {
-    //     $request->validate([
-    //         'degree.*' => 'required|string',
-    //         'institution.*' => 'required|string',
-    //         'graduation_year.*' => 'required|integer',
-    //         'grade.*' => 'nullable|string',
-    //         'document' => 'required|file|mimes:pdf|max:2048', // Single file upload validation
-    //     ]);
-
-    //     // Retrieve the currently authenticated user
-    //     $user = auth()->user();
-
-    //     // Delete the user's current academic qualifications if you're updating them
-    //     AcademicQualification::where('user_id', $user->id)->each(function ($qualification) {
-    //         // Delete the old document if it exists
-    //         if ($qualification->document && file_exists(public_path('profile_management/academic_qualification/' . $qualification->document))) {
-    //             unlink(public_path('profile_management/academic_qualification/' . $qualification->document));
-    //         }
-    //     });
-
-    //     // Retrieve all fields from the request
-    //     $degrees = $request->degree;
-    //     $institutions = $request->institution;
-    //     $graduation_years = $request->graduation_year;
-    //     $grades = $request->grade;
-    //     $document = $request->file('document'); // Get the uploaded file
-
-    //     // Handle saving qualifications
-    //     $qualification = new AcademicQualification();
-    //     $qualification->user_id = $user->id;
-
-    //     // Save as JSON if there are multiple entries
-    //     if (is_array($degrees) && count($degrees) > 1) {
-    //         $qualification->degree = json_encode($degrees);
-    //         $qualification->institution = json_encode($institutions);
-    //         $qualification->graduation_year = json_encode($graduation_years);
-    //         $qualification->grade = json_encode($grades);
-    //     } else {
-    //         // Handle single qualification case
-    //         $qualification->degree = $degrees[0] ?? null;
-    //         $qualification->institution = $institutions[0] ?? null;
-    //         $qualification->graduation_year = $graduation_years[0] ?? null;
-    //         $qualification->grade = $grades[0] ?? null;
-    //     }
-
-    //     // Save the document if available
-    //     if ($document) {
-    //         $filename = date('YmdHi') . '_' . $document->getClientOriginalName();
-    //         $document->move(public_path('profile_management/academic_qualification'), $filename);
-    //         $qualification->document = $filename;
-    //     }
-
-    //     $qualification->save();
-
-    //     $notification = array(
-    //         'message' => 'Academic Qualifications Updated Successfully!',
+    //         'message' => 'Referee and Next of Kin Data Saved Successfully',
     //         'alert-type' => 'success'
     //     );
     //     return redirect()->back()->with($notification);
     // }
+
+    public function nextOfKinAndRefereeStore(Request $request)
+    {
+        // Get the ID of the currently authenticated user
+        $userId = Auth::id(); // Get the user's ID
+
+        // Create or update the NextOfKinAndReferee record
+        $data = NextOfKinAndReferee::updateOrCreate(
+            ['user_id' => $userId], // Find the record by user_id
+            [
+                'next_of_kin_full_name' => $request->input('next_of_kin_full_name'),
+                'next_of_kin_relationship' => $request->input('next_of_kin_relationship'),
+                'next_of_kin_email' => $request->input('next_of_kin_email', null),
+                'next_of_kin_phone' => $request->input('next_of_kin_phone', null),
+                'next_of_kin_address' => $request->input('next_of_kin_address', null),
+                'referee1_full_name' => $request->input('referee1_fullname', null),
+                'referee1_relationship' => $request->input('referee1_relationship', null),
+                'referee1_email' => $request->input('referee1_email', null),
+                'referee1_phone' => $request->input('referee1_phone', null),
+                'referee1_address' => $request->input('referee1_address', null),
+                'referee2_full_name' => $request->input('referee2_fullname', null),
+                'referee2_relationship' => $request->input('referee2_relationship', null),
+                'referee2_email' => $request->input('referee2_email', null),
+                'referee2_phone' => $request->input('referee2_phone', null),
+                'referee2_address' => $request->input('referee2_address', null),
+            ]
+        );
+
+        // Redirect with a success message
+        return redirect()->back()->with([
+            'message' => 'Referee and Next of Kin Data Saved Successfully',
+            'alert-type' => 'success'
+        ]);
+    }
+
+
+
 
 
 

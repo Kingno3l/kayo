@@ -42,19 +42,6 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
     
     // Route::get('/users', [UserController::class, 'userChangePassword'])->name('user.change.password');
 
-    //users All Routes...
-    Route::controller(PaymentController::class)->group(function () {
-
-        Route::get('/all/users', 'allUsers')->name('all.users');
-
-        Route::post('/update/user/status', 'updateUserStatus')->name('update.user.status');
-
-        Route::get('/pay', 'pay')->name('pay.view');
-        Route::post('/pay', 'make_payment')->name('pay');
-        Route::get('/pay/callback', 'payment_callback')->name('pay.callback');
-
-    });
-
 
     //Personal Details All Routes...
     Route::controller(ProfileManagementController::class)->group(function () {
@@ -79,6 +66,19 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
 
         Route::post('/profile-management/document-upload', 'documentUploadStore')->name('profile-management.document-upload.store');
 
+
+    });
+
+    //users All Routes...
+    Route::controller(PaymentController::class)->group(function () {
+
+        Route::get('/all/users', 'allUsers')->name('all.users');
+
+        Route::post('/update/user/status', 'updateUserStatus')->name('update.user.status');
+
+        Route::get('/pay', 'pay')->name('pay.view');
+        Route::post('/pay', 'make_payment')->name('pay');
+        Route::get('/pay/callback', 'payment_callback')->name('pay.callback');
 
     });
 });

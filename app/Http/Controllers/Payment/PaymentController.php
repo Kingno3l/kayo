@@ -37,7 +37,9 @@ class PaymentController extends Controller
             'amount' => 5000000,
             'callback_url' => route('pay.callback')
         ];
+        
         $pay = json_decode($this->initiate_payment($formData));
+        
         if ($pay) {
             if ($pay->status) {
                 return redirect($pay->data->authorization_url);
@@ -47,6 +49,32 @@ class PaymentController extends Controller
         } else {
             return back()->withError("Something went wrong");
         }
+
+        // $formData = [
+        //     'email' => request('email'),
+        //     'amount' => 5000000,
+        //     'callback_url' => route('pay.callback')
+        // ];
+
+        // $pay = json_decode($this->initiate_payment($formData));
+
+        // // Debug the $pay variable to check its structure and content
+        // dd($pay);
+
+        // // Check if the payment status is being set correctly
+        // if ($pay) {
+        //     dd($pay->status, $pay->data->authorization_url); // Debug status and authorization_url
+
+        //     if ($pay->status) {
+        //         return redirect($pay->data->authorization_url);
+        //     } else {
+        //         return back()->withError($pay->message);
+        //     }
+        // } else {
+        //     return back()->withError("Something went wrong");
+        // }
+
+
     }
 
     public function payment_callback()

@@ -1,7 +1,10 @@
 @extends('user.user_dashboard')
 @section('user')
 
-    <div class="page-content">
+
+<h1>Dashboard work in progress...</h1>
+
+    {{-- <div class="page-content">
         <div class="container-fluid">
 
             <!-- start page title -->
@@ -822,5 +825,5 @@
 
         </div>
         <!-- container-fluid -->
-    </div>
+    </div> --}}
 @endsection

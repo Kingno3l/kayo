@@ -1,5 +1,4 @@
 @extends('user.user_dashboard')
-
 @section('user')
     @if (session()->has('error'))
         {{ session()->get('error') }}

@@ -1,3 +1,9 @@
+  @php
+        $id = Auth::user()->id;
+        $instructorId = App\Models\User::find($id);
+        $status = $instructorId->status;
+    @endphp
+
 <div class="app-menu navbar-menu">
     <!-- LOGO -->
     <div class="navbar-brand-box">
@@ -41,6 +47,8 @@
 
                  <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Menu</span>
                 </li>
+
+                            @if ($status === '1')
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#profileManagement" data-bs-toggle="collapse" role="button"
@@ -91,7 +99,8 @@
                     </div>
                 </li>
 
-
+@else
+            @endif
 
                 
 

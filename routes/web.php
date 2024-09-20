@@ -28,9 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth', 'verified', 'user'])->group(function () {
+Route::middleware(['auth', 'verified', 'check.status', 'user'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'userDashboard'])->name('dashboard');
 
     Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
@@ -44,7 +45,9 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
     Route::get('/user/change/password', [UserController::class, 'userChangePassword'])->name('user.change.password');
     
     Route::post('/user/password/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
-    
+
+
+
     // Route::get('/users', [UserController::class, 'userChangePassword'])->name('user.change.password');
 
 
@@ -126,4 +129,8 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 });
 
 //end of admin 
+
+
+Route::get('/disabled', [UserController::class, 'disabled'])->name('disabled');
+
 

@@ -268,5 +268,12 @@ class UserController extends Controller
         );
         return back()->with($notification);
     }
+
+    public function disabled(){
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+
+        return view('user.disabled', compact('profileData'));
+    }
     
 }

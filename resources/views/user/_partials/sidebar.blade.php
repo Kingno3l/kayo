@@ -32,9 +32,9 @@
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDashboards"  role="button"
+                    <a class="nav-link menu-link" href="{{route('dashboard')}}"  role="button"
                         aria-expanded="false" aria-controls="sidebarDashboards">
-                        <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Dashboards</span>
+                        <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Dashboard</span>
                     </a>
                     
                 </li> <!-- end Dashboard Menu -->

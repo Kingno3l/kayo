@@ -80,52 +80,7 @@
                                     <span class="align-middle">English</span>
                                 </a>
 
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language"
-                                    data-lang="sp" title="Spanish">
-                                    <img src="assets/images/flags/spain.svg" alt="user-image" class="me-2 rounded"
-                                        height="18">
-                                    <span class="align-middle">Española</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language"
-                                    data-lang="gr" title="German">
-                                    <img src="assets/images/flags/germany.svg" alt="user-image" class="me-2 rounded"
-                                        height="18"> <span class="align-middle">Deutsche</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language"
-                                    data-lang="it" title="Italian">
-                                    <img src="assets/images/flags/italy.svg" alt="user-image" class="me-2 rounded"
-                                        height="18">
-                                    <span class="align-middle">Italiana</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language"
-                                    data-lang="ru" title="Russian">
-                                    <img src="assets/images/flags/russia.svg" alt="user-image" class="me-2 rounded"
-                                        height="18">
-                                    <span class="align-middle">русский</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language"
-                                    data-lang="ch" title="Chinese">
-                                    <img src="assets/images/flags/china.svg" alt="user-image" class="me-2 rounded"
-                                        height="18">
-                                    <span class="align-middle">中国人</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language"
-                                    data-lang="fr" title="French">
-                                    <img src="assets/images/flags/french.svg" alt="user-image" class="me-2 rounded"
-                                        height="18">
-                                    <span class="align-middle">français</span>
-                                </a>
+                              
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language"

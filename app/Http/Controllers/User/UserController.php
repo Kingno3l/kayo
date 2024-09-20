@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Payment\Payment;
+
 use App\Models\ProfileManagement\Social;
 
 
@@ -19,7 +21,15 @@ class UserController extends Controller
 
     public function userDashboard()
     {
-        return view('user.index');
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+
+        $currentYear = date('Y');
+        $hasPaidDues = Payment::where('user_id', $id)
+            ->whereYear('created_at', $currentYear)
+            ->exists();
+
+        return view('user.index', compact('profileData', 'hasPaidDues'));
     }
 
     public function userProfile()

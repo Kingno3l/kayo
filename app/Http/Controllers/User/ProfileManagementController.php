@@ -12,6 +12,7 @@ use App\Models\ProfileManagement\NextOfKinAndReferee;
 use App\Models\ProfileManagement\EmploymentHistory;
 use App\Models\ProfileManagement\Document;
 use App\Models\ProfileManagement\Social;
+use App\Models\Payment\Payment;
 use Carbon\Carbon;
 
 
@@ -624,6 +625,29 @@ class ProfileManagementController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function idCardShow()
+    {
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+
+        // Get the latest payment based on the created_at column
+        $latestPayment = Payment::where('user_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        if ($latestPayment) {
+            // Extract the year from the created_at date
+            $paymentYear = date('Y', strtotime($latestPayment->created_at));
+
+            // The "Valid Until" is always January of the next year
+            $validUntil = 'January - ' . ($paymentYear + 1);
+        } else {
+            // Handle cases where no payment is found
+            $validUntil = 'No payment found';
+        }
+
+        return view('user.id_card', compact('profileData', 'validUntil'));
+    }
 
 
 

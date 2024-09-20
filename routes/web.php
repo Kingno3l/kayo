@@ -72,6 +72,10 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
         Route::post('/profile-management/document-upload', 'documentUploadStore')->name('profile-management.document-upload.store');
 
         Route::post('/profile-management/socials-store', 'socialsStore')->name('socials.store');
+        
+        Route::get('/id-card', 'idCardShow')->name('id-card.show');
+        
+        Route::get('/id-card/download', 'idCardDownload')->name('id-card.download');
 
         
 

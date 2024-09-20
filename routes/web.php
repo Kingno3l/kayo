@@ -13,6 +13,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
+
 // Route::get('/dashboard', function () {
 //     return view('user.user_dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -66,6 +71,9 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
 
         Route::post('/profile-management/document-upload', 'documentUploadStore')->name('profile-management.document-upload.store');
 
+        Route::post('/profile-management/socials-store', 'socialsStore')->name('socials.store');
+
+        
 
     });
 

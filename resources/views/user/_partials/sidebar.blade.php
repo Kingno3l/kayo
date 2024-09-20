@@ -32,65 +32,68 @@
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="" role="button">
-                        <i data-feather="home" class="icon-dual"></i>
-                        <span data-key="t-dashboards">Dashboard</span>
+                    <a class="nav-link menu-link" href="#sidebarDashboards"  role="button"
+                        aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">Dashboards</span>
                     </a>
+                    
                 </li> <!-- end Dashboard Menu -->
 
-
-                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Menu</span>
+                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Menu</span>
                 </li>
 
-               <li class="nav-item">
-    <a class="nav-link menu-link" href="#profileManagement" data-bs-toggle="collapse" role="button"
-        aria-expanded="false" aria-controls="profileManagement">
-        <i data-feather="users" class="icon-dual"></i> <span data-key="t-authentication">Profile
-            Management</span>
-    </a>
-    <div class="collapse menu-dropdown" id="profileManagement">
-        <ul class="nav nav-sm flex-column">
-            <li class="nav-item">
-                <a href="{{ route('user.profile') }}" class="nav-link" data-key="t-all-users"> Manage
-                    Profile</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('profile-management.academic-qualification') }}" class="nav-link"
-                    data-key="t-all-users"> Academic Qualification</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('profile-management.employment-history') }}" class="nav-link"
-                    data-key="t-all-users"> Employment History</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('profile-management.next-of-kin-and-referee') }}" class="nav-link"
-                    data-key="t-all-users"> Next of Kin & Referee Information</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('profile-management.document-upload') }}" class="nav-link"
-                    data-key="t-all-users"> Document Uploads</a>
-            </li>
-        </ul>
-    </div>
-</li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#profileManagement" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="profileManagement">
+                        <i data-feather="users" class="icon-dual"></i> <span data-key="t-authentication">Profile
+                            Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="profileManagement">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('user.profile') }}" class="nav-link" data-key="t-all-users"> Manage
+                                    Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('profile-management.academic-qualification') }}" class="nav-link"
+                                    data-key="t-all-users"> Academic Qualification</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('profile-management.employment-history') }}" class="nav-link"
+                                    data-key="t-all-users"> Employment History</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('profile-management.next-of-kin-and-referee') }}" class="nav-link"
+                                    data-key="t-all-users"> Next of Kin & Referee Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('profile-management.document-upload') }}" class="nav-link"
+                                    data-key="t-all-users"> Document Uploads</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </li>
 
-<li class="nav-item">
-    <a class="nav-link menu-link" href="#financialManagement" data-bs-toggle="collapse" role="button"
-        aria-expanded="false" aria-controls="financialManagement">
-        <i data-feather="wallet" class="bx bx-money"></i>
-        <span data-key="t-authentication">Financial Management</span>
-    </a>
-    <div class="collapse menu-dropdown" id="financialManagement">
-        <ul class="nav nav-sm flex-column">
-            <li class="nav-item">
-                <a href="{{ route('pay.view') }}" class="nav-link" data-key="t-all-users"> Yearly
-                    Dues</a>
-            </li>
-        </ul>
-    </div>
-</li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#financialManagement" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="financialManagement">
+                        <i data-feather="credit-card" class="bx bx-money"></i>
+                        <span data-key="t-authentication">Financial Management</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="financialManagement">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('pay.view') }}" class="nav-link" data-key="t-all-users"> Yearly
+                                    Dues</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
 
+
+                
 
             </ul>
         </div>

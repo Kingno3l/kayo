@@ -22,9 +22,10 @@
                             <p class="text-white text-opacity-75">Member</p>
                             <div class="hstack text-white-50 gap-1">
                                 <div class="me-2"><i
-                                        class="ri-map-pin-user-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>   {!! !empty($profileData->country) ? $profileData->country : '<em> Update your profile </em>' !!}</div>
-                                <div><i
-                                        class="ri-building-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>   {!! !empty($profileData->employer) ? $profileData->employer : '<em>Update your profile</em>' !!}
+                                        class="ri-map-pin-user-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>
+                                    {!! !empty($profileData->country) ? $profileData->country : '<em> Update your profile </em>' !!}</div>
+                                <div><i class="ri-building-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>
+                                    {!! !empty($profileData->employer) ? $profileData->employer : '<em>Update your profile</em>' !!}
                                 </div>
                             </div>
                         </div>
@@ -80,8 +81,10 @@
                                                             <tr>
                                                                 <th class="ps-0" scope="row">Mobile:</th>
                                                                 <td class="text-muted">
-    {!! !empty($profileData->phone) && !empty($profileData->country_code) ? $profileData->country_code . ' ' . $profileData->phone : '<em>Update your profile</em>' !!}
-</td>
+                                                                    {!! !empty($profileData->phone) && !empty($profileData->country_code)
+                                                                        ? $profileData->country_code . ' ' . $profileData->phone
+                                                                        : '<em>Update your profile</em>' !!}
+                                                                </td>
 
                                                             </tr>
                                                             <tr>
@@ -121,29 +124,164 @@
                                             </div><!-- end card body -->
                                         </div><!-- end card -->
 
+                                         <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="flex-grow-1">
+                                    <h5 class="card-title mb-0">Socials</h5>
+                                </div>
+
+                            </div>
+
+
+                            <form action="{{ route('socials.store') }}" method="POST">
+                                @csrf
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                @endif
+                                <div class="mb-3 d-flex">
+                                    <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                        <span class="avatar-title rounded-circle fs-16 bg-info text-light">
+                                            <i class="ri-linkedin-fill"></i>
+                                        </span>
+                                    </div>
+                                    <input type="url" class="form-control" name="linkedin"
+                                        placeholder="www.linkedin.com/yips-africa">
+                                </div>
+                                <div class="mb-3 d-flex">
+                                    <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                        <span class="avatar-title rounded-circle fs-16 bg-primary text-light">
+                                            <i class="ri-facebook-fill"></i>
+                                        </span>
+                                    </div>
+                                    <input type="url" class="form-control" name="facebook"
+                                        placeholder="www.facebook.com/yips-africa">
+                                </div>
+                                <div class="mb-3 d-flex">
+                                    <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                        <span class="avatar-title rounded-circle fs-16 bg-danger text-light">
+                                            <i class="ri-instagram-fill"></i>
+                                        </span>
+                                    </div>
+                                    <input type="url" class="form-control" name="instagram"
+                                        placeholder="www.instagram.com/yips-africa">
+                                </div>
+                                <div class="mb-3 d-flex">
+                                    <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                        <span class="avatar-title rounded-circle fs-16 bg-warning text-light">
+                                            <i class="ri-snapchat-fill"></i>
+                                        </span>
+                                    </div>
+                                    <input type="url" class="form-control" name="snapchat"
+                                        placeholder="www.snapchat.com/yips-africa">
+                                </div>
+
+                                <div class="col-lg-12 mt-4">
+                                    <button type="submit" class="btn btn-success w-100">Save
+                                        Socials</button>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+
+                                        @if ($socials)
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title mb-4">Socials</h5>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        @if ($socials->linkedin)
+                                                            <div>
+                                                                <a href="{{ strpos($socials->linkedin, 'http') === 0 ? $socials->linkedin : 'https://' . $socials->linkedin }}"
+                                                                    class="avatar-xs d-block" target="_blank"
+                                                                    rel="noopener noreferrer">
+                                                                    <span
+                                                                        class="avatar-title rounded-circle fs-16 bg-info text-light">
+                                                                        <i class="ri-linkedin-fill"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        @endif
+                                                        @if ($socials->facebook)
+                                                            <div>
+                                                                <a href="{{ strpos($socials->facebook, 'http') === 0 ? $socials->facebook : 'https://' . $socials->facebook }}"
+                                                                    class="avatar-xs d-block" target="_blank"
+                                                                    rel="noopener noreferrer">
+                                                                    <span
+                                                                        class="avatar-title rounded-circle fs-16 bg-primary text-light">
+                                                                        <i class="ri-facebook-fill"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        @endif
+                                                        @if ($socials->instagram)
+                                                            <div>
+                                                                <a href="{{ strpos($socials->instagram, 'http') === 0 ? $socials->instagram : 'https://' . $socials->instagram }}"
+                                                                    class="avatar-xs d-block" target="_blank"
+                                                                    rel="noopener noreferrer">
+                                                                    <span
+                                                                        class="avatar-title rounded-circle fs-16 bg-danger text-light">
+                                                                        <i class="ri-instagram-fill"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        @endif
+                                                        @if ($socials->snapchat)
+                                                            <div>
+                                                                <a href="{{ strpos($socials->snapchat, 'http') === 0 ? $socials->snapchat : 'https://' . $socials->snapchat }}"
+                                                                    class="avatar-xs d-block" target="_blank"
+                                                                    rel="noopener noreferrer">
+                                                                    <span
+                                                                        class="avatar-title rounded-circle fs-16 bg-warning text-light">
+                                                                        <i class="ri-snapchat-fill"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div><!-- end card body -->
+                                            </div>
+                                        @endif
+
+
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title mb-4">Portfolio</h5>
+                                                <h5 class="card-title mb-4">Registration Number</h5>
                                                 <div class="d-flex flex-wrap gap-2">
 
 
 
-                                                   @if($profileData->registration_number)
-    <div class="card ribbon-box border shadow-none overflow-hidden">
-        <div class="card-body text-muted">
-            <div class="ribbon ribbon-primary ribbon-shape trending-ribbon">
-                <span class="trending-ribbon-text">Registration Number</span> 
-                <i class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
-            </div>
-            <h5 class="fs-14 text-end mb-3">
-                {{ $profileData->registration_number }}
-            </h5>
-            <p class="mb-0">
-                Please note that your registration number is assigned based on your initial country of registration and cannot be changed or reset if you update your country information. This number is generated only once and remains the same throughout your membership.
-            </p>
-        </div>
-    </div>
-@endif
+                                                    @if ($profileData->registration_number)
+                                                        <div class="card ribbon-box border shadow-none overflow-hidden">
+                                                            <div class="card-body text-muted">
+                                                                <div
+                                                                    class="ribbon ribbon-success ribbon-shape trending-ribbon">
+                                                                    <span class="trending-ribbon-text">Registration
+                                                                        Number</span>
+                                                                    <i
+                                                                        class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+                                                                </div>
+                                                                <h5 class="fs-14 text-end mb-3">
+                                                                    {{ $profileData->registration_number }}
+                                                                </h5>
+                                                                <p class="mb-0">
+                                                                    Please note that your registration number is assigned
+                                                                    based on your initial country of registration and cannot
+                                                                    be changed or reset if you update your country
+                                                                    information. This number is generated only once and
+                                                                    remains the same throughout your membership.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    @endif
 
 
                                                 </div>

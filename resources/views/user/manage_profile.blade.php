@@ -30,6 +30,8 @@
                     </div>
                     <!--end card-->
 
+                    
+
                     @if ($profileData->registration_number)
                         <div class="card ribbon-box border shadow-none overflow-hidden">
                             <div class="card-body text-muted">

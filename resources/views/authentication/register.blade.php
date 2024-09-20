@@ -58,7 +58,7 @@
                                     <img src="assets/images/logo-light.png" alt="" height="20">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
+                            <p class="mt-3 fs-15 fw-medium"> Yips Auth</p>
                         </div>
                     </div>
                 </div>
@@ -132,18 +132,7 @@
         <button class="btn btn-success w-100" type="submit" id="signup-button" disabled>Sign Up</button>
     </div>
 
-    <div class="mt-4 text-center">
-        <div class="signin-other-title">
-            <h5 class="fs-13 mb-4 title text-muted">Create account with</h5>
-        </div>
-
-        <div>
-            <button type="button" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></button>
-            <button type="button" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></button>
-            <button type="button" class="btn btn-dark btn-icon waves-effect waves-light"><i class="ri-github-fill fs-16"></i></button>
-            <button type="button" class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-twitter-fill fs-16"></i></button>
-        </div>
-    </div>
+   
 </form>
                                 </div>
                             </div>
@@ -173,8 +162,7 @@
                             <p class="mb-0 text-muted">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i>
-                                by Themesbrand
+                                </script> Yips Africa.
                             </p>
                         </div>
                     </div>

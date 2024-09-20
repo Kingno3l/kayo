@@ -11,6 +11,7 @@ use App\Models\ProfileManagement\AcademicQualification;
 use App\Models\ProfileManagement\NextOfKinAndReferee;
 use App\Models\ProfileManagement\EmploymentHistory;
 use App\Models\ProfileManagement\Document;
+use App\Models\ProfileManagement\Social;
 use Carbon\Carbon;
 
 
@@ -389,18 +390,18 @@ class ProfileManagementController extends Controller
             ->where('documentable_type', 'like', 'means of id - %')
             ->first();
 
-            
-            $meansOfIdentificationType = $meansOfIdentificationDoc ? substr($meansOfIdentificationDoc->documentable_type, 13) : '';
-            // return $meansOfIdentificationType;
 
-        
+        $meansOfIdentificationType = $meansOfIdentificationDoc ? substr($meansOfIdentificationDoc->documentable_type, 13) : '';
+        // return $meansOfIdentificationType;
+
+
         // Extract the other document
         $existingOtherDoc = Document::where('user_id', $userId)
             ->where('documentable_type', 'like', 'others - %')
             ->first();
         $documentName = $existingOtherDoc ? substr($existingOtherDoc->documentable_type, 8) : '';
 
-        
+
 
         return view('user.profile.document_upload', compact('profileData', 'documents', 'meansOfIdentificationType', 'documentName'));
     }
@@ -577,6 +578,52 @@ class ProfileManagementController extends Controller
         );
         return redirect()->back()->with($notification);
     }
+
+    public function socialsStore(Request $request)
+    {
+        // Validate the input fields
+        $request->validate([
+            'linkedin' => 'nullable|url|max:255',
+            'facebook' => 'nullable|url|max:255',
+            'instagram' => 'nullable|url|max:255',
+            'snapchat' => 'nullable|url|max:255',
+        ]);
+
+        // Check if all social fields are null
+        $allNull = is_null($request->input('linkedin')) &&
+            is_null($request->input('facebook')) &&
+            is_null($request->input('instagram')) &&
+            is_null($request->input('snapchat'));
+
+        // If all fields are null, send an error message
+        if ($allNull) {
+            $notification = [
+                'message' => 'At least one social media field must be filled out.',
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+
+        $userId = Auth::user()->id;
+
+        // Use updateOrCreate to either find or create a new entry
+        $social = Social::updateOrCreate(
+            ['user_id' => $userId], // This is the condition to find the record
+            [
+                'linkedin' => $request->input('linkedin'),
+                'facebook' => $request->input('facebook'),
+                'instagram' => $request->input('instagram'),
+                'snapchat' => $request->input('snapchat'),
+            ]
+        );
+
+        $notification = [
+            'message' => 'User Socials Updated successfully!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
+    }
+
 
 
 

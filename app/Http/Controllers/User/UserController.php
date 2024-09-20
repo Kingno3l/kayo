@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\ProfileManagement\Social;
+
 
 class UserController extends Controller
 {
@@ -24,14 +26,18 @@ class UserController extends Controller
     {
         $id = Auth::user()->id;
         $profileData = User::find($id);
-        return view('user.profile', compact('profileData'));
+        $socials = Social::where('user_id', $id)->first(); // Retrieve the socials for the user
+
+        return view('user.profile', compact('profileData', 'socials'));
     }
 
     public function userProfileEdit()
     {
         $id = Auth::user()->id;
         $profileData = User::find($id);
-        return view('user.edit_profile', compact('profileData'));
+        $socials = Social::where('user_id', $id)->first(); // Retrieve the socials for the user
+
+        return view('user.edit_profile', compact('profileData', 'socials'));
     }
 
     // public function userProfileSave(Request $request)
@@ -79,6 +85,11 @@ class UserController extends Controller
         $data->education = $request->education;
         $data->position = $request->position;
         $data->employer = $request->employer;
+        $data->current_employer_name = $request->current_employer_name;
+        $data->current_employer_date = $request->current_employer_date;
+        $data->previous_employer_name = $request->previous_employer_name;
+        $data->previous_employer_start_date = $request->previous_employer_start_date;
+        $data->previous_employer_end_date = $request->previous_employer_end_date;
         $data->short_bio = $request->short_bio;
         $data->country = $request->country;
         $data->phone = $request->phone;
@@ -247,4 +258,5 @@ class UserController extends Controller
         );
         return back()->with($notification);
     }
+    
 }

@@ -117,91 +117,175 @@
                                     <a class="nav-link active" data-bs-toggle="tab" href="#employmentHistory"
                                         role="tab">
                                         <i class="fas fa-briefcase"></i>
-                                        Next of Kin and Referee
+                                        Next of Kin and Referee / Means of ID
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="card-body p-4">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="employmentHistory" role="tabpanel">
-                                     <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="text-center" scope="col">Field</th>
-                        <th class="text-center" scope="col">Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row" class="text-center">Next of Kin Full Name</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->next_of_kin_full_name }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Relationship</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->next_of_kin_relationship }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Email</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->next_of_kin_email }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Phone</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->next_of_kin_phone }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Address</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->next_of_kin_address }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 1 Full Name</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee1_full_name }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 1 Relationship</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee1_relationship }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 1 Email</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee1_email }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 1 Phone</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee1_phone }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 1 Address</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee1_address }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 2 Full Name</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee2_full_name }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 2 Relationship</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee2_relationship }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 2 Email</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee2_email }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 2 Phone</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee2_phone }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Referee 2 Address</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->referee2_address }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-center">Created At</th>
-                        <td class="text-center">{{ $nextOfKinAndReferee->created_at->format('M d, Y') }}</td>
-                    </tr>
-                </tbody>
-            </table>
+                        <div class="card m-3">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Means of
+                                    Identification</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="live-preview">
+                                    <div class="row">
+                                        <div class="col-lg-12 mt-4">
+                                            @if ($documents->isEmpty())
+                                                <p>No other documents uploaded by the member.</p>
+                                            @else
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center" scope="col">S/N</th>
+                                                            <th class="text-center" scope="col">Document Type</th>
+                                                            <th class="text-center" scope="col">Document Name</th>
+                                                            <th class="text-center" scope="col">Uploaded At</th>
+                                                            <th class="text-center" scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($documents as $index => $document)
+                                                            <tr>
+                                                                <th scope="row" class="text-center">{{ $index + 1 }}
+                                                                </th>
+                                                                <td class="text-center">{{ $document->documentable_type }}
+                                                                </td>
+                                                                <td class="text-center">{{ $document->document }}</td>
+                                                                <td class="text-center">
+                                                                    {{ $document->created_at->format('M d, Y') }}</td>
+                                                                <td class="text-center">
+                                                                    <a href="{{ asset('profile_management/identification/' . $document->document) }}"
+                                                                        target="_blank" class="btn btn-primary btn-sm">
+                                                                        View
+                                                                    </a>
 
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
-                                <!--end tab-pane-->
+                            </div>
+                        </div>
+                        <div class="card m-3">
+                            <div class="card-body p-4">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="employmentHistory" role="tabpanel">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center fw-bold" scope="col">Field</th>
+                                                    <th class="text-center fw-bold" scope="col">Details</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center fw-bold" colspan="2">Next of Kin Record</th>
+                                                    <!-- Header spanning both columns -->
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Next of Kin Full Name</th>
+                                                    <td class="text-center">
+                                                        {{ $nextOfKinAndReferee->next_of_kin_full_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Relationship</th>
+                                                    <td class="text-center">
+                                                        {{ $nextOfKinAndReferee->next_of_kin_relationship }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Email</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->next_of_kin_email }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Phone</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->next_of_kin_phone }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Address</th>
+                                                    <td class="text-center">
+                                                        {{ $nextOfKinAndReferee->next_of_kin_address }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center fw-bold" colspan="2">Referee 1 Record</th>
+                                                    <!-- Header spanning both columns -->
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 1 Full Name</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->referee1_full_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 1 Relationship</th>
+                                                    <td class="text-center">
+                                                        {{ $nextOfKinAndReferee->referee1_relationship }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 1 Email</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->referee1_email }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 1 Phone</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->referee1_phone }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 1 Address</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->referee1_address }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center fw-bold" colspan="2">Referee 2 Record</th>
+                                                    <!-- Header spanning both columns -->
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 2 Full Name</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->referee2_full_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 2 Relationship</th>
+                                                    <td class="text-center">
+                                                        {{ $nextOfKinAndReferee->referee2_relationship }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 2 Email</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->referee2_email }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 2 Phone</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->referee2_phone }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Referee 2 Address</th>
+                                                    <td class="text-center">{{ $nextOfKinAndReferee->referee2_address }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="text-center">Created At</th>
+                                                    <td class="text-center">
+                                                        {{ $nextOfKinAndReferee->created_at->format('M d, Y') }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!--end tab-pane-->
+                                </div>
                             </div>
                         </div>
                     </div>

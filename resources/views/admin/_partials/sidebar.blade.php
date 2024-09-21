@@ -32,7 +32,7 @@
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="" role="button">
+                    <a class="nav-link menu-link" href="{{route('admin.admin_dashboard')}}" role="button">
                         <i data-feather="home" class="icon-dual"></i>
                         <span data-key="t-dashboards">Dashboard</span>
                     </a>

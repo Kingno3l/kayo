@@ -78,24 +78,32 @@
                                                                         <label for="identificationInput"
                                                                             class="form-label">Means of
                                                                             Identification</label>
-                                                                        <select name="means_of_identification" class="form-control" id="identificationInput" required>
-    <option value="" disabled>Select Means of Identification</option>
-    <option value="National ID" {{ trim($meansOfIdentificationType) == 'National ID' ? 'selected' : '' }}>
-        National ID
-    </option>
-    <option value="Driver's License" {{ trim($meansOfIdentificationType) == "Driver's License" ? 'selected' : '' }}>
-        Driver's License
-    </option>
-    <option value="International Passport" {{ trim($meansOfIdentificationType) == 'International Passport' ? 'selected' : '' }}>
-        International Passport
-    </option>
-    <option value="Voter's Card" {{ trim($meansOfIdentificationType) == "Voter's Card" ? 'selected' : '' }}>
-        Voter's Card
-    </option>
-    <option value="Other" {{ trim($meansOfIdentificationType) == 'Other' ? 'selected' : '' }}>
-        Other
-    </option>
-</select>
+                                                                        <select name="means_of_identification"
+                                                                            class="form-control" id="identificationInput"
+                                                                            required>
+                                                                            <option value="" disabled>Select Means of
+                                                                                Identification</option>
+                                                                            <option value="National ID"
+                                                                                {{ trim($meansOfIdentificationType) == 'National ID' ? 'selected' : '' }}>
+                                                                                National ID
+                                                                            </option>
+                                                                            <option value="Driver's License"
+                                                                                {{ trim($meansOfIdentificationType) == "Driver's License" ? 'selected' : '' }}>
+                                                                                Driver's License
+                                                                            </option>
+                                                                            <option value="International Passport"
+                                                                                {{ trim($meansOfIdentificationType) == 'International Passport' ? 'selected' : '' }}>
+                                                                                International Passport
+                                                                            </option>
+                                                                            <option value="Voter's Card"
+                                                                                {{ trim($meansOfIdentificationType) == "Voter's Card" ? 'selected' : '' }}>
+                                                                                Voter's Card
+                                                                            </option>
+                                                                            <option value="Other"
+                                                                                {{ trim($meansOfIdentificationType) == 'Other' ? 'selected' : '' }}>
+                                                                                Other
+                                                                            </option>
+                                                                        </select>
 
 
                                                                     </div>

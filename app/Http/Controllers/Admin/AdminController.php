@@ -7,12 +7,60 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Carbon\Carbon;
+
 
 
 class AdminController extends Controller
 {
     public function adminDashboard(){
-        return view('admin.index');	
+        $completedUsers = User::whereNotNull('name')
+            ->whereNotNull('email')
+            ->whereNotNull('photo')
+            ->whereNotNull('phone')
+            ->whereNotNull('country')
+            ->whereNotNull('country_code')
+            ->whereNotNull('registration_number')
+            ->whereNotNull('marital_status')
+            ->whereNotNull('gender')
+            ->whereNotNull('date_of_birth')
+            ->whereNotNull('employer')
+            ->whereNotNull('position')
+            ->whereNotNull('education')
+            ->whereNotNull('short_bio')
+            ->whereHas('payments')
+            ->whereHas('academicQualifications')
+            ->whereHas('employmentHistory')
+            ->whereHas('nextOfKinAndReferee')
+            ->whereHas('socials')
+            ->with([
+                'payments',
+                'academicQualifications',
+                'employmentHistory',
+                'nextOfKinAndReferee',
+                'socials'
+            ])
+            ->get();
+
+        // Calculate total number of completed users
+        $totalCompletedUsers = $completedUsers->count();
+
+        // Total number of all registered users
+        $totalRegisteredUsers = User::count();
+
+        // Get the current year
+        $currentYear = Carbon::now()->year;
+
+        // Fetch users who have paid dues for the current year
+        $paidDuesUsers = User::whereHas('payments', function ($query) use ($currentYear) {
+            $query->whereYear('created_at', $currentYear);
+        })->get();
+
+        // Total number of users who have paid dues
+        $totalPaidDuesUsers = $paidDuesUsers->count();
+
+
+        return view('admin.index', compact('totalCompletedUsers', 'totalRegisteredUsers', 'totalPaidDuesUsers'));	
     }
 
     public function adminProfile()

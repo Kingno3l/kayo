@@ -131,6 +131,32 @@
                                     </div> <!-- end card-->
                                 </a>
                             </div> <!-- end col-->
+
+
+
+
+                             <div class="col-md-6">
+                                <a href="{{ route('member.other.document', $member->id) }}" class="text-decoration-none">
+                                    <div class="card card-animate">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <p class="fw-medium text-muted mb-0">{{ $member->name }}'s Other Document Uploads</p>
+                                                    <h2 class="mt-4 ff-secondary fw-semibold"><span>View Other Document Uploads</span></h2>
+
+                                                </div>
+                                                <div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-primary-subtle rounded-circle fs-2">
+                                                            <i data-feather="user-plus" class="text-primary"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- end card body -->
+                                    </div> <!-- end card-->
+                                </a>
+                            </div> <!-- end col-->
                         </div> <!-- end row-->
 
 

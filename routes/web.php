@@ -148,6 +148,9 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         // Route for viewing member next of kin and referee information
         Route::get('/member/{id}/next-of-kin', [MembersController::class, 'showNextOfKin'])->name('member.nextofkin.referee');
 
+        // Route for viewing member next of kin and referee information
+        Route::get('/member/{id}/other-document', [MembersController::class, 'otherDocument'])->name('member.other.document');
+
 
     });
 

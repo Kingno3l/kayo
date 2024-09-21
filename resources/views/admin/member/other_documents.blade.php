@@ -125,71 +125,47 @@
                         <div class="card-body p-4">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="employmentHistory" role="tabpanel">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" scope="col">S/N</th>
-                                                <th class="text-center" scope="col">Job Title</th>
-                                                <th class="text-center" scope="col">Company</th>
-                                                <th class="text-center" scope="col">Start Date</th>
-                                                <th class="text-center" scope="col">End Date</th>
-                                                <th class="text-center" scope="col">Responsibilities</th>
-                                                <th class="text-center" scope="col">Updated At</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($employmentHistory as $index => $employment)
+                                    @if ($documents->isEmpty())
+                                        <p>No other documents uploaded by the member.</p>
+                                    @else
+                                        <table class="table table-striped">
+                                            <thead>
                                                 <tr>
-                                                    <th scope="row" class="text-center">{{ $index + 1 }}</th>
-                                                    <td class="text-center">{{ $employment->job_title }}</td>
-                                                    <td class="text-center">{{ $employment->company }}</td>
-                                                    <td class="text-center">
-                                                        {{ \Carbon\Carbon::parse($employment->start_date)->format('M d, Y') }}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{ $employment->end_date ? \Carbon\Carbon::parse($employment->end_date)->format('M d, Y') : 'Present' }}
-                                                    </td>
-                                                    <td class="text-center">{{ $employment->responsibilities }}</td>
-                                                    <td class="text-center">
-                                                        {{ \Carbon\Carbon::parse($employment->created_at)->format('M d, Y') }}
-                                                    </td>
+                                                    <th class="text-center" scope="col">S/N</th>
+                                                    <th class="text-center" scope="col">Document Type</th>
+                                                    <th class="text-center" scope="col">Document Name</th>
+                                                    <th class="text-center" scope="col">Uploaded At</th>
+                                                    <th class="text-center" scope="col">Action</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($documents as $index => $document)
+                                                    <tr>
+                                                        <th scope="row" class="text-center">{{ $index + 1 }}</th>
+                                                        <td class="text-center">{{ $document->documentable_type }}</td>
+                                                        <td class="text-center">{{ $document->document }}</td>
+                                                        <td class="text-center">
+                                                            {{ $document->created_at->format('M d, Y') }}</td>
+                                                        <td class="text-center">
+                                                            <a href="{{ asset('profile_management/others/' . $document->document) }}"
+                                                                target="_blank" class="btn btn-primary btn-sm">
+                                                                View
+                                                            </a>
 
-                                    </table>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    @endif
                                 </div>
                                 <!--end tab-pane-->
                             </div>
                         </div>
+
                     </div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-4">
-                                <div class="flex-grow-1">
-                                    <h5 class="card-title mb-0">Uploaded Files by Member</h5>
-                                </div>
-                            </div>
 
-                            @if ($uploadedFiles->isEmpty())
-                                <p>No files uploaded by the member.</p>
-                            @else
-                                <ul class="list-group">
-                                    @foreach ($uploadedFiles as $file)
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <a href="{{ asset('profile_management/academic_qualification/' . $file->document) }}"
-                                                    target="_blank" class="text-primary">
-                                                    {{ $file->document }} <!-- This should be the filename you saved -->
-                                                </a>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </div>
-                    </div>
                 </div>
 
 

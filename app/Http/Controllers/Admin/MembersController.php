@@ -38,14 +38,6 @@ class MembersController extends Controller
         return view('admin.member.profile', compact('profileData', 'socials'));
     }
 
-    // public function showAcademicQualifications($id)
-    // {
-    //     $profileData = User::findOrFail($id);
-    //     $socials = $profileData->socials()->first(); // Retrieve the first social record
-
-    //     $academicQualifications = $profileData->academicQualifications;
-    //     return view('admin.member.academic_qualifications', compact('profileData', 'academicQualifications', 'socials'));
-    // }
 
     public function showAcademicQualifications($id)
     {
@@ -80,17 +72,6 @@ class MembersController extends Controller
         return view('admin.member.employment_history', compact('profileData', 'employmentHistory', 'socials', 'uploadedFiles'));
     }
 
-    // public function showNextOfKin($id)
-    // {
-    //     $profileData = User::findOrFail($id);
-    //     $socials = $profileData->socials()->first(); // Retrieve the first social record
-
-    //     $nextOfKinAndReferee = $profileData->nextOfKinAndReferee;
-
-    //     // return $nextOfKinAndReferee;
-    //     return view('admin.member.next_of_kin_referee', compact('profileData', 'nextOfKinAndReferee', 'socials'));
-    // }
-
     public function showNextOfKin($id)
     {
         $profileData = User::findOrFail($id);
@@ -99,7 +80,26 @@ class MembersController extends Controller
         // Assuming nextOfKinAndReferee is a relationship that returns a single record
         $nextOfKinAndReferee = $profileData->nextOfKinAndReferee()->first(); // Use first() to get a single record
 
-        return view('admin.member.next_of_kin_referee', compact('profileData', 'nextOfKinAndReferee', 'socials'));
+        $documents = Document::where('user_id', $id)
+            ->where('documentable_type', 'like', '%means of id%')
+            ->get();
+
+
+        return view('admin.member.next_of_kin_referee', compact('profileData', 'nextOfKinAndReferee', 'socials', 'documents'));
     }
+
+    public function otherDocument($id)
+    {
+        $profileData = User::findOrFail($id);
+        $socials = $profileData->socials()->first(); // Retrieve the first social record
+        // Fetch documents for the user, excluding specific documentable types
+        $documents = Document::where('user_id', $id)
+            ->where('documentable_type', 'like', '%others%')
+            ->get();
+
+        // Return the view with the documents data
+        return view('admin.member.other_documents', compact('documents', 'profileData', 'socials'));
+    }
+
 
 }

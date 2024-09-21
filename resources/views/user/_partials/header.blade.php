@@ -63,12 +63,16 @@
                     </div>
                 </div> --}}
 
+                
+
                 <div class="dropdown ms-1 topbar-head-dropdown header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img id="header-lang-img" src="{{asset('assets/images/flags/us.svg')}}" alt="Header Language" height="20"
-                            class="rounded">
+                        <img id="header-lang-img" src="{{ asset('assets/images/flags/us.svg') }}" alt="Header Language"
+                            height="20" class="rounded">
                     </button>
+
+                    
                     <div class="dropdown-menu dropdown-menu-end">
 
                         <!-- item-->
@@ -83,8 +87,8 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ar"
                             title="Arabic">
-                            <img src="assets/images/flags/ae.svg" alt="user-image" class="me-2 rounded" height="18">
-                            <span class="align-middle">Arabic</span>
+                            <img src="assets/images/flags/fr.svg" alt="user-image" class="me-2 rounded" height="18">
+                            <span class="align-middle">French</span>
                         </a>
                     </div>
                 </div>

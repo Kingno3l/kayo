@@ -48,15 +48,16 @@
                                                 <th class="text-center sort" data-sort="customer_name">Full Name</th>
                                                 <th class="text-center sort" data-sort="email">Email</th>
                                                 <th class="text-center sort" data-sort="phone">Phone</th>
-                                                <th class="text-center sort" data-sort="date">Joined Date</th>
+                                                <th class="text-center sort" data-sort="date">Paid Date</th>
                                                 <th class="text-center sort" data-sort="status">Online Status</th>
-                                                <th class="text-center sort" data-sort="registration_number">Registration Number</th>
+                                                <th class="text-center sort" data-sort="registration_number">Registration
+                                                    Number</th>
                                                 <th class="text-center sort" data-sort="country">Country</th>
                                                 <th class="text-center sort" data-sort="action">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="list form-check-all">
-                                            @foreach ($allUser as $key => $item)
+                                            @foreach ($users as $key => $item)
                                                 <tr>
                                                     <td class="id" style="display:none;"><a href="javascript:void(0);"
                                                             class="fw-medium link-primary">#VZ10</a></td>
@@ -73,8 +74,11 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-center email">{{ $item->email }}</td>
-                                                    <td class="text-center phone">{{ $item->country_code }} {{ $item->phone }}</td>
-                                                    <td class="text-center date">{{ $item->created_at->format('d M, Y') }}</td>
+                                                    <td class="text-center phone">{{ $item->country_code }}
+                                                        {{ $item->phone }}</td>
+                                                    <td class="text-center date">
+                                                        {{ $item->payments->last()->created_at->format('d M, Y') }}
+                                                    </td>
                                                     <td class="text-center status">
                                                         @if ($item->UserOnline())
                                                             <span
@@ -91,7 +95,8 @@
                                                             : 'default';
                                                     @endphp
 
-                                                    <td class="text-center registration_number">{{ $item->registration_number }}</td>
+                                                    <td class="text-center registration_number">
+                                                        {{ $item->registration_number }}</td>
                                                     <td class="text-center country">
                                                         <img src="{{ asset('assets/images/flags/' . $countryCode . '.svg') }}"
                                                             alt="{{ $item->country }}"
@@ -166,7 +171,7 @@
 
 
 
-                        
+
                     </div>
                     <!-- end col -->
                 </div>

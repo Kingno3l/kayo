@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\Admin\UserFinanciesController;
+use App\Http\Controllers\Admin\MembersController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileManagementController;
@@ -29,7 +31,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'verified', 'check.status', 'user'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'userDashboard'])->name('dashboard');
@@ -43,7 +45,7 @@ Route::middleware(['auth', 'verified', 'check.status', 'user'])->group(function 
     Route::get('/user/logout', [UserController::class, 'userLogout'])->name('user.logout');
 
     Route::get('/user/change/password', [UserController::class, 'userChangePassword'])->name('user.change.password');
-    
+
     Route::post('/user/password/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
 
 
@@ -69,18 +71,18 @@ Route::middleware(['auth', 'verified', 'check.status', 'user'])->group(function 
         Route::get('/profile-management/next-of-kin-and-referee', 'nextOfKinAndReferee')->name('profile-management.next-of-kin-and-referee');
 
         Route::post('/profile-management/next-of-kin-and-referee', 'nextOfKinAndRefereeStore')->name('profile-management.next-of-kin-and-referee.store');
-        
+
         Route::get('/profile-management/document-upload', 'documentUpload')->name('profile-management.document-upload');
 
         Route::post('/profile-management/document-upload', 'documentUploadStore')->name('profile-management.document-upload.store');
 
         Route::post('/profile-management/socials-store', 'socialsStore')->name('socials.store');
-        
+
         Route::get('/id-card', 'idCardShow')->name('id-card.show');
-        
+
         Route::get('/id-card/download', 'idCardDownload')->name('id-card.download');
 
-        
+
 
     });
 
@@ -122,6 +124,40 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::get('/all/users', 'allUsers')->name('all.users');
 
         Route::post('/update/user/status', 'updateUserStatus')->name('update.user.status');
+
+        Route::get('/all/users/completed-registered-users', 'completedRegisteredUsers')->name('completed.registered.users');
+
+        Route::get('/member/{id}', 'memberDetails')->name('member.details');
+
+
+    });
+
+    //Members All Routes...
+    Route::controller(MembersController::class)->group(function () {
+
+        Route::get('/member/{id}', 'memberDetails')->name('member.details');
+
+        Route::get('/member/{id}/profile', [MembersController::class, 'showProfile'])->name('member.profile');
+
+        // Route for viewing member academic qualifications
+        Route::get('/member/{id}/academic-qualifications', [MembersController::class, 'showAcademicQualifications'])->name('member.academic.qualifications');
+
+        // Route for viewing member employment history
+        Route::get('/member/{id}/employment-history', [MembersController::class, 'showEmploymentHistory'])->name('member.employment.history');
+
+        // Route for viewing member next of kin and referee information
+        Route::get('/member/{id}/next-of-kin', [MembersController::class, 'showNextOfKin'])->name('member.nextofkin.referee');
+
+
+    });
+
+    //users All Routes...
+    Route::controller(UserFinanciesController::class)->group(function () {
+
+        Route::get('/users/annual-paid-users', 'annualPaidUsers')->name('annual.paid.users');
+
+        Route::get('/users/annual-unpaid-users', 'annualUnpaidUsers')->name('annual.unpaid.users');
+
 
     });
 

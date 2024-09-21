@@ -50,16 +50,15 @@
                                                 <th class="text-center sort" data-sort="phone">Phone</th>
                                                 <th class="text-center sort" data-sort="date">Joined Date</th>
                                                 <th class="text-center sort" data-sort="status">Online Status</th>
-                                                <th class="text-center sort" data-sort="registration_number">Registration Number</th>
+                                                <th class="text-center sort" data-sort="registration_number">Registration
+                                                    Number</th>
                                                 <th class="text-center sort" data-sort="country">Country</th>
-                                                <th class="text-center sort" data-sort="action">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="list form-check-all">
-                                            @foreach ($allUser as $key => $item)
+                                            @foreach ($completedUsers as $key => $item)
                                                 <tr>
-                                                    <td class="id" style="display:none;"><a href="javascript:void(0);"
-                                                            class="fw-medium link-primary">#VZ10</a></td>
+
                                                     <td class="text-center">{{ $key + 1 }}</td>
                                                     <td class="text-center">
                                                         <div class="d-flex gap-2 align-items-center">
@@ -68,13 +67,18 @@
                                                                     alt="" class="avatar-xs rounded-circle">
                                                             </div>
                                                             <div class="flex-grow-1 customer_name">
-                                                                {{ $item->name }}
+                                                                <a href="{{ route('member.details', $item->id) }}">
+                                                                    {{ $item->name }}
+                                                                </a>
                                                             </div>
+
                                                         </div>
                                                     </td>
                                                     <td class="text-center email">{{ $item->email }}</td>
-                                                    <td class="text-center phone">{{ $item->country_code }} {{ $item->phone }}</td>
-                                                    <td class="text-center date">{{ $item->created_at->format('d M, Y') }}</td>
+                                                    <td class="text-center phone">{{ $item->country_code }}
+                                                        {{ $item->phone }}</td>
+                                                    <td class="text-center date">{{ $item->created_at->format('d M, Y') }}
+                                                    </td>
                                                     <td class="text-center status">
                                                         @if ($item->UserOnline())
                                                             <span
@@ -91,7 +95,8 @@
                                                             : 'default';
                                                     @endphp
 
-                                                    <td class="text-center registration_number">{{ $item->registration_number }}</td>
+                                                    <td class="text-center registration_number">
+                                                        {{ $item->registration_number }}</td>
                                                     <td class="text-center country">
                                                         <img src="{{ asset('assets/images/flags/' . $countryCode . '.svg') }}"
                                                             alt="{{ $item->country }}"
@@ -100,28 +105,7 @@
                                                     </td>
 
 
-                                                    <td class="text-center">
-                                                        <div
-                                                            class="form-check form-switch form-switch-right form-switch-md">
-                                                            <label for="user-status-toggle-{{ $item->id }}"
-                                                                class="form-label text-muted">
-                                                                @if ($item->status == 1)
-                                                                    <span
-                                                                        class="badge bg-success-subtle text-success">Active</span>
-                                                                    Suspend User?
-                                                                @else
-                                                                    <span
-                                                                        class="badge bg-danger-subtle text-danger">Suspended</span>
-                                                                    Activate User?
-                                                                @endif
-                                                            </label>
-                                                            <input class="form-check-input code-switcher status-toggle"
-                                                                type="checkbox" id="user-status-toggle-{{ $item->id }}"
-                                                                data-user-id="{{ $item->id }}"
-                                                                {{ $item->status ? 'checked' : '' }}>
-                                                        </div>
 
-                                                    </td>
                                                 </tr>
                                             @endforeach
 
@@ -133,9 +117,8 @@
                                                 colors="primary:#25a0e2,secondary:#00bd9d" style="width:75px;height:75px">
                                             </lord-icon>
                                             <h5 class="mt-2">Sorry! No Result Found</h5>
-                                            <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find
-                                                any
-                                                orders for you search.</p>
+                                            <p class="text-muted mb-0">We've searched all our records, but we did not find
+                                                any.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -166,7 +149,7 @@
 
 
 
-                        
+
                     </div>
                     <!-- end col -->
                 </div>

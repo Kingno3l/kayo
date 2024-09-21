@@ -15,62 +15,7 @@ class UserManagementController extends Controller
         $allUser = User::where('role', 'user')->latest()->get();
 
         // Define a map of countries to ISO codes
-        $countryCodes = [
-            'Algeria' => 'DZ',
-            'Angola' => 'AO',
-            'Benin' => 'BJ',
-            'Botswana' => 'BW',
-            'Burkina Faso' => 'BF',
-            'Burundi' => 'BI',
-            'Cabo Verde' => 'CV',
-            'Cameroon' => 'CM',
-            'Central African Republic' => 'CF',
-            'Chad' => 'TD',
-            'Comoros' => 'KM',
-            'Congo, Democratic Republic of the' => 'CD',
-            'Congo, Republic of the' => 'CG',
-            'Djibouti' => 'DJ',
-            'Egypt' => 'EG',
-            'Equatorial Guinea' => 'GQ',
-            'Eritrea' => 'ER',
-            'Eswatini' => 'SZ',
-            'Ethiopia' => 'ET',
-            'Gabon' => 'GA',
-            'Gambia' => 'GM',
-            'Ghana' => 'GH',
-            'Guinea' => 'GN',
-            'Guinea-Bissau' => 'GW',
-            'Ivory Coast' => 'CI',
-            'Kenya' => 'KE',
-            'Lesotho' => 'LS',
-            'Liberia' => 'LR',
-            'Libya' => 'LY',
-            'Madagascar' => 'MG',
-            'Malawi' => 'MW',
-            'Mali' => 'ML',
-            'Mauritania' => 'MR',
-            'Mauritius' => 'MU',
-            'Morocco' => 'MA',
-            'Mozambique' => 'MZ',
-            'Namibia' => 'NA',
-            'Niger' => 'NE',
-            'Nigeria' => 'NG',
-            'Rwanda' => 'RW',
-            'Sao Tome and Principe' => 'ST',
-            'Senegal' => 'SN',
-            'Seychelles' => 'SC',
-            'Sierra Leone' => 'SL',
-            'Somalia' => 'SO',
-            'South Africa' => 'ZA',
-            'South Sudan' => 'SS',
-            'Sudan' => 'SD',
-            'Togo' => 'TG',
-            'Tunisia' => 'TN',
-            'Uganda' => 'UG',
-            'United Republic of Tanzania' => 'TZ',
-            'Zambia' => 'ZM',
-            'Zimbabwe' => 'ZW',
-        ];
+        $countryCodes = config('country_codes');
 
         // Pass the $allUser and $countryCodes to the view
         return view('admin.user.all_user', compact('allUser', 'countryCodes'));
@@ -104,6 +49,46 @@ class UserManagementController extends Controller
 
         // Return the notification as JSON response
         return response()->json($notification);
+    }
+
+    public function completedRegisteredUsers(){
+
+        $completedUsers = User::whereNotNull('name')
+            ->whereNotNull('email')
+            ->whereNotNull('photo')
+            ->whereNotNull('phone')
+            ->whereNotNull('country')
+            ->whereNotNull('country_code')
+            ->whereNotNull('registration_number')
+            ->whereNotNull('marital_status')
+            ->whereNotNull('gender')
+            ->whereNotNull('date_of_birth')
+            ->whereNotNull('employer')
+            ->whereNotNull('position')
+            ->whereNotNull('education')
+            ->whereNotNull('short_bio')
+            // Ensure the user has at least one payment
+            ->whereHas('payments')
+            // Ensure the user has at least one academic qualification
+            ->whereHas('academicQualifications')
+            // Ensure the user has at least one employment history
+            ->whereHas('employmentHistory')
+            // Ensure the user has at least one next of kin and referee
+            ->whereHas('nextOfKinAndReferee')
+            // Ensure the user has at least one social media profile
+            ->whereHas('socials')
+            ->with([
+                'payments',
+                'academicQualifications',
+                'employmentHistory',
+                'nextOfKinAndReferee',
+                'socials'
+            ])
+            ->get();
+
+        $countryCodes = config('country_codes');
+
+        return view('admin.user.completed_registered_users', compact('completedUsers', 'countryCodes'));
     }
 
 }

@@ -57,7 +57,7 @@
             </div>
 
             @if ($status === '1')
-                <h4>Instructor Account is <span class="text-success">Active</span></h4>
+                <h4>User Account is <span class="text-success">Active</span></h4>
 
 
                 <div class="row dash-nft">

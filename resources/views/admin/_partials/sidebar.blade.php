@@ -51,17 +51,39 @@
                     <div class="collapse menu-dropdown" id="sidebarAuth">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('all.users')}}" class="nav-link" data-key="t-all-users"> View All Registered
+                                <a href="{{ route('all.users') }}" class="nav-link" data-key="t-all-users"> View All
+                                    Registered
                                     Users</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#completedUsers" class="nav-link" data-key="t-completed-users"> View Users with
+                                <a href="{{route('completed.registered.users')}}" class="nav-link" data-key="t-completed-users"> View Users with
                                     Completed Registrations</a>
                             </li>
+
+
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#financialManagement" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="financialManagement">
+                        <i data-feather="credit-card" class="bx bx-money"></i>
+                        <span data-key="t-authentication">Financies</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="financialManagement">
+                        <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#financialUsers" class="nav-link" data-key="t-financial-users"> View Users with
-                                    Financial Transactions</a>
+                               <a href="{{route('annual.paid.users')}}" class="nav-link" data-key="t-financial-users"> See Users Who Paid Annual Dues</a>
+
                             </li>
+
+                            <a href="{{ route('annual.unpaid.users') }}" class="nav-link" data-key="t-financial-unpaid-users"> 
+    See Users Who Are Yet To Pay Annual Dues
+</a>
+
+
 
 
                         </ul>

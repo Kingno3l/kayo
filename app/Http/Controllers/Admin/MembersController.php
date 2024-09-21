@@ -68,14 +68,38 @@ class MembersController extends Controller
     public function showEmploymentHistory($id)
     {
         $profileData = User::findOrFail($id);
+        $socials = $profileData->socials()->first(); // Retrieve the first social record
+
         $employmentHistory = $profileData->employmentHistory;
-        return view('admin.member.employment_history', compact('profileData', 'employmentHistory'));
+
+        // Fetch uploaded files related to academic qualifications
+        $uploadedFiles = Document::where('user_id', $id)
+            ->where('documentable_type', 'employment history')
+            ->get();
+
+        return view('admin.member.employment_history', compact('profileData', 'employmentHistory', 'socials', 'uploadedFiles'));
     }
+
+    // public function showNextOfKin($id)
+    // {
+    //     $profileData = User::findOrFail($id);
+    //     $socials = $profileData->socials()->first(); // Retrieve the first social record
+
+    //     $nextOfKinAndReferee = $profileData->nextOfKinAndReferee;
+
+    //     // return $nextOfKinAndReferee;
+    //     return view('admin.member.next_of_kin_referee', compact('profileData', 'nextOfKinAndReferee', 'socials'));
+    // }
 
     public function showNextOfKin($id)
     {
         $profileData = User::findOrFail($id);
-        $nextOfKin = $profileData->nextOfKin; 
-        return view('admin.member.next_of_kin_referee', compact('profileData', 'nextOfKin'));
+        $socials = $profileData->socials()->first(); // Retrieve the first social record
+
+        // Assuming nextOfKinAndReferee is a relationship that returns a single record
+        $nextOfKinAndReferee = $profileData->nextOfKinAndReferee()->first(); // Use first() to get a single record
+
+        return view('admin.member.next_of_kin_referee', compact('profileData', 'nextOfKinAndReferee', 'socials'));
     }
+
 }

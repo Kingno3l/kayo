@@ -8,7 +8,7 @@
         <title>Yips Landing</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="YIPS Africa" name="description" />
-        <meta content="Themesbrand" name="author" />
+        <meta content="YIPS" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -589,7 +589,7 @@
                                             </a>
                                             <ul class="list-inline text-muted mb-3">
                                                 <li class="list-inline-item">
-                                                    <i class="ri-building-line align-bottom me-1"></i> Themesbrand
+                                                    <i class="ri-building-line align-bottom me-1"></i> YIPS
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <i class="ri-map-pin-2-line align-bottom me-1"></i> USA
@@ -812,7 +812,7 @@
                                         <a href="#!">
                                             <h5>New Web designer</h5>
                                         </a>
-                                        <p class="text-muted">Themesbrand</p>
+                                        <p class="text-muted">YIPS</p>
 
                                         <div class="d-flex gap-4 mb-3">
                                             <div>

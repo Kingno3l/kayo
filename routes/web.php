@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\UserFinanciesController;
@@ -12,12 +13,18 @@ use App\Http\Controllers\User\ProfileManagementController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
+
 
 Route::get('/test', function () {
     return view('test');
 });
+
+Route::get('/confirm-email', function () {
+    return view('emails.email_sent_for_password');
+})->name('emails.email_sent_for_password');
+
 
 
 // Route::get('/dashboard', function () {
@@ -32,6 +39,12 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__ . '/auth.php';
+
+Route::get('registration/confirm/{token}', [RegisteredUserController::class, 'confirmRegistration'])->name('registration.confirm');
+
+Route::post('registration/complete/{token}', [RegisteredUserController::class, 'completeRegistration'])->name('registration.complete');
+
+
 
 Route::middleware(['auth', 'verified', 'check.status', 'user'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'userDashboard'])->name('dashboard');

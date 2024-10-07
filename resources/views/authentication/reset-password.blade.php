@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Create New Password | Velzon - Admin & Dashboard Template</title>
+    <title>Create New Password | YIPS - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="YIPS Africa" name="description" />
     <meta content="Themesbrand" name="author" />

@@ -22,21 +22,58 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
+    // public function store(LoginRequest $request): RedirectResponse
+    // {
+    //     $request->authenticate();
+
+    //     $request->session()->regenerate();
+
+    //     $url = '';
+
+    //     if ($request->user()->role === 'admin') {
+    //         $url = 'admin/dashboard';
+    //     } else if ($request->user()->role === 'user') {
+    //         $url = 'dashboard';
+    //     }
+
+    //     // Notification for success login
+    //     $notification = array(
+    //         'message' => 'Login Successful!',
+    //         'alert-type' => 'success'
+    //     );
+
+    //     // Redirect to intended URL with notification
+    //     return redirect()->intended($url)->with($notification);
+    // }
+
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Authenticate the user
         $request->authenticate();
 
+        // Regenerate the session
         $request->session()->regenerate();
 
+        // Determine the redirect URL
         $url = '';
 
+        // Check if the user's profile is completed
+        if (!$request->user()->profile_completed) {
+            // Redirect to profile completion if not completed
+            return redirect()->route('profile.complete')->with([
+                'message' => 'Please complete your profile before accessing the dashboard.',
+                'alert-type' => 'info'
+            ]);
+        }
+
+        // Redirect based on user role
         if ($request->user()->role === 'admin') {
             $url = 'admin/dashboard';
         } else if ($request->user()->role === 'user') {
             $url = 'dashboard';
         }
 
-        // Notification for success login
+        // Notification for successful login
         $notification = array(
             'message' => 'Login Successful!',
             'alert-type' => 'success'
@@ -45,6 +82,7 @@ class AuthenticatedSessionController extends Controller
         // Redirect to intended URL with notification
         return redirect()->intended($url)->with($notification);
     }
+
 
     /**
      * Destroy an authenticated session.

@@ -68,7 +68,8 @@
                                     <div class="card-body bg-marketplace d-flex">
                                         <div class="flex-grow-1">
                                             <h4 class="fs-18 lh-base mb-0">View and download your <br>
-                                                <span class="text-success">Membership ID Card.</span>
+                                                <span class="text-success">Membership ID Card. <a href="{{ route('id-card.show') }}"
+                                                            class="btn btn-success">Here!</a></span>
                                             </h4>
                                             @if ($hasPaidDues)
                                                 <p class="mb-0 mt-2 text-muted">Your ID Card is ready!</p>
@@ -109,7 +110,7 @@
                                                         class="badge bg-success-subtle text-success mb-0 me-1"> <span>
                                                             <i class="ri-arrow-down-line align-middle"></i> Your annual dues
                                                             are
-                                                            up to date, continue to enjoy your membership benefits.
+                                                            up to date.
 
                                                         </span>
 
@@ -119,7 +120,7 @@
                                                         class="badge bg-danger-subtle text-danger mb-0 me-1"> <span>
                                                             <i class="ri-arrow-down-line align-middle"></i> Please make your
                                                             annual
-                                                            dues payment to maintain your membership benefits.
+                                                            dues.
                                                         </span> <a href="{{ route('pay') }}"
                                                             class="btn btn-success">Pay!</a>
 

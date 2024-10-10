@@ -53,7 +53,12 @@ Route::middleware(['auth', 'verified', 'check.status', 'user'])->group(function 
 
     Route::get('/profile/edit', [UserController::class, 'userProfileEdit'])->name('user.profile.edit');
 
+    Route::get('/profile/complete', [UserController::class, 'showCompleteProfileForm'])->name('profile.complete');
+
+
     Route::post('/profile/save', [UserController::class, 'userProfileSave'])->name('user.profile.update');
+
+    Route::post('/profile/complete', [UserController::class, 'userProfilecomplete'])->name('user.profile.complete');
 
     Route::get('/user/logout', [UserController::class, 'userLogout'])->name('user.logout');
 

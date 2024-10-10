@@ -624,7 +624,7 @@ class ProfileManagementController extends Controller
         ];
         return redirect()->back()->with($notification);
     }
-
+    
     public function idCardShow()
     {
         $id = Auth::user()->id;

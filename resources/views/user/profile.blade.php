@@ -80,11 +80,11 @@
                                                             </tr>
                                                             <tr>
                                                                 <th class="ps-0" scope="row">Mobile:</th>
-                                                                <td class="text-muted">
-                                                                    {!! !empty($profileData->phone) && !empty($profileData->country_code)
-                                                                        ? $profileData->country_code . ' ' . $profileData->phone
-                                                                        : '<em>Update your profile</em>' !!}
-                                                                </td>
+                                                               <td class="text-muted">
+                                                {!! !empty($profileData->phone)
+                                                    ? $profileData->phone
+                                                    : '<em>No record for this</em>' !!}
+                                            </td>
 
                                                             </tr>
                                                             <tr>

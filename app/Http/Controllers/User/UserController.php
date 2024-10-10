@@ -50,6 +50,14 @@ class UserController extends Controller
         return view('user.edit_profile', compact('profileData', 'socials'));
     }
 
+    public function showCompleteProfileForm(){
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        $socials = Social::where('user_id', $id)->first(); // Retrieve the socials for the user
+
+        return view('user.complete_profile', compact('profileData', 'socials'));
+    }
+
     // public function userProfileSave(Request $request)
     // {
     //     $id = Auth::user()->id;
@@ -83,6 +91,74 @@ class UserController extends Controller
 
     //     return redirect()->back()->with($notification);
     // }
+
+    public function userProfilecomplete(Request $request)
+{
+    $id = Auth::user()->id;
+    $data = User::find($id);
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+        'education' => 'required|string|max:255',
+        'position' => 'required|string|max:255',
+        'employer' => 'required|string|max:255',
+        'country' => 'required|string|max:255',
+        'phone' => 'required|string|max:20',
+        'marital_status' => 'required|string|max:20',
+        'gender' => 'required|string|max:10',
+        'date_of_birth' => 'required|date',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Optional image
+    ]);
+
+    // Updating user information from request
+    $data->name = $request->name;
+    $data->email = $request->email;
+    $data->education = $request->education;
+    $data->position = $request->position;
+    $data->employer = $request->employer;
+    $data->country = $request->country;
+    $data->phone = $request->phone;
+    $data->marital_status = $request->marital_status;
+    $data->gender = $request->gender;
+    $data->date_of_birth = $request->date_of_birth;
+
+    // Ensure that 'country_code' is used to generate the registration number
+    $country = $request->country;
+    $countryCodes = config('country_codes');
+
+    $countryCode = isset($countryCodes[$country]) ? $countryCodes[$country] : 'XX'; // Default to 'XX' if country not found
+
+    if (is_null($data->registration_number)) {
+        $rankingNumber = User::where('country', $country)->whereNotNull('registration_number')->count() + 1;
+        $formattedRankingNumber = str_pad($rankingNumber, 3, '0', STR_PAD_LEFT);  
+        $yearJoined = date('y');  
+
+        $data->registration_number = "YIP-{$countryCode}-{$formattedRankingNumber}-{$yearJoined}";
+    }
+
+    if ($request->file('photo')) {
+        $file = $request->file('photo');
+        @unlink(public_path('uploads/user_images/' . $data->photo));
+        $filename = date('YmdHi') . $file->getClientOriginalName();
+        $file->move(public_path('uploads/user_images'), $filename);
+        $data->photo = $filename;
+    }
+
+    try {
+        $data->save();
+    } catch (\Exception $e) {
+        return back()->withErrors(['error' => 'An error occurred while saving.']);
+    }
+
+    $notification = [
+        'message' => 'User Profile Saved Successfully.',
+        'alert-type' => 'success'
+    ];
+    
+    return redirect()->route('dashboard')->with($notification);
+}
+
 
     public function userProfileSave(Request $request)
     {

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MembersController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileManagementController;
+use App\Http\Controllers\User\ViewMembersController;
 
 
 Route::get('/', function () {
@@ -104,16 +105,30 @@ Route::middleware(['auth', 'verified', 'check.status', 'user'])->group(function 
 
     });
 
-    //users All Routes...
+    //Payment All Routes...
     Route::controller(PaymentController::class)->group(function () {
 
-        Route::get('/all/users', 'allUsers')->name('all.users');
-
-        Route::post('/update/user/status', 'updateUserStatus')->name('update.user.status');
-
+       
         Route::get('/pay', 'pay')->name('pay.view');
         Route::post('/pay', 'make_payment')->name('pay');
         Route::get('/pay/callback', 'payment_callback')->name('pay.callback');
+
+        Route::get('/all/users/completed-registered-users', 'completedRegisteredUsers')->name('completed.registered.users');
+
+        
+
+    });
+
+
+    Route::controller(ViewMembersController::class)->group(function () {
+
+        Route::get('/all/members', 'allMembers')->name('all.members');
+
+        Route::get('/member/info/{id}', 'memberInfoDetails')->name('member.info.details');
+
+        Route::get('/member/info/{id}/profile','showInfoProfile')->name('member.info.profile');
+
+
 
     });
 });

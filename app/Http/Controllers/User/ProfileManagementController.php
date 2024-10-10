@@ -14,6 +14,8 @@ use App\Models\ProfileManagement\Document;
 use App\Models\ProfileManagement\Social;
 use App\Models\Payment\Payment;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 
 
 class ProfileManagementController extends Controller

@@ -624,28 +624,79 @@ class ProfileManagementController extends Controller
         ];
         return redirect()->back()->with($notification);
     }
-    
+
+
     public function idCardShow()
     {
         $id = Auth::user()->id;
+
+        // Fetch the profile data for the authenticated user
         $profileData = User::find($id);
 
-        // Get the latest payment based on the created_at column
+        // Check academic qualification data
+        $academicQualification = DB::table('academic_qualifications')
+            ->where('user_id', $id)
+            ->first();
+
+        // Check next of kin and referee data
+        $nextOfKin = DB::table('next_of_kin_and_referee')
+            ->where('user_id', $id)
+            ->first();
+
+        // Check documents for means of ID
+        $document = DB::table('documents')
+            ->where('user_id', $id)
+            ->whereIn('documentable_type', [
+                'means of id - Driver\'s License',
+                'means of id - National ID',
+                'means of id - International Passport',
+                'means of id - Voter\'s Card'
+            ]) // Match the format in the database
+            ->first();
+
+        $errorMessages = [];
+
+        // Ensure all required fields are filled in academic qualifications
+        if (
+            !$academicQualification || empty($academicQualification->degree) || empty($academicQualification->institution) ||
+            empty($academicQualification->graduation_year) || empty($academicQualification->grade)
+        ) {
+            $errorMessages[] = 'Please complete your academic qualification details.';
+        }
+
+        // Ensure all required fields are filled in next of kin and referee data
+        if (
+            !$nextOfKin || empty($nextOfKin->next_of_kin_full_name) || empty($nextOfKin->next_of_kin_relationship) ||
+            empty($nextOfKin->next_of_kin_email) || empty($nextOfKin->next_of_kin_phone) || empty($nextOfKin->next_of_kin_address) ||
+            empty($nextOfKin->referee1_full_name) || empty($nextOfKin->referee1_relationship) || empty($nextOfKin->referee1_email) ||
+            empty($nextOfKin->referee1_phone) || empty($nextOfKin->referee1_address)
+        ) {
+            $errorMessages[] = 'Please complete your next of kin and referee details.';
+        }
+
+        // Check for valid means of ID
+        if (!$document) {
+            $errorMessages[] = 'Please provide a valid means of identification (e.g., Driver\'s License, National ID, International Passport, Voter\'s Card).';
+        }
+
+        // Get the latest payment to set "Valid Until" date
         $latestPayment = Payment::where('user_id', $id)
             ->orderBy('created_at', 'desc')
             ->first();
 
         if ($latestPayment) {
-            // Extract the year from the created_at date
             $paymentYear = date('Y', strtotime($latestPayment->created_at));
-
-            // The "Valid Until" is always January of the next year
             $validUntil = 'January - ' . ($paymentYear + 1);
         } else {
-            // Handle cases where no payment is found
             $validUntil = 'No payment found';
         }
 
+        // If there are error messages, render the ID card view with errors
+        if (!empty($errorMessages)) {
+            return view('user.id_card', compact('profileData', 'validUntil', 'errorMessages'));
+        }
+
+        // If all required fields are filled, render the ID card
         return view('user.id_card', compact('profileData', 'validUntil'));
     }
 

@@ -99,6 +99,7 @@
     </div>
     <!-- end auth-page-wrapper -->
 
+    
       <!-- JAVASCRIPT -->
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
@@ -107,21 +108,16 @@
     <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
 
-    <!-- particles js -->
-    <script src="assets/libs/particles.js/particles.js"></script>
-    <!-- particles app js -->
-    <script src="assets/js/pages/particles.app.js"></script>
-    <!-- password-addon init -->
-    <script src="assets/js/pages/password-addon.init.js"></script>
-
      <!-- Particles JS -->
     <script src="{{ asset('assets/libs/particles.js/particles.js') }}"></script>
 
     <!-- Particles app JS -->
     <script src="{{ asset('assets/js/pages/particles.app.js') }}"></script>
 
-    <!-- Password-addon init -->
-    <script src="{{ asset('assets/js/pages/password-addon.init.js') }}"></script>
+    <!-- password-addon init -->
+    <script src="{{asset('assets/js/pages/password-addon.init.js')}}"></script>
+
+   
 
     <!-- jQuery (required for Toastr) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

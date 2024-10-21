@@ -174,12 +174,7 @@
                                                     <option value="Married"
                                                         {{ $profileData->marital_status == 'Married' ? 'selected' : '' }}>
                                                         Married</option>
-                                                    <option value="Divorced"
-                                                        {{ $profileData->marital_status == 'Divorced' ? 'selected' : '' }}>
-                                                        Divorced</option>
-                                                    <option value="Widowed"
-                                                        {{ $profileData->marital_status == 'Widowed' ? 'selected' : '' }}>
-                                                        Widowed</option>
+                                                   
                                                 </select>
                                             </div>
                                         </div>

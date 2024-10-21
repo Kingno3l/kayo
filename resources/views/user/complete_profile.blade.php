@@ -1,49 +1,32 @@
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="light" data-sidebar-size="lg"
+<html lang="en" data-layout="horizontal" data-topbar="dark" data-sidebar-size="lg" data-sidebar="light"
     data-sidebar-image="none" data-preloader="disable">
 
 <head>
 
     <meta charset="utf-8" />
-    <title>User Africa</title>
+    <title>Profile Settings | Velzon - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="YIPS Africa" name="description" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    <!-- Bootstrap Css -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- App Css -->
-    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- Custom Css -->
-    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- Toastr CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-    <!-- Filepond css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/filepond/filepond.min.css') }}" type="text/css" />
-    <link rel="stylesheet"
-        href="{{ asset('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css') }}" />
-
-    <!-- dropzone css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/dropzone/dropzone.css') }}" type="text/css" />
-
-    <!-- multi.js css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/multi.js/multi.min.css') }}" />
-
-    <!-- autocomplete css -->
-    <link rel="stylesheet" href="{{ asset('assets/libs/@tarekraafat/autocomplete.js/css/autoComplete.css') }}">
-
     <!-- Layout config Js -->
     <script src="{{ asset('assets/js/layout.js') }}"></script>
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 
 
 </head>
@@ -53,14 +36,11 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
+
         @php
             $id = Auth::user()->id;
             $profileData = App\Models\User::find($id);
         @endphp
-
-
-
-
 
         <header id="page-topbar">
             <div class="layout-width">
@@ -70,19 +50,20 @@
                         <div class="navbar-brand-box horizontal-logo">
                             <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="" height="22">
+                                    <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-dark.png" alt="" height="17">
+                                    <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="17">
                                 </span>
                             </a>
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="" height="22">
+                                    <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-light.png" alt="" height="17">
+                                    <img src="{{ asset('assets/images/logo-light.png') }}" alt=""
+                                        height="17">
                                 </span>
                             </a>
                         </div>
@@ -103,35 +84,38 @@
                     <div class="d-flex align-items-center">
 
 
+
                         <div class="dropdown ms-1 topbar-head-dropdown header-item">
                             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img id="header-lang-img" src="{{ asset('assets/images/flags/us.svg') }}"
                                     alt="Header Language" height="20" class="rounded">
                             </button>
-
-
                             <div class="dropdown-menu dropdown-menu-end">
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language py-2"
                                     data-lang="en" title="English">
-                                    <img src="assets/images/flags/us.svg" alt="user-image" class="me-2 rounded"
-                                        height="18">
+                                    <img src="{{ asset('assets/images/flags/us.svg') }}" alt="user-image"
+                                        class="me-2 rounded" height="18">
                                     <span class="align-middle">English</span>
                                 </a>
 
-
-
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ar"
-                                    title="Arabic">
-                                    <img src="assets/images/flags/fr.svg" alt="user-image" class="me-2 rounded"
-                                        height="18">
-                                    <span class="align-middle">French</span>
+                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="fr"
+                                    title="French">
+                                    <img src="{{ asset('assets/images/flags/fr.svg') }}" alt="user-image"
+                                        class="me-2 rounded" height="18">
+                                    <span class="align-middle">français</span>
                                 </a>
+
+
                             </div>
                         </div>
+
+
+
+
 
                         <div class="ms-1 header-item d-none d-sm-flex">
                             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
@@ -147,41 +131,48 @@
                             </button>
                         </div>
 
+
+
                         <div class="dropdown ms-sm-3 header-item topbar-user">
-                    <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user"
-                                src="{{ !empty($profileData->photo) ? url('uploads/user_images/' . $profileData->photo) : url('upload/no_image.jpg') }}"
-                                alt="Header Avatar">
-                            <span class="text-start ms-xl-2">
-                                <span
-                                    class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ $profileData->name }}</span>
-                                <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Member</span>
-                            </span>
-                        </span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <h6 class="dropdown-header">Welcome {{ $profileData->name }}!</h6>
-                       
+                            <button type="button" class="btn" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-flex align-items-center">
+                                    <img class="rounded-circle header-profile-user"
+                                        src="{{ !empty($profileData->photo) ? url('uploads/user_images/' . $profileData->photo) : url('upload/no_image.jpg') }}"
+                                        alt="Header Avatar">
+                                    <span class="text-start ms-xl-2">
+                                        <span
+                                            class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ $profileData->name }}</span>
+                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Member</span>
+                                    </span>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <h6 class="dropdown-header">Welcome {{ $profileData->name }}!</h6>
+                                <a class="dropdown-item" href="{{ route('admin.profile') }}"><i
+                                        class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Profile</span></a>
+
+                                <a class="dropdown-item" href="{{ route('admin.change.password') }}"><i
+                                        class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Change Password</span></a>
 
 
-                        <a class="dropdown-item" href="{{ route('user.logout') }}"><i
-                                class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
-                                class="align-middle" data-key="t-logout">Logout</span></a>
-                    </div>
-                </div>
+
+                                <div class="dropdown-divider"></div>
 
 
 
+                                <a class="dropdown-item" href="{{ route('admin.logout') }}"><i
+                                        class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle" data-key="t-logout">Logout</span></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
-
-
-
 
         <!-- removeNotificationModal -->
         <div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
@@ -212,37 +203,25 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
         <!-- ========== App Menu ========== -->
-
-
-
-
-
-
-        @php
-            $id = Auth::user()->id;
-            $instructorId = App\Models\User::find($id);
-            $status = $instructorId->status;
-        @endphp
-
         <div class="app-menu navbar-menu">
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <!-- Dark Logo-->
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                        <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/images/logo-dark.png" alt="" height="17">
+                        <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="17">
                     </span>
                 </a>
                 <!-- Light Logo-->
                 <a href="index.html" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                        <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="assets/images/logo-light.png" alt="" height="17">
+                        <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="17">
                     </span>
                 </a>
                 <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -256,36 +235,16 @@
 
                     <div id="two-column-menu">
                     </div>
-                    <ul class="navbar-nav" id="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link menu-link active" href="#" role="button" aria-expanded="false"
-                                aria-controls="sidebarDashboards">
-                                <i data-feather="user" class="icon-dual"></i> <span data-key="t-dashboards">Profile
-                                    Page</span>
-                            </a>
-
-                        </li> <!-- end Dashboard Menu -->
-
-
-                    </ul>
+                    <p class="text-center fw-bold text-danger m-2"> Welcome {{ $profileData->name }}, Kindly Complete
+                        This
+                        Section To Access Your Dashboard!!!
+                    </p>
                 </div>
                 <!-- Sidebar -->
             </div>
 
             <div class="sidebar-background"></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
         <!-- Left Sidebar End -->
         <!-- Vertical Overlay-->
         <div class="vertical-overlay"></div>
@@ -304,15 +263,15 @@
 
                         </div>
                     </div>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     <div class="row">
                         <div class="col-xxl-3">
@@ -394,187 +353,167 @@
 
                                                 <!--end col-->
                                                 @include('user._partials.countries')
+                                               
+
+
                                                 <!--end col-->
                                                 {{-- @include('user._partials.phone_number') --}}
-                                                 <div class="col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label for="emailInput" class="form-label">Phone Number</label>
-                                                        <input type="tel" class="form-control" name="phone"
-                                                            id="phone" placeholder="Enter your phone number" r
-                                                            value="{{ $profileData->phone }}">
-                                                    </div>
-                                                </div>
-                                                <!--end col-->
-
-                                                <div class="col-lg-4">
-                                                    <div class="mb-3">
-                                                        <label for="maritalStatusInput" class="form-label">Marital
-                                                            Status</label>
-                                                        <select class="form-select mb-3" id="maritalStatusInput"
-                                                            name="marital_status" aria-label="Marital Status">
-                                                            <option value=""
-                                                                {{ $profileData->marital_status == '' ? 'selected' : '' }}>
-                                                                Select
-                                                                Marital Status</option>
-                                                            <option value="Single"
-                                                                {{ $profileData->marital_status == 'Single' ? 'selected' : '' }}>
-                                                                Single</option>
-                                                            <option value="Married"
-                                                                {{ $profileData->marital_status == 'Married' ? 'selected' : '' }}>
-                                                                Married</option>
-                                                            <option value="Divorced"
-                                                                {{ $profileData->marital_status == 'Divorced' ? 'selected' : '' }}>
-                                                                Divorced</option>
-                                                            <option value="Widowed"
-                                                                {{ $profileData->marital_status == 'Widowed' ? 'selected' : '' }}>
-                                                                Widowed</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4">
-                                                    <div class="mb-3">
-                                                        <label for="genderInput" class="form-label">Gender</label>
-                                                        <select class="form-select mb-3" id="genderInput"
-                                                            name="gender" aria-label="Gender">
-                                                            <option value=""
-                                                                {{ $profileData->gender == '' ? 'selected' : '' }}>
-                                                                Select Gender
-                                                            </option>
-                                                            <option value="Male"
-                                                                {{ $profileData->gender == 'Male' ? 'selected' : '' }}>
-                                                                Male
-                                                            </option>
-                                                            <option value="Female"
-                                                                {{ $profileData->gender == 'Female' ? 'selected' : '' }}>
-                                                                Female
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4">
-                                                    <div class="mb-3">
-                                                        <label for="dobInput" class="form-label">Date of Birth</label>
-                                                        <input type="date" class="form-control" id="dobInput"
-                                                            name="date_of_birth"
-                                                            value="{{ $profileData->date_of_birth }}"
-                                                            aria-label="Date of Birth">
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="col-lg-4">
-                                                    <div class="mb-3">
-                                                        <label for="educationInput"
-                                                            class="form-label">Education</label>
-                                                        <select class="form-select mb-3" id="educationInput"
-                                                            name="education" aria-label="Default select example">
-                                                            <option value=""
-                                                                {{ $profileData->education == '' ? 'selected' : '' }}>
-                                                                Select
-                                                                your Education</option>
-                                                            <option value="High School Diploma"
-                                                                {{ $profileData->education == 'High School Diploma' ? 'selected' : '' }}>
-                                                                High School Diploma</option>
-                                                            <option value="Associate Degree"
-                                                                {{ $profileData->education == 'Associate Degree' ? 'selected' : '' }}>
-                                                                Associate Degree</option>
-                                                            <option value="Bachelor’s Degree"
-                                                                {{ $profileData->education == 'Bachelor’s Degree' ? 'selected' : '' }}>
-                                                                Bachelor’s Degree</option>
-                                                            <option value="Master’s Degree"
-                                                                {{ $profileData->education == 'Master’s Degree' ? 'selected' : '' }}>
-                                                                Master’s Degree</option>
-                                                            <option value="Doctorate (Ph.D.)"
-                                                                {{ $profileData->education == 'Doctorate (Ph.D.)' ? 'selected' : '' }}>
-                                                                Doctorate (Ph.D.)</option>
-                                                            <option value="Professional Certificate"
-                                                                {{ $profileData->education == 'Professional Certificate' ? 'selected' : '' }}>
-                                                                Professional Certificate</option>
-                                                            <option value="Some College (No Degree)"
-                                                                {{ $profileData->education == 'Some College (No Degree)' ? 'selected' : '' }}>
-                                                                Some College (No Degree)</option>
-                                                            <option value="Vocational Training"
-                                                                {{ $profileData->education == 'Vocational Training' ? 'selected' : '' }}>
-                                                                Vocational Training</option>
-                                                            <option value="Online Course"
-                                                                {{ $profileData->education == 'Online Course' ? 'selected' : '' }}>
-                                                                Online Course</option>
-                                                            <option value="Not Applicable"
-                                                                {{ $profileData->education == 'Not Applicable' ? 'selected' : '' }}>
-                                                                Not Applicable</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
+                                               <div class="col-lg-6">
+    <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter your phone number" value="{{ old('phone', $profileData->phone) }}">
+    </div>
+</div>
 
                                                 <!--end col-->
-                                                <div class="col-lg-4">
-                                                    <div class="mb-3">
-                                                        <label for="positionInput" class="form-label">Position</label>
-                                                        <select class="form-select mb-3" id="positionInput"
-                                                            name="position" aria-label="Default select example">
-                                                            <option value=""
-                                                                {{ $profileData->position == '' ? 'selected' : '' }}>
-                                                                Select
-                                                                your Position</option>
-                                                            <option value="Intern"
-                                                                {{ $profileData->position == 'Intern' ? 'selected' : '' }}>
-                                                                Intern</option>
-                                                            <option value="Junior Developer"
-                                                                {{ $profileData->position == 'Junior Developer' ? 'selected' : '' }}>
-                                                                Junior Developer</option>
-                                                            <option value="Software Engineer"
-                                                                {{ $profileData->position == 'Software Engineer' ? 'selected' : '' }}>
-                                                                Software Engineer</option>
-                                                            <option value="Senior Software Engineer"
-                                                                {{ $profileData->position == 'Senior Software Engineer' ? 'selected' : '' }}>
-                                                                Senior Software Engineer</option>
-                                                            <option value="Project Manager"
-                                                                {{ $profileData->position == 'Project Manager' ? 'selected' : '' }}>
-                                                                Project Manager</option>
-                                                            <option value="Team Lead"
-                                                                {{ $profileData->position == 'Team Lead' ? 'selected' : '' }}>
-                                                                Team Lead</option>
-                                                            <option value="Product Manager"
-                                                                {{ $profileData->position == 'Product Manager' ? 'selected' : '' }}>
-                                                                Product Manager</option>
-                                                            <option value="Marketing Manager"
-                                                                {{ $profileData->position == 'Marketing Manager' ? 'selected' : '' }}>
-                                                                Marketing Manager</option>
-                                                            <option value="Sales Executive"
-                                                                {{ $profileData->position == 'Sales Executive' ? 'selected' : '' }}>
-                                                                Sales Executive</option>
-                                                            <option value="Human Resources Manager"
-                                                                {{ $profileData->position == 'Human Resources Manager' ? 'selected' : '' }}>
-                                                                Human Resources Manager</option>
-                                                            <option value="Administrative Assistant"
-                                                                {{ $profileData->position == 'Administrative Assistant' ? 'selected' : '' }}>
-                                                                Administrative Assistant</option>
-                                                            <option value="CEO"
-                                                                {{ $profileData->position == 'CEO' ? 'selected' : '' }}>
-                                                                CEO
-                                                            </option>
-                                                            <option value="CTO"
-                                                                {{ $profileData->position == 'CTO' ? 'selected' : '' }}>
-                                                                CTO
-                                                            </option>
-                                                            <option value="CFO"
-                                                                {{ $profileData->position == 'CFO' ? 'selected' : '' }}>
-                                                                CFO
-                                                            </option>
-                                                            <option value="Consultant"
-                                                                {{ $profileData->position == 'Consultant' ? 'selected' : '' }}>
-                                                                Consultant</option>
-                                                            <option value="Other"
-                                                                {{ $profileData->position == 'Other' ? 'selected' : '' }}>
-                                                                Other
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+
+
+
+                                             <div class="col-lg-4">
+    <div class="mb-3">
+        <label for="maritalStatusInput" class="form-label">Marital Status</label>
+        <select class="form-select mb-3" id="maritalStatusInput" name="marital_status" aria-label="Marital Status">
+            <option value="" {{ old('marital_status', $profileData->marital_status) == '' ? 'selected' : '' }}>
+                Select Marital Status
+            </option>
+            <option value="Single" {{ old('marital_status', $profileData->marital_status) == 'Single' ? 'selected' : '' }}>
+                Single
+            </option>
+            <option value="Married" {{ old('marital_status', $profileData->marital_status) == 'Married' ? 'selected' : '' }}>
+                Married
+            </option>
+            
+        </select>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="mb-3">
+        <label for="genderInput" class="form-label">Gender</label>
+        <select class="form-select mb-3" id="genderInput" name="gender" aria-label="Gender">
+            <option value="" {{ old('gender', $profileData->gender) == '' ? 'selected' : '' }}>
+                Select Gender
+            </option>
+            <option value="Male" {{ old('gender', $profileData->gender) == 'Male' ? 'selected' : '' }}>
+                Male
+            </option>
+            <option value="Female" {{ old('gender', $profileData->gender) == 'Female' ? 'selected' : '' }}>
+                Female
+            </option>
+        </select>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="mb-3">
+        <label for="dobInput" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" id="dobInput" name="date_of_birth" value="{{ old('date_of_birth', $profileData->date_of_birth) }}" aria-label="Date of Birth">
+    </div>
+</div>
+
+
+
+
+                                             <div class="col-lg-4">
+    <div class="mb-3">
+        <label for="educationInput" class="form-label">Education</label>
+        <select class="form-select mb-3" id="educationInput" name="education" aria-label="Default select example">
+            <option value="" {{ old('education', $profileData->education) == '' ? 'selected' : '' }}>
+                Select your Education
+            </option>
+            <option value="High School Diploma" {{ old('education', $profileData->education) == 'High School Diploma' ? 'selected' : '' }}>
+                High School Diploma
+            </option>
+            <option value="Associate Degree" {{ old('education', $profileData->education) == 'Associate Degree' ? 'selected' : '' }}>
+                Associate Degree
+            </option>
+            <option value="Bachelor’s Degree" {{ old('education', $profileData->education) == 'Bachelor’s Degree' ? 'selected' : '' }}>
+                Bachelor’s Degree
+            </option>
+            <option value="Master’s Degree" {{ old('education', $profileData->education) == 'Master’s Degree' ? 'selected' : '' }}>
+                Master’s Degree
+            </option>
+            <option value="Doctorate (Ph.D.)" {{ old('education', $profileData->education) == 'Doctorate (Ph.D.)' ? 'selected' : '' }}>
+                Doctorate (Ph.D.)
+            </option>
+            <option value="Professional Certificate" {{ old('education', $profileData->education) == 'Professional Certificate' ? 'selected' : '' }}>
+                Professional Certificate
+            </option>
+            <option value="Some College (No Degree)" {{ old('education', $profileData->education) == 'Some College (No Degree)' ? 'selected' : '' }}>
+                Some College (No Degree)
+            </option>
+            <option value="Vocational Training" {{ old('education', $profileData->education) == 'Vocational Training' ? 'selected' : '' }}>
+                Vocational Training
+            </option>
+            <option value="Online Course" {{ old('education', $profileData->education) == 'Online Course' ? 'selected' : '' }}>
+                Online Course
+            </option>
+            <option value="Not Applicable" {{ old('education', $profileData->education) == 'Not Applicable' ? 'selected' : '' }}>
+                Not Applicable
+            </option>
+        </select>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="mb-3">
+        <label for="positionInput" class="form-label">Position</label>
+        <select class="form-select mb-3" id="positionInput" name="position" aria-label="Default select example">
+            <option value="" {{ old('position', $profileData->position) == '' ? 'selected' : '' }}>
+                Select your Position
+            </option>
+            <option value="Intern" {{ old('position', $profileData->position) == 'Intern' ? 'selected' : '' }}>
+                Intern
+            </option>
+            <option value="Junior Developer" {{ old('position', $profileData->position) == 'Junior Developer' ? 'selected' : '' }}>
+                Junior Developer
+            </option>
+            <option value="Software Engineer" {{ old('position', $profileData->position) == 'Software Engineer' ? 'selected' : '' }}>
+                Software Engineer
+            </option>
+            <option value="Senior Software Engineer" {{ old('position', $profileData->position) == 'Senior Software Engineer' ? 'selected' : '' }}>
+                Senior Software Engineer
+            </option>
+            <option value="Project Manager" {{ old('position', $profileData->position) == 'Project Manager' ? 'selected' : '' }}>
+                Project Manager
+            </option>
+            <option value="Team Lead" {{ old('position', $profileData->position) == 'Team Lead' ? 'selected' : '' }}>
+                Team Lead
+            </option>
+            <option value="Product Manager" {{ old('position', $profileData->position) == 'Product Manager' ? 'selected' : '' }}>
+                Product Manager
+            </option>
+            <option value="Marketing Manager" {{ old('position', $profileData->position) == 'Marketing Manager' ? 'selected' : '' }}>
+                Marketing Manager
+            </option>
+            <option value="Sales Executive" {{ old('position', $profileData->position) == 'Sales Executive' ? 'selected' : '' }}>
+                Sales Executive
+            </option>
+            <option value="Human Resources Manager" {{ old('position', $profileData->position) == 'Human Resources Manager' ? 'selected' : '' }}>
+                Human Resources Manager
+            </option>
+            <option value="Administrative Assistant" {{ old('position', $profileData->position) == 'Administrative Assistant' ? 'selected' : '' }}>
+                Administrative Assistant
+            </option>
+            <option value="CEO" {{ old('position', $profileData->position) == 'CEO' ? 'selected' : '' }}>
+                CEO
+            </option>
+            <option value="CTO" {{ old('position', $profileData->position) == 'CTO' ? 'selected' : '' }}>
+                CTO
+            </option>
+            <option value="CFO" {{ old('position', $profileData->position) == 'CFO' ? 'selected' : '' }}>
+                CFO
+            </option>
+            <option value="Consultant" {{ old('position', $profileData->position) == 'Consultant' ? 'selected' : '' }}>
+                Consultant
+            </option>
+            <option value="Other" {{ old('position', $profileData->position) == 'Other' ? 'selected' : '' }}>
+                Other
+            </option>
+        </select>
+    </div>
+</div>
+
 
 
                                                 <!--end col-->
@@ -727,14 +666,12 @@
                                                 <!--end col-->
 
                                                 <div class="col-lg-12">
-                                                    <div class="mb-3 pb-2">
-                                                        <label for="exampleFormControlTextarea"
-                                                            class="form-label">Short
-                                                            Bio</label>
-                                                        <textarea class="form-control" name="short_bio" id="exampleFormControlTextarea" placeholder="Enter your description"
-                                                            rows="3">{{ $profileData->short_bio }}</textarea>
-                                                    </div>
-                                                </div>
+    <div class="mb-3 pb-2">
+        <label for="exampleFormControlTextarea" class="form-label">Short Bio</label>
+        <textarea class="form-control" name="short_bio" id="exampleFormControlTextarea" placeholder="Enter your description" rows="3">{{ old('short_bio', $profileData->short_bio) }}</textarea>
+    </div>
+</div>
+
                                                 <!--end col-->
                                                 <div class="col-lg-12">
                                                     <div class="hstack gap-2 justify-content-end">
@@ -788,6 +725,10 @@
             </div>
         </div>
     </div>
+
+
+
+
 
     <script>
         document.getElementById('profile-img-file-input').addEventListener('change', function(event) {
@@ -850,7 +791,7 @@
     <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins.js') }}"></script> --}}
 
     <!-- File Uploads -->
     <script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
@@ -871,7 +812,7 @@
     <!-- Form Initialization -->
     <script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form-input-spin.init.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/flag-input.init.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/pages/flag-input.init.js') }}"></script> --}}
 
     <!-- ApexCharts (Charts and Dashboard) -->
     <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>

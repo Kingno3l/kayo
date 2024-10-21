@@ -7,7 +7,6 @@
 </style>
 
 
-
 <div class="col-lg-6 mb-3">
     <label class="form-label">Phone Number</label>
     <input type="hidden" name="country_code" id="country_code" value="{{ $profileData->country_code }}">
@@ -17,8 +16,7 @@
             aria-expanded="false">
             <img id="phone-flag-img" src="{{ asset('assets/images/flags/ng.svg') }}" alt="flag img" height="20"
                 class="phone-country-flagimg rounded">
-            <span class="ms-2 phone-country-codeno">{{ $profileData->country_code }}</span>
-            {{-- <span class="ms-2 phone-country-codeno"></span> --}}
+            <span class="ms-2 phone-country-codeno" id="selected-country-code">{{ $profileData->country_code }}</span>
         </button>
 
         <input type="text" name="phone" class="form-control rounded-end phone-flag-input"
@@ -29,12 +27,10 @@
                 <input type="text" class="form-control form-control-sm border search-phone-countryList"
                     placeholder="Search country name or country code...">
             </div>
-            <ul class="list-unstyled dropdown-menu-list mb-0">
-                <!-- Algeria -->
-                <li class="phone-dropdown-item d-flex" data-flag="dz.svg">
+            <ul class="list-unstyled dropdown-menu-list mb-0" id="country-list">
+                <li class="phone-dropdown-item d-flex" data-flag="dz.svg" data-code="+213">
                     <div class="flex-shrink-0 me-2">
-                        <img src="{{ asset('assets/images/flags/dz.svg') }}" alt="country flag"
-                            class="phone-options-flagimg" height="20">
+                        <img src="{{ asset('assets/images/flags/dz.svg') }}" alt="country flag" class="phone-options-flagimg" height="20">
                     </div>
                     <div class="flex-grow-1">
                         <div class="d-flex">
@@ -789,3 +785,31 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    // Get the elements
+    const countryList = document.getElementById('country-list');
+    const phoneFlagImg = document.getElementById('phone-flag-img');
+    const selectedCountryCode = document.getElementById('selected-country-code');
+    const countryCodeInput = document.getElementById('country_code');
+
+    // Add event listener to the country list
+    countryList.addEventListener('click', function (e) {
+        const clickedItem = e.target.closest('.phone-dropdown-item');
+        if (clickedItem) {
+            const flag = clickedItem.getAttribute('data-flag');
+            const code = clickedItem.getAttribute('data-code');
+            
+            // Update the flag image source
+            phoneFlagImg.src = `{{ asset('assets/images/flags/') }}/${flag}`;
+
+            // Update the country code
+            selectedCountryCode.textContent = code;
+            countryCodeInput.value = code; // Update the hidden input value
+
+            // Close the dropdown (optional)
+            document.querySelector('.phone-dropdown-toggle').click(); 
+        }
+    });
+</script>

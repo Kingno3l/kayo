@@ -13,6 +13,22 @@ use App\Http\Controllers\User\ProfileManagementController;
 use App\Http\Controllers\User\ViewMembersController;
 
 
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-email', function () {
+    try {
+        Mail::raw('This is a test email', function ($message) {
+            $message->to('gibelsoft@gmail.com') // Replace with your actual email address
+                ->subject('Test Email');
+        });
+        return 'Email sent!';
+    } catch (\Exception $e) {
+        Log::error('Email sending failed: ' . $e->getMessage());
+        return 'Failed to send email. Check the logs for more details.';
+    }
+});
+
+
 Route::get('/', function () {
     return redirect()->route('login');
 });

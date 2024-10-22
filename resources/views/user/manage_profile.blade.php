@@ -163,26 +163,7 @@
                                                                             class="form-control" id="institutionInput">
                                                                     </div>
 
-                                                                    <div class="col-lg-6">
-                                                                        <label for="graduationYearInput"
-                                                                            class="form-label">Graduation Year</label>
-                                                                        <select name="graduation_year[]"
-                                                                            class="form-control" id="graduationYearInput">
-                                                                            <option value="" disabled selected>Select
-                                                                                Graduation Year</option>
-                                                                            <!-- Dynamically populate the last 50 years -->
-                                                                            <script>
-                                                                                const graduationYearSelect = document.getElementById('graduationYearInput');
-                                                                                const currentYear = new Date().getFullYear();
-                                                                                for (let year = currentYear; year >= currentYear - 50; year--) {
-                                                                                    let option = document.createElement('option');
-                                                                                    option.value = year;
-                                                                                    option.text = year;
-                                                                                    graduationYearSelect.appendChild(option);
-                                                                                }
-                                                                            </script>
-                                                                        </select>
-                                                                    </div>
+                                                                   
                                                                     <div class="col-lg-6">
                                                                         <label for="gradeInput"
                                                                             class="form-label">Grade</label>

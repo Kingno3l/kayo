@@ -125,9 +125,11 @@
                                                                             <label
                                                                                 for="academicYearInput{{ $index }}"
                                                                                 class="form-label">Graduation Year</label>
+                                                                                
                                                                             <select name="graduation_year[]"
                                                                                 class="form-control"
                                                                                 id="academicYearInput{{ $index }}">
+                                                                                
                                                                                 @for ($year = 1980; $year <= date('Y'); $year++)
                                                                                     <option value="{{ $year }}"
                                                                                         {{ $qualification->graduation_year == $year ? 'selected' : '' }}>
@@ -183,6 +185,8 @@
                                                                         <label class="form-label">Graduation Year</label>
                                                                         <select name="graduation_year[]"
                                                                             class="form-control">
+                                                                                    <option value="" selected disabled>Select Graduation Year</option>
+
                                                                             @for ($year = 1980; $year <= date('Y'); $year++)
                                                                                 <option value="{{ $year }}">
                                                                                     {{ $year }}</option>

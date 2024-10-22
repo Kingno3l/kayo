@@ -253,65 +253,44 @@
 
 
                                         <!--end col-->
-                                        <div class="col-lg-4">
-                                            <div class="mb-3">
-                                                <label for="positionInput" class="form-label">Position</label>
-                                                <select class="form-select mb-3" id="positionInput" name="position"
-                                                    aria-label="Default select example">
-                                                    <option value=""
-                                                        {{ $profileData->position == '' ? 'selected' : '' }}>Select
-                                                        your Position</option>
-                                                    <option value="Intern"
-                                                        {{ $profileData->position == 'Intern' ? 'selected' : '' }}>
-                                                        Intern</option>
-                                                    <option value="Junior Developer"
-                                                        {{ $profileData->position == 'Junior Developer' ? 'selected' : '' }}>
-                                                        Junior Developer</option>
-                                                    <option value="Software Engineer"
-                                                        {{ $profileData->position == 'Software Engineer' ? 'selected' : '' }}>
-                                                        Software Engineer</option>
-                                                    <option value="Senior Software Engineer"
-                                                        {{ $profileData->position == 'Senior Software Engineer' ? 'selected' : '' }}>
-                                                        Senior Software Engineer</option>
-                                                    <option value="Project Manager"
-                                                        {{ $profileData->position == 'Project Manager' ? 'selected' : '' }}>
-                                                        Project Manager</option>
-                                                    <option value="Team Lead"
-                                                        {{ $profileData->position == 'Team Lead' ? 'selected' : '' }}>
-                                                        Team Lead</option>
-                                                    <option value="Product Manager"
-                                                        {{ $profileData->position == 'Product Manager' ? 'selected' : '' }}>
-                                                        Product Manager</option>
-                                                    <option value="Marketing Manager"
-                                                        {{ $profileData->position == 'Marketing Manager' ? 'selected' : '' }}>
-                                                        Marketing Manager</option>
-                                                    <option value="Sales Executive"
-                                                        {{ $profileData->position == 'Sales Executive' ? 'selected' : '' }}>
-                                                        Sales Executive</option>
-                                                    <option value="Human Resources Manager"
-                                                        {{ $profileData->position == 'Human Resources Manager' ? 'selected' : '' }}>
-                                                        Human Resources Manager</option>
-                                                    <option value="Administrative Assistant"
-                                                        {{ $profileData->position == 'Administrative Assistant' ? 'selected' : '' }}>
-                                                        Administrative Assistant</option>
-                                                    <option value="CEO"
-                                                        {{ $profileData->position == 'CEO' ? 'selected' : '' }}>CEO
-                                                    </option>
-                                                    <option value="CTO"
-                                                        {{ $profileData->position == 'CTO' ? 'selected' : '' }}>CTO
-                                                    </option>
-                                                    <option value="CFO"
-                                                        {{ $profileData->position == 'CFO' ? 'selected' : '' }}>CFO
-                                                    </option>
-                                                    <option value="Consultant"
-                                                        {{ $profileData->position == 'Consultant' ? 'selected' : '' }}>
-                                                        Consultant</option>
-                                                    <option value="Other"
-                                                        {{ $profileData->position == 'Other' ? 'selected' : '' }}>Other
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                       <div class="col-lg-4">
+    <div class="mb-3">
+        <label for="positionInput" class="form-label">Position</label>
+        <select class="form-select mb-3" id="positionInput" name="position" aria-label="Default select example">
+            <option value="" {{ old('position', $profileData->position) == '' ? 'selected' : '' }}>
+                Select your Position
+            </option>
+            <option value="Broker/Agent" {{ old('position', $profileData->position) == 'Broker/Agent' ? 'selected' : '' }}>
+                Broker/Agent
+            </option>
+            <option value="Underwriter" {{ old('position', $profileData->position) == 'Underwriter' ? 'selected' : '' }}>
+                Underwriter
+            </option>
+            <option value="Business Development" {{ old('position', $profileData->position) == 'Business Development' ? 'selected' : '' }}>
+                Business Development
+            </option>
+            <option value="Customer Service Representative" {{ old('position', $profileData->position) == 'Customer Service Representative' ? 'selected' : '' }}>
+                Customer Service Representative
+            </option>
+            <option value="Claims Representative" {{ old('position', $profileData->position) == 'Claims Representative' ? 'selected' : '' }}>
+                Claims Representative
+            </option>
+            <option value="Adjuster" {{ old('position', $profileData->position) == 'Adjuster' ? 'selected' : '' }}>
+                Adjuster
+            </option>
+            <option value="Actuary" {{ old('position', $profileData->position) == 'Actuary' ? 'selected' : '' }}>
+                Actuary
+            </option>
+            <option value="Regulator" {{ old('position', $profileData->position) == 'Regulator' ? 'selected' : '' }}>
+                Regulator
+            </option>
+            <option value="Other" {{ old('position', $profileData->position) == 'Other' ? 'selected' : '' }}>
+                Other
+            </option>
+        </select>
+    </div>
+</div>
+
 
 
                                         <!--end col-->

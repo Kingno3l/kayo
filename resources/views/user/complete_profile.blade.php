@@ -462,50 +462,29 @@
             <option value="" {{ old('position', $profileData->position) == '' ? 'selected' : '' }}>
                 Select your Position
             </option>
-            <option value="Intern" {{ old('position', $profileData->position) == 'Intern' ? 'selected' : '' }}>
-                Intern
+            <option value="Broker/Agent" {{ old('position', $profileData->position) == 'Broker/Agent' ? 'selected' : '' }}>
+                Broker/Agent
             </option>
-            <option value="Junior Developer" {{ old('position', $profileData->position) == 'Junior Developer' ? 'selected' : '' }}>
-                Junior Developer
+            <option value="Underwriter" {{ old('position', $profileData->position) == 'Underwriter' ? 'selected' : '' }}>
+                Underwriter
             </option>
-            <option value="Software Engineer" {{ old('position', $profileData->position) == 'Software Engineer' ? 'selected' : '' }}>
-                Software Engineer
+            <option value="Business Development" {{ old('position', $profileData->position) == 'Business Development' ? 'selected' : '' }}>
+                Business Development
             </option>
-            <option value="Senior Software Engineer" {{ old('position', $profileData->position) == 'Senior Software Engineer' ? 'selected' : '' }}>
-                Senior Software Engineer
+            <option value="Customer Service Representative" {{ old('position', $profileData->position) == 'Customer Service Representative' ? 'selected' : '' }}>
+                Customer Service Representative
             </option>
-            <option value="Project Manager" {{ old('position', $profileData->position) == 'Project Manager' ? 'selected' : '' }}>
-                Project Manager
+            <option value="Claims Representative" {{ old('position', $profileData->position) == 'Claims Representative' ? 'selected' : '' }}>
+                Claims Representative
             </option>
-            <option value="Team Lead" {{ old('position', $profileData->position) == 'Team Lead' ? 'selected' : '' }}>
-                Team Lead
+            <option value="Adjuster" {{ old('position', $profileData->position) == 'Adjuster' ? 'selected' : '' }}>
+                Adjuster
             </option>
-            <option value="Product Manager" {{ old('position', $profileData->position) == 'Product Manager' ? 'selected' : '' }}>
-                Product Manager
+            <option value="Actuary" {{ old('position', $profileData->position) == 'Actuary' ? 'selected' : '' }}>
+                Actuary
             </option>
-            <option value="Marketing Manager" {{ old('position', $profileData->position) == 'Marketing Manager' ? 'selected' : '' }}>
-                Marketing Manager
-            </option>
-            <option value="Sales Executive" {{ old('position', $profileData->position) == 'Sales Executive' ? 'selected' : '' }}>
-                Sales Executive
-            </option>
-            <option value="Human Resources Manager" {{ old('position', $profileData->position) == 'Human Resources Manager' ? 'selected' : '' }}>
-                Human Resources Manager
-            </option>
-            <option value="Administrative Assistant" {{ old('position', $profileData->position) == 'Administrative Assistant' ? 'selected' : '' }}>
-                Administrative Assistant
-            </option>
-            <option value="CEO" {{ old('position', $profileData->position) == 'CEO' ? 'selected' : '' }}>
-                CEO
-            </option>
-            <option value="CTO" {{ old('position', $profileData->position) == 'CTO' ? 'selected' : '' }}>
-                CTO
-            </option>
-            <option value="CFO" {{ old('position', $profileData->position) == 'CFO' ? 'selected' : '' }}>
-                CFO
-            </option>
-            <option value="Consultant" {{ old('position', $profileData->position) == 'Consultant' ? 'selected' : '' }}>
-                Consultant
+            <option value="Regulator" {{ old('position', $profileData->position) == 'Regulator' ? 'selected' : '' }}>
+                Regulator
             </option>
             <option value="Other" {{ old('position', $profileData->position) == 'Other' ? 'selected' : '' }}>
                 Other
@@ -513,6 +492,7 @@
         </select>
     </div>
 </div>
+
 
 
 

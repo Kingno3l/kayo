@@ -44,10 +44,7 @@
                                 <div class="tab-pane active" id="employmentHistory" role="tabpanel">
                                     <div class="row">
 
-                                        <p>Means of Identification Type: {{ $meansOfIdentificationType }}</p>
-                                        <p>Old Means of Identification Value: {{ old('means_of_identification') }}</p>
-
-
+                        
 
                                         <form action="{{ route('profile-management.document-upload.store') }}"
                                             method="POST" enctype="multipart/form-data">
@@ -81,7 +78,7 @@
                                                                         <select name="means_of_identification"
                                                                             class="form-control" id="identificationInput"
                                                                             required>
-                                                                            <option value="" disabled>Select Means of
+                                                                            <option value="" selected disabled>Select Means of
                                                                                 Identification</option>
                                                                             <option value="National ID"
                                                                                 {{ trim($meansOfIdentificationType) == 'National ID' ? 'selected' : '' }}>

@@ -66,104 +66,115 @@
                                                     </div>
                                                 </div>
 
-                                                @forelse ($employmentHistories as $index => $employment)
-                                                    <div class="col-lg-12">
-                                                        <div class="card">
-                                                            <div class="card-header align-items-center d-flex">
-                                                                <h4 class="card-title mb-0 flex-grow-1">Employment History
-                                                                </h4>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="live-preview">
-                                                                    <div class="row employment-history-item">
-                                                                        <div class="col-lg-6">
-                                                                            <label for="jobTitleInput{{ $index }}"
-                                                                                class="form-label">Job Title</label>
-                                                                            <input type="text" name="job_title[]"
-                                                                                class="form-control"
-                                                                                id="jobTitleInput{{ $index }}"
-                                                                                value="{{ $employment->job_title }}">
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <label for="companyInput{{ $index }}"
-                                                                                class="form-label">Company</label>
-                                                                            <input type="text" name="company[]"
-                                                                                class="form-control"
-                                                                                id="companyInput{{ $index }}"
-                                                                                value="{{ $employment->company }}">
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <label for="startDateInput{{ $index }}"
-                                                                                class="form-label">Start Date</label>
-                                                                            <input type="date" name="start_date[]"
-                                                                                class="form-control"
-                                                                                id="startDateInput{{ $index }}"
-                                                                                value="{{ $employment->start_date }}">
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <label for="endDateInput{{ $index }}"
-                                                                                class="form-label">End Date</label>
-                                                                            <input type="date" name="end_date[]"
-                                                                                class="form-control"
-                                                                                id="endDateInput{{ $index }}"
-                                                                                value="{{ $employment->end_date }}">
-                                                                        </div>
-                                                                        <div class="col-lg-12">
-                                                                            <label
-                                                                                for="responsibilitiesInput{{ $index }}"
-                                                                                class="form-label">Responsibilities</label>
-                                                                            <textarea name="responsibilities[]" class="form-control" id="responsibilitiesInput{{ $index }}" rows="3">{{ $employment->responsibilities }}</textarea>
-                                                                        </div>
-                                                                        @if ($index > 0)
-                                                                            <div class="col-lg-12 mt-2">
-                                                                                <button type="button"
-                                                                                    class="btn btn-danger remove-btn">Remove</button>
-                                                                            </div>
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @empty
-                                                    <!-- Empty form for new employment history -->
-                                                    <div class="col-lg-12">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="row employment-history-item">
-                                                                    <div class="col-lg-6">
-                                                                        <label class="form-label">Job Title</label>
-                                                                        <input type="text" name="job_title[]"
-                                                                            class="form-control">
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <label class="form-label">Company</label>
-                                                                        <input type="text" name="company[]"
-                                                                            class="form-control">
-                                                                    </div>
-                                                                    <div class="col-lg-6 mt-2">
-                                                                        <label class="form-label">Start Date</label>
-                                                                        <input type="date" name="start_date[]"
-                                                                            class="form-control">
-                                                                    </div>
-                                                                    <div class="col-lg-6 mt-2">
-                                                                        <label class="form-label">End Date</label>
-                                                                        <input type="date" name="end_date[]"
-                                                                            class="form-control">
-                                                                    </div>
-                                                                    <div class="col-lg-12 mt-2">
-                                                                        <label class="form-label">Responsibilities</label>
-                                                                        <textarea name="responsibilities[]" class="form-control" rows="3"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforelse
+                                               @forelse ($employmentHistories as $index => $employment)
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Employment History</h4>
+            </div>
+            <div class="card-body">
+                <div class="live-preview">
+                    <div class="row employment-history-item">
+                        <div class="col-lg-6">
+                            <label for="jobTitleInput{{ $index }}" class="form-label">Job Title</label>
+                            <input type="text" name="job_title[]" class="form-control" id="jobTitleInput{{ $index }}" value="{{ $employment->job_title }}">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="companyInput{{ $index }}" class="form-label">Company</label>
+                            <input type="text" name="company[]" class="form-control" id="companyInput{{ $index }}" value="{{ $employment->company }}">
+                        </div>
+                        
+                        <!-- Still Employed Checkbox -->
+                        <div class="col-lg-12 mt-4">
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input still-employed-checkbox"
+                                    type="checkbox"
+                                    id="stillEmployedCheck{{ $index }}"
+                                    name="still_employed[]"
+                                    {{ empty($employment->end_date) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="stillEmployedCheck{{ $index }}">
+                                    Still Employed
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Start Date -->
+                        <div class="col-lg-6">
+                            <label for="startDateInput{{ $index }}" class="form-label">Start Date</label>
+                            <input type="date" name="start_date[]" class="form-control" id="startDateInput{{ $index }}" value="{{ $employment->start_date }}">
+                        </div>
+
+                        <!-- End Date, hidden if 'Still Employed' is checked -->
+                        <div class="col-lg-6 end-date-container" style="{{ empty($employment->end_date) ? 'display:none;' : '' }}">
+                            <label for="endDateInput{{ $index }}" class="form-label">End Date</label>
+                            <input type="date" name="end_date[]" class="form-control end-date-input" id="endDateInput{{ $index }}" value="{{ $employment->end_date }}">
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="responsibilitiesInput{{ $index }}" class="form-label">Responsibilities</label>
+                            <textarea name="responsibilities[]" class="form-control" id="responsibilitiesInput{{ $index }}" rows="3">{{ $employment->responsibilities }}</textarea>
+                        </div>
+
+                        @if ($index > 0)
+                            <div class="col-lg-12 mt-2">
+                                <button type="button" class="btn btn-danger remove-btn">Remove</button>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@empty
+    <!-- Empty form for new employment history -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row employment-history-item">
+                    <div class="col-lg-6">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" name="job_title[]" class="form-control">
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label">Company</label>
+                        <input type="text" name="company[]" class="form-control">
+                    </div>
+                    
+                    <div class="col-lg-12 mt-4">
+                        <div class="form-check">
+                            <input
+                                class="form-check-input still-employed-checkbox"
+                                type="checkbox"
+                                id="stillEmployedCheckNew"
+                                name="still_employed[]">
+                            <label class="form-check-label" for="stillEmployedCheckNew">
+                                Still Employed
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-2">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" name="start_date[]" class="form-control">
+                    </div>
+
+                    <div class="col-lg-6 mt-2 end-date-container">
+                        <label class="form-label">End Date</label>
+                        <input type="date" name="end_date[]" class="form-control end-date-input">
+                    </div>
+
+                    <div class="col-lg-12 mt-2">
+                        <label class="form-label">Responsibilities</label>
+                        <textarea name="responsibilities[]" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforelse
+
                                             </div>
-
-                                                                                        <input type="file" name="document" id="">
-
 
                                             <!-- Submit Button -->
                                             <div class="col-lg-12 mt-4">
@@ -185,12 +196,12 @@
 
 
             <script>
-         // Function to add a new employment history entry
-function addEmploymentHistory() {
-    const employmentHistoryContainer = document.getElementById('employment-history-container');
-    const newEmploymentHistoryItem = document.createElement('div');
-    newEmploymentHistoryItem.classList.add('col-lg-12');
-    newEmploymentHistoryItem.innerHTML = `
+                // Function to add a new employment history entry
+                function addEmploymentHistory() {
+                    const employmentHistoryContainer = document.getElementById('employment-history-container');
+                    const newEmploymentHistoryItem = document.createElement('div');
+                    newEmploymentHistoryItem.classList.add('col-lg-12');
+                    newEmploymentHistoryItem.innerHTML = `
         <div class="card">
             <div class="card-body">
                 <div class="row employment-history-item">
@@ -221,32 +232,94 @@ function addEmploymentHistory() {
             </div>
         </div>
     `;
-    employmentHistoryContainer.appendChild(newEmploymentHistoryItem);
-    updateRemoveButtons();
-}
+                    employmentHistoryContainer.appendChild(newEmploymentHistoryItem);
+                    updateRemoveButtons();
+                }
 
-// Function to update remove buttons' event listeners
-function updateRemoveButtons() {
-    document.querySelectorAll('.remove-btn').forEach(button => {
-        button.removeEventListener('click', handleRemoveClick); // Remove old event listeners
-        button.addEventListener('click', handleRemoveClick);
-    });
-}
+                // Function to update remove buttons' event listeners
+                function updateRemoveButtons() {
+                    document.querySelectorAll('.remove-btn').forEach(button => {
+                        button.removeEventListener('click', handleRemoveClick); // Remove old event listeners
+                        button.addEventListener('click', handleRemoveClick);
+                    });
+                }
 
-// Handler function for remove button click
-function handleRemoveClick(event) {
-    // Find the closest card and remove it
-    const button = event.target;
-    const card = button.closest('.card');
-    if (card) {
-        card.parentElement.remove(); // Remove the entire col-lg-12
-    }
-}
+                // Handler function for remove button click
+                function handleRemoveClick(event) {
+                    // Find the closest card and remove it
+                    const button = event.target;
+                    const card = button.closest('.card');
+                    if (card) {
+                        card.parentElement.remove(); // Remove the entire col-lg-12
+                    }
+                }
 
-// Initialize remove buttons event listeners on page load
-document.addEventListener('DOMContentLoaded', updateRemoveButtons);
-
+                // Initialize remove buttons event listeners on page load
+                document.addEventListener('DOMContentLoaded', updateRemoveButtons);
             </script>
         </div>
     </div>
+
+    <script>
+        // Function to initialize still employed checkbox behavior
+        function initializeStillEmployedCheckboxes() {
+            document.querySelectorAll('.still-employed-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const employmentHistoryItem = checkbox.closest('.employment-history-item');
+                    const endDateContainer = employmentHistoryItem.querySelector('.end-date-container');
+                    const endDateInput = employmentHistoryItem.querySelector('.end-date-input');
+
+                    if (checkbox.checked) {
+                        // Hide and disable the end date if still employed
+                        endDateInput.value = ''; // Clear any previously set value
+                        endDateInput.disabled = true;
+                        endDateContainer.style.display = 'none';
+                    } else {
+                        // Show and enable the end date if not still employed
+                        endDateInput.disabled = false;
+                        endDateContainer.style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        // Call the function when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStillEmployedCheckboxes();
+        });
+
+        // Ensure that you call the function whenever a new employment history entry is added dynamically
+
+
+        // Function to initialize still employed checkbox behavior
+        function initializeStillEmployedCheckboxes() {
+            document.querySelectorAll('.still-employed-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const employmentHistoryItem = checkbox.closest('.employment-history-item');
+                    const endDateContainer = employmentHistoryItem.querySelector('.end-date-container');
+                    const endDateInput = employmentHistoryItem.querySelector('.end-date-input');
+
+                    if (checkbox.checked) {
+                        // Hide and disable the end date if still employed
+                        endDateInput.value = ''; // Clear any previously set value
+                        endDateInput.disabled = true;
+                        endDateContainer.style.display = 'none';
+                    } else {
+                        // Show and enable the end date if not still employed
+                        endDateInput.disabled = false;
+                        endDateContainer.style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        // Call the function when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStillEmployedCheckboxes();
+        });
+
+        // Ensure that you call the function whenever a new employment history entry is added dynamically
+    </script>
+
+
 @endsection

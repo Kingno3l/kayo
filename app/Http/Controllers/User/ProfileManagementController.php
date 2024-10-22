@@ -213,7 +213,6 @@ class ProfileManagementController extends Controller
             'start_date.*' => 'required|date',
             'end_date.*' => 'nullable|date|after_or_equal:start_date.*',
             'responsibilities.*' => 'nullable|string',
-            'document' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Single file upload validation
         ]);
 
         // Retrieve the currently authenticated user

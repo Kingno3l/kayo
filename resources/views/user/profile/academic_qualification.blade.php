@@ -67,7 +67,8 @@
                                                 </div>
 
                                                 @forelse ($qualifications as $index => $qualification)
-                                                    <div class="col-lg-12 academic-qualification-item" data-index="{{ $index }}">
+                                                    <div class="col-lg-12 academic-qualification-item"
+                                                        data-index="{{ $index }}">
                                                         <div class="card">
                                                             <div class="card-header align-items-center d-flex">
                                                                 <h4 class="card-title mb-0 flex-grow-1">Academic
@@ -155,14 +156,20 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <label class="form-label">Degree</label>
-                                                                        <select name="degree[]"
-                                                                            class="form-control">
-                                                                            <option value="" disabled selected>Select Degree</option>
-                                                                            <option value="Bachelor of Science">Bachelor of Science (B.Sc.)</option>
-                                                                            <option value="Bachelor of Arts">Bachelor of Arts (B.A.)</option>
-                                                                            <option value="Master of Science">Master of Science (M.Sc.)</option>
-                                                                            <option value="Master of Arts">Master of Arts (M.A.)</option>
-                                                                            <option value="Doctor of Philosophy">Doctor of Philosophy (Ph.D.)</option>
+                                                                        <select name="degree[]" class="form-control">
+                                                                            <option value="" disabled selected>Select
+                                                                                Degree</option>
+                                                                            <option value="Bachelor of Science">Bachelor of
+                                                                                Science (B.Sc.)</option>
+                                                                            <option value="Bachelor of Arts">Bachelor of
+                                                                                Arts (B.A.)</option>
+                                                                            <option value="Master of Science">Master of
+                                                                                Science (M.Sc.)</option>
+                                                                            <option value="Master of Arts">Master of Arts
+                                                                                (M.A.)
+                                                                            </option>
+                                                                            <option value="Doctor of Philosophy">Doctor of
+                                                                                Philosophy (Ph.D.)</option>
                                                                             <option value="Diploma">Diploma</option>
                                                                             <option value="Other">Other</option>
                                                                         </select>
@@ -177,7 +184,8 @@
                                                                         <select name="graduation_year[]"
                                                                             class="form-control">
                                                                             @for ($year = 1980; $year <= date('Y'); $year++)
-                                                                                <option value="{{ $year }}">{{ $year }}</option>
+                                                                                <option value="{{ $year }}">
+                                                                                    {{ $year }}</option>
                                                                             @endfor
                                                                         </select>
                                                                     </div>
@@ -192,7 +200,22 @@
                                                     </div>
                                                 @endforelse
                                             </div>
-                                                                                        <input type="file" name="document" id="">
+                                            {{-- <input type="file" name="document" id=""> --}}
+
+                                            <label for="file-upload"
+                                                style="
+    display: inline-block; 
+    padding: 6px 12px; 
+    cursor: pointer; 
+    background-color: #5f5959; 
+    color: white; 
+    border-radius: 4px; 
+    font-size: 14px;">
+                                                Kindly Merge to PDF and Upload 
+                                            </label>
+                                            <input type="file" id="file-upload" name="document"
+                                                style="display: none;" />
+
 
                                             <!-- Submit Button -->
                                             <div class="col-lg-12 mt-4">
@@ -276,4 +299,4 @@
                     }
                 }
             </script>
-@endsection
+        @endsection

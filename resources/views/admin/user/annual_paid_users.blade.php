@@ -95,8 +95,10 @@
                                                             : 'default';
                                                     @endphp
 
-                                                    <td class="text-center registration_number">
-                                                        {{ $item->registration_number }}</td>
+                                                   <td class="text-center registration_number">
+    {{ str_replace('-', '/', $item->registration_number) }}
+</td>
+
                                                     <td class="text-center country">
                                                         <img src="{{ asset('assets/images/flags/' . $countryCode . '.svg') }}"
                                                             alt="{{ $item->country }}"

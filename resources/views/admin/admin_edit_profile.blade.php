@@ -111,12 +111,12 @@
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="educationInput" class="form-label">Education</label>
+                                                <label for="educationInput" class="form-label">Highest level of Education</label>
                                                 <select class="form-select mb-3" id="educationInput" name="education"
                                                     aria-label="Default select example">
                                                     <option value=""
                                                         {{ $profileData->education == '' ? 'selected' : '' }}>Select
-                                                        your Education</option>
+                                                        your Highest level of Education</option>
                                                     <option value="High School Diploma"
                                                         {{ $profileData->education == 'High School Diploma' ? 'selected' : '' }}>
                                                         High School Diploma</option>

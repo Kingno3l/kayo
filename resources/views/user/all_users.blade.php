@@ -50,7 +50,8 @@
                                                 <th class="text-center sort" data-sort="phone">Phone</th>
                                                 <th class="text-center sort" data-sort="date">Joined Date</th>
                                                 <th class="text-center sort" data-sort="status">Online Status</th>
-                                                <th class="text-center sort" data-sort="registration_number">Registration Number</th>
+                                                <th class="text-center sort" data-sort="registration_number">Registration
+                                                    Number</th>
                                                 <th class="text-center sort" data-sort="country">Country</th>
                                             </tr>
                                         </thead>
@@ -66,7 +67,7 @@
                                                                 <img src="{{ !empty($item->photo) ? url('uploads/user_images/' . $item->photo) : url('upload/no_image.jpg') }}"
                                                                     alt="" class="avatar-xs rounded-circle">
                                                             </div>
-                                                             <div class="flex-grow-1 customer_name">
+                                                            <div class="flex-grow-1 customer_name">
                                                                 <a href="{{ route('member.info.details', $item->id) }}">
                                                                     {{ $item->name }}
                                                                 </a>
@@ -74,8 +75,10 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-center email">{{ $item->email }}</td>
-                                                    <td class="text-center phone">{{ $item->country_code }} {{ $item->phone }}</td>
-                                                    <td class="text-center date">{{ $item->created_at->format('d M, Y') }}</td>
+                                                    <td class="text-center phone">{{ $item->country_code }}
+                                                        {{ $item->phone }}</td>
+                                                    <td class="text-center date">{{ $item->created_at->format('d M, Y') }}
+                                                    </td>
                                                     <td class="text-center status">
                                                         @if ($item->UserOnline())
                                                             <span
@@ -92,7 +95,10 @@
                                                             : 'default';
                                                     @endphp
 
-                                                    <td class="text-center registration_number">{{ $item->registration_number }}</td>
+                                                 <td class="text-center registration_number">
+    {{ str_replace('-', '/', $item->registration_number) }}
+</td>
+
                                                     <td class="text-center country">
                                                         <img src="{{ asset('assets/images/flags/' . $countryCode . '.svg') }}"
                                                             alt="{{ $item->country }}"
@@ -101,7 +107,7 @@
                                                     </td>
 
 
-                                                   
+
                                                 </tr>
                                             @endforeach
 
@@ -146,7 +152,7 @@
 
 
 
-                        
+
                     </div>
                     <!-- end col -->
                 </div>

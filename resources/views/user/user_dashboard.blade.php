@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>User Africa</title>
+    <title>YIPs Africa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="YIPS Africa" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -138,6 +138,14 @@
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    
+     <!-- prismjs plugin -->
+    <script src="{{ asset('assets/libs/prismjs/prism.js') }}"></script>
+    <script src="{{ asset('assets/libs/list.js/list.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/list.pagination.js/list.pagination.min.js') }}"></script>
+
+    <!-- listjs init -->
+    <script src="{{ asset('assets/js/pages/listjs.init.js') }}"></script>
 
     <!-- File Uploads -->
     <script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
@@ -169,6 +177,8 @@
 
     <!-- App JS -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    
 
     <!-- Toastr Notifications -->
     <script>

@@ -753,19 +753,19 @@
 
 <div class="col-lg-6 mb-3">
     <label class="form-label">Phone Number</label>
-            <input type="hidden" name="country_code" id="country_code" value="{{ $profileData->country_code }}">
+    <input type="hidden" name="country_code" id="country_code" value="{{ $profileData->country_code }}">
 
     <div class="input-group" data-phone-input-flag="">
         <button class="btn btn-light border phone-dropdown-toggle" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            <img id="phone-flag-img" src="{{ asset('assets/images/flags/ng.svg') }}" alt="flag img" height="20"
-                class="phone-country-flagimg rounded">
-                <span class="ms-2 phone-country-codeno">{{ $profileData->country_code }}</span>
+            {{-- <img id="phone-flag-img" src="{{ asset('assets/images/flags/ng.svg') }}" alt="flag img" height="20"
+                class="phone-country-flagimg rounded"> --}}
+            <span class="ms-2 phone-country-codeno">{{ $profileData->country_code }}</span>
             {{-- <span class="ms-2 phone-country-codeno"></span> --}}
         </button>
 
-        <input type="text" name="phone" class="form-control rounded-end phone-flag-input" value="{{ $profileData->phone }}"
-            placeholder="Enter number"
+        <input type="text" name="phone" class="form-control rounded-end phone-flag-input"
+            value="{{ $profileData->phone }}" placeholder="Enter number"
             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
         <div class="dropdown-menu w-100">
             <div class="p-2 px-3 pt-1 searchlist-input">

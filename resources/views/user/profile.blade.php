@@ -80,11 +80,9 @@
                                                             </tr>
                                                             <tr>
                                                                 <th class="ps-0" scope="row">Mobile:</th>
-                                                               <td class="text-muted">
-                                                {!! !empty($profileData->phone)
-                                                    ? $profileData->phone
-                                                    : '<em>No record for this</em>' !!}
-                                            </td>
+                                                                <td class="text-muted">
+                                                                    {!! !empty($profileData->phone) ? $profileData->phone : '<em>No record for this</em>' !!}
+                                                                </td>
 
                                                             </tr>
                                                             <tr>
@@ -107,7 +105,8 @@
                                                             </tr>
 
                                                             <tr>
-                                                                <th class="ps-0" scope="row">Education:</th>
+                                                                <th class="ps-0" scope="row">Highest level of
+                                                                    Education:</th>
                                                                 <td class="text-muted">
                                                                     {!! !empty($profileData->education) ? $profileData->education : '<em>Update your profile</em>' !!}
 
@@ -124,74 +123,102 @@
                                             </div><!-- end card body -->
                                         </div><!-- end card -->
 
-                                         <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-4">
-                                <div class="flex-grow-1">
-                                    <h5 class="card-title mb-0">Socials</h5>
-                                </div>
+                                        <div class="card">
+                                            <div class="card-header" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link fw-bold" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseExample" aria-expanded="true"
+                                                        aria-controls="collapseExample">
+                                                        Modify Socials
+                                                    </button>
+                                                </h5>
+                                            </div>
 
-                            </div>
+                                            <div id="collapseExample" class="collapse" aria-labelledby="headingOne">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-4">
+                                                        <div class="flex-grow-1">
+                                                            <h5 class="card-title mb-0">Socials</h5>
+                                                        </div>
+
+                                                    </div>
 
 
-                            <form action="{{ route('socials.store') }}" method="POST">
-                                @csrf
+                                                    <form action="{{ route('socials.store') }}" method="POST">
+                                                        @csrf
 
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                @endif
-                                <div class="mb-3 d-flex">
-                                    <div class="avatar-xs d-block flex-shrink-0 me-3">
-                                        <span class="avatar-title rounded-circle fs-16 bg-info text-light">
-                                            <i class="ri-linkedin-fill"></i>
-                                        </span>
-                                    </div>
-                                    <input type="url" class="form-control" name="linkedin"
-                                        placeholder="www.linkedin.com/yips-africa">
-                                </div>
-                                <div class="mb-3 d-flex">
-                                    <div class="avatar-xs d-block flex-shrink-0 me-3">
-                                        <span class="avatar-title rounded-circle fs-16 bg-primary text-light">
-                                            <i class="ri-facebook-fill"></i>
-                                        </span>
-                                    </div>
-                                    <input type="url" class="form-control" name="facebook"
-                                        placeholder="www.facebook.com/yips-africa">
-                                </div>
-                                <div class="mb-3 d-flex">
-                                    <div class="avatar-xs d-block flex-shrink-0 me-3">
-                                        <span class="avatar-title rounded-circle fs-16 bg-danger text-light">
-                                            <i class="ri-instagram-fill"></i>
-                                        </span>
-                                    </div>
-                                    <input type="url" class="form-control" name="instagram"
-                                        placeholder="www.instagram.com/yips-africa">
-                                </div>
-                                <div class="mb-3 d-flex">
-                                    <div class="avatar-xs d-block flex-shrink-0 me-3">
-                                        <span class="avatar-title rounded-circle fs-16 bg-warning text-light">
-                                            <i class="ri-snapchat-fill"></i>
-                                        </span>
-                                    </div>
-                                    <input type="url" class="form-control" name="snapchat"
-                                        placeholder="www.snapchat.com/yips-africa">
-                                </div>
-
-                                <div class="col-lg-12 mt-4">
-                                    <button type="submit" class="btn btn-success w-100">Save
-                                        Socials</button>
-                                </div>
-                            </form>
+                                                        @if ($errors->any())
+                                                            <div class="alert alert-danger">
+                                                                <ul>
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <li>{{ $error }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        @endif
 
 
 
-                        </div>
-                    </div>
+                                                        <div class="mb-3 d-flex">
+                                                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                                                <span
+                                                                    class="avatar-title rounded-circle fs-16 bg-info text-light">
+                                                                    <i class="ri-linkedin-fill"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="url" class="form-control" name="linkedin"
+                                                                placeholder="www.linkedin.com/yips-africa"
+                                                                value="{{ old('linkedin', $socials->linkedin ?? '') }}">
+                                                        </div>
+
+                                                        <div class="mb-3 d-flex">
+                                                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                                                <span
+                                                                    class="avatar-title rounded-circle fs-16 bg-primary text-light">
+                                                                    <i class="ri-facebook-fill"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="url" class="form-control" name="facebook"
+                                                                placeholder="www.facebook.com/yips-africa"
+                                                                value="{{ old('facebook', $socials->facebook ?? '') }}">
+                                                        </div>
+
+                                                        <div class="mb-3 d-flex">
+                                                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                                                <span
+                                                                    class="avatar-title rounded-circle fs-16 bg-danger text-light">
+                                                                    <i class="ri-instagram-fill"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="url" class="form-control" name="instagram"
+                                                                placeholder="www.instagram.com/yips-africa"
+                                                                value="{{ old('instagram', $socials->instagram ?? '') }}">
+                                                        </div>
+
+                                                        <div class="mb-3 d-flex">
+                                                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                                                <span
+                                                                    class="avatar-title rounded-circle fs-16 bg-warning text-light">
+                                                                    <i class="ri-snapchat-fill"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="url" class="form-control" name="snapchat"
+                                                                placeholder="www.snapchat.com/yips-africa"
+                                                                value="{{ old('snapchat', $socials->snapchat ?? '') }}">
+                                                        </div>
+
+                                                        <div class="col-lg-12 mt-4">
+                                                            <button type="submit" class="btn btn-success w-100">Save
+                                                                Socials</button>
+                                                        </div>
+                                                    </form>
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         @if ($socials)
                                             <div class="card">

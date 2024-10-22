@@ -284,14 +284,33 @@ class ProfileManagementController extends Controller
     // }
     public function nextOfKinAndReferee()
     {
-        $userId = Auth::user()->id;
-        // Fetch existing record or create a new instance if not found
-        $profileData = NextOfKinAndReferee::where('user_id', $userId)->first();
+        // $userId = Auth::user()->id;
+        // // Fetch existing record or create a new instance if not found
+        // $profileData = NextOfKinAndReferee::where('user_id', $userId)->first();
 
-        // If no record found, create a new instance with default values (optional)
-        if (!$profileData) {
-            $profileData = new NextOfKinAndReferee;
-        }
+        // // If no record found, create a new instance with default values (optional)
+        // if (!$profileData) {
+        //     $profileData = new NextOfKinAndReferee;
+        // }
+
+
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+
+        // // Retrieve the academic qualifications for the specified user
+        // $qualifications = AcademicQualification::where('user_id', $id)->get();
+
+
+        // // Optionally, you can include the associated document if needed
+        // $document = Document::where('user_id', $id)
+        //     ->where('documentable_type', 'academic qualification')
+        //     ->first();
+
+        // return view('user.profile.academic_qualification', compact('profileData', 'qualifications', 'document'));
+
+
+
+
 
         return view('user.profile.next_of_kin_and_referee', compact('profileData'));
     }

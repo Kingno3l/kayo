@@ -79,7 +79,7 @@
                                         </tr>
 
                                         <tr>
-                                            <th class="ps-0" scope="row">Education:</th>
+                                            <th class="ps-0" scope="row">Highest level of Education:</th>
                                             <td class="text-muted">
                                                 {!! !empty($profileData->education) ? $profileData->education : '<em>No record for this</em>' !!}
 

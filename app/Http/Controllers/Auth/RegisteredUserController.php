@@ -34,39 +34,11 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    // public function store(Request $request): RedirectResponse
-    // {
-    //     $request->validate([
-    //         'name' => ['required', 'string', 'max:255'],
-    //         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-    //         'password' => ['required', 'confirmed', Rules\Password::defaults()],
-    //     ]);
-
-    //     $user = User::create([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => Hash::make($request->password),
-    //     ]);
-
-    //     event(new Registered($user));
-
-    //     Auth::login($user);
-
-    //     // Redirect with success message
-    //     $notification = array(
-    //         'message' => 'Registration Completed!',
-    //         'alert-type' => 'success'
-    //     );
-
-    //     return Redirect()->route('dashboard')->with($notification);
-
-    //     // return redirect(route('dashboard', absolute: false));
-    // }
+   
 
 
     // public function store(Request $request): RedirectResponse
     // {
-
     //     $request->validate([
     //         'name' => ['required', 'string', 'max:255'],
     //         'email' => ['required', 'string', 'email', 'max:255'],
@@ -83,54 +55,26 @@ class RegisteredUserController extends Controller
     //         return redirect()->back()->with($notification);
     //     }
 
-    //     // Create user with a new verification token
+    //     // Generate a random password
+    //     $randomPassword = Str::random(10); // You can adjust the length or complexity
+
+    //     // Create user with a hashed password
     //     $user = User::create([
     //         'name' => $request->name,
     //         'email' => $request->email,
-    //         'password' => null, // Password will be set later
-    //         'email_verification_token' => Str::random(60), // Generate a unique token
+    //         'password' => Hash::make($randomPassword), // Save hashed password
+    //         'email_verification_token' => null, // No verification token needed
     //     ]);
 
-    //     // Send confirmation email with the token
-    //     Mail::to($user->email)->send(new RegistrationConfirmationMail($user));
+    //     // Send email with the random password
+    //     Mail::to($user->email)->send(new RegistrationWithPasswordMail($user, $randomPassword));
 
     //     $notification = array(
-    //         'message' => 'A confirmation email to help you continue your registration has been sent. Please check your email.',
+    //         'message' => 'Your account has been created. Please check your email for your login credentials.',
     //         'alert-type' => 'success'
     //     );
     //     return redirect()->route('emails.email_sent_for_password');
     // }
-
-    // public function confirmRegistration($token)
-    // {
-    //     $user = User::where('email_verification_token', $token)->firstOrFail();
-
-    //     // If the token is valid, show the form to set the password
-    //     return view('authentication.set_password', compact('user'));
-    // }
-
-    // public function completeRegistration(Request $request, $token)
-    // {
-    //     $request->validate([
-    //         'password' => ['required', 'confirmed', Rules\Password::defaults()],
-    //     ]);
-
-    //     $user = User::where('email_verification_token', $token)->firstOrFail();
-    //     $user->update([
-    //         'password' => Hash::make($request->password),
-    //         'email_verification_token' => null, // Clear the token after successful confirmation
-    //     ]);
-
-    //     Auth::login($user);
-
-    //     $notification = array(
-    //         'message' => 'Your registration is complete!',
-    //         'alert-type' => 'success'
-    //     );
-    //     return redirect()->route('dashboard')->with($notification);
-    // }
-
-
 
     public function store(Request $request): RedirectResponse
     {
@@ -139,37 +83,37 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
 
-        // Check if the email already exists and has a verification token
+        // Check if the email already exists
         $existingUser = User::where('email', $request->email)->first();
 
-        if ($existingUser && $existingUser->email_verification_token) {
-            $notification = array(
-                'message' => 'This email address is already registered. Please check your inbox or spam folder for an email to complete your registration.',
+        if ($existingUser) {
+            $notification = [
+                'message' => 'This email address is already registered. Please log in or use the password reset option if you forgot your password.',
                 'alert-type' => 'error'
-            );
+            ];
             return redirect()->back()->with($notification);
         }
 
         // Generate a random password
-        $randomPassword = Str::random(10); // You can adjust the length or complexity
+        $randomPassword = Str::random(10);
 
-        // Create user with a hashed password
+        // Create the user with a hashed password
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($randomPassword), // Save hashed password
-            'email_verification_token' => null, // No verification token needed
+            'password' => Hash::make($randomPassword),
         ]);
 
         // Send email with the random password
         Mail::to($user->email)->send(new RegistrationWithPasswordMail($user, $randomPassword));
 
-        $notification = array(
+        $notification = [
             'message' => 'Your account has been created. Please check your email for your login credentials.',
             'alert-type' => 'success'
-        );
-        return redirect()->route('emails.email_sent_for_password');
+        ];
+        return redirect()->route('emails.email_sent_for_password')->with($notification);
     }
+
 
 
 }

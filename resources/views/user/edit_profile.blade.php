@@ -1,5 +1,14 @@
 @extends('user.user_dashboard')
 @section('user')
+
+<style>
+    .rotate-icon {
+        transition: transform 0.3s ease;
+    }
+    .btn[aria-expanded="true"] .rotate-icon {
+        transform: rotate(180deg);
+    }
+</style>
     <div class="page-content">
         <div class="container-fluid">
 
@@ -140,7 +149,7 @@
                                                     Name</label>
                                                 <input type="text" class="form-control" name="name"
                                                     id="firstnameInput" placeholder="Enter your firstname"
-                                                    value="{{ $profileData->name }}">
+                                                    value="{{ $profileData->name }}" readonly>
                                             </div>
                                         </div>
 
@@ -150,7 +159,8 @@
                                                 <label for="emailInput" class="form-label">Email
                                                     Address</label>
                                                 <input type="email" class="form-control" name="email" id="emailInput"
-                                                    placeholder="Enter your email" value="{{ $profileData->email }}">
+                                                    placeholder="Enter your email" value="{{ $profileData->email }}"
+                                                    readonly>
                                             </div>
                                         </div>
 
@@ -208,230 +218,6 @@
 
 
 
-                                        <div class="col-lg-4">
-                                            <div class="mb-3">
-                                                <label for="educationInput" class="form-label">Highest level of
-                                                    Education</label>
-                                                <select class="form-select mb-3" id="educationInput" name="education"
-                                                    aria-label="Default select example">
-                                                    <option value=""
-                                                        {{ $profileData->education == '' ? 'selected' : '' }}>Select
-                                                        your Education</option>
-                                                    <option value="High School Diploma"
-                                                        {{ $profileData->education == 'High School Diploma' ? 'selected' : '' }}>
-                                                        High School Diploma</option>
-                                                    <option value="Associate Degree"
-                                                        {{ $profileData->education == 'Associate Degree' ? 'selected' : '' }}>
-                                                        Associate Degree</option>
-                                                    <option value="Bachelor’s Degree"
-                                                        {{ $profileData->education == 'Bachelor’s Degree' ? 'selected' : '' }}>
-                                                        Bachelor’s Degree</option>
-                                                    <option value="Master’s Degree"
-                                                        {{ $profileData->education == 'Master’s Degree' ? 'selected' : '' }}>
-                                                        Master’s Degree</option>
-                                                    <option value="Doctorate (Ph.D.)"
-                                                        {{ $profileData->education == 'Doctorate (Ph.D.)' ? 'selected' : '' }}>
-                                                        Doctorate (Ph.D.)</option>
-                                                    <option value="Professional Certificate"
-                                                        {{ $profileData->education == 'Professional Certificate' ? 'selected' : '' }}>
-                                                        Professional Certificate</option>
-                                                    <option value="Some College (No Degree)"
-                                                        {{ $profileData->education == 'Some College (No Degree)' ? 'selected' : '' }}>
-                                                        Some College (No Degree)</option>
-                                                    <option value="Vocational Training"
-                                                        {{ $profileData->education == 'Vocational Training' ? 'selected' : '' }}>
-                                                        Vocational Training</option>
-                                                    <option value="Online Course"
-                                                        {{ $profileData->education == 'Online Course' ? 'selected' : '' }}>
-                                                        Online Course</option>
-                                                    <option value="Not Applicable"
-                                                        {{ $profileData->education == 'Not Applicable' ? 'selected' : '' }}>
-                                                        Not Applicable</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-                                        <!--end col-->
-                                       <div class="col-lg-4">
-    <div class="mb-3">
-        <label for="positionInput" class="form-label">Position</label>
-        <select class="form-select mb-3" id="positionInput" name="position" aria-label="Default select example">
-            <option value="" {{ old('position', $profileData->position) == '' ? 'selected' : '' }}>
-                Select your Position
-            </option>
-            <option value="Broker/Agent" {{ old('position', $profileData->position) == 'Broker/Agent' ? 'selected' : '' }}>
-                Broker/Agent
-            </option>
-            <option value="Underwriter" {{ old('position', $profileData->position) == 'Underwriter' ? 'selected' : '' }}>
-                Underwriter
-            </option>
-            <option value="Business Development" {{ old('position', $profileData->position) == 'Business Development' ? 'selected' : '' }}>
-                Business Development
-            </option>
-            <option value="Customer Service Representative" {{ old('position', $profileData->position) == 'Customer Service Representative' ? 'selected' : '' }}>
-                Customer Service Representative
-            </option>
-            <option value="Claims Representative" {{ old('position', $profileData->position) == 'Claims Representative' ? 'selected' : '' }}>
-                Claims Representative
-            </option>
-            <option value="Adjuster" {{ old('position', $profileData->position) == 'Adjuster' ? 'selected' : '' }}>
-                Adjuster
-            </option>
-            <option value="Actuary" {{ old('position', $profileData->position) == 'Actuary' ? 'selected' : '' }}>
-                Actuary
-            </option>
-            <option value="Regulator" {{ old('position', $profileData->position) == 'Regulator' ? 'selected' : '' }}>
-                Regulator
-            </option>
-            <option value="Other" {{ old('position', $profileData->position) == 'Other' ? 'selected' : '' }}>
-                Other
-            </option>
-        </select>
-    </div>
-</div>
-
-
-
-                                        <!--end col-->
-
-
-
-                                        <div class="col-lg-4">
-                                            <div class="mb-3">
-                                                <label for="employerInput" class="form-label">Employer</label>
-                                                <select class="form-select mb-3" id="employerInput" name="employer"
-                                                    aria-label="Default select example">
-                                                    <option value=""
-                                                        {{ $profileData->employer == '' ? 'selected' : '' }}>Select your
-                                                        Employer</option>
-                                                    <option value="Current Employer"
-                                                        {{ $profileData->employer == 'Current Employer' ? 'selected' : '' }}>
-                                                        Current Employer</option>
-                                                    <option value="Previous Employer"
-                                                        {{ $profileData->employer == 'Previous Employer' ? 'selected' : '' }}>
-                                                        Previous Employer</option>
-                                                    <option value="Self-Employed"
-                                                        {{ $profileData->employer == 'Self-Employed' ? 'selected' : '' }}>
-                                                        Self-Employed</option>
-                                                    <option value="Freelancer"
-                                                        {{ $profileData->employer == 'Freelancer' ? 'selected' : '' }}>
-                                                        Freelancer</option>
-                                                    <option value="Unemployed"
-                                                        {{ $profileData->employer == 'Unemployed' ? 'selected' : '' }}>
-                                                        Unemployed</option>
-                                                    <option value="Retired"
-                                                        {{ $profileData->employer == 'Retired' ? 'selected' : '' }}>Retired
-                                                    </option>
-                                                    <option value="Not Applicable"
-                                                        {{ $profileData->employer == 'Not Applicable' ? 'selected' : '' }}>
-                                                        Not Applicable</option>
-                                                    <option value="Broker/Agent"
-                                                        {{ $profileData->employer == 'Broker/Agent' ? 'selected' : '' }}>
-                                                        Broker/Agent</option>
-                                                    <option value="Underwriter"
-                                                        {{ $profileData->employer == 'Underwriter' ? 'selected' : '' }}>
-                                                        Underwriter</option>
-                                                    <option value="Business Development"
-                                                        {{ $profileData->employer == 'Business Development' ? 'selected' : '' }}>
-                                                        Business Development</option>
-                                                    <option value="Customer Service Representative"
-                                                        {{ $profileData->employer == 'Customer Service Representative' ? 'selected' : '' }}>
-                                                        Customer Service Representative</option>
-                                                    <option value="Claims Representative"
-                                                        {{ $profileData->employer == 'Claims Representative' ? 'selected' : '' }}>
-                                                        Claims Representative</option>
-                                                    <option value="Adjuster"
-                                                        {{ $profileData->employer == 'Adjuster' ? 'selected' : '' }}>
-                                                        Adjuster</option>
-                                                    <option value="Actuary"
-                                                        {{ $profileData->employer == 'Actuary' ? 'selected' : '' }}>Actuary
-                                                    </option>
-                                                    <option value="Regulator"
-                                                        {{ $profileData->employer == 'Regulator' ? 'selected' : '' }}>
-                                                        Regulator</option>
-                                                    <option value="Others"
-                                                        {{ $profileData->employer == 'Others' ? 'selected' : '' }}>Others
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-
-
-                                        <!-- Hidden input fields for Current Employer -->
-                                        <!-- Current Employer -->
-                                        <div id="currentEmployerName"
-                                            style="display: {{ $profileData->employer == 'Current Employer' ? 'block' : 'none' }};"
-                                            class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label for="currentEmployerNameInput" class="form-label">Current Employer
-                                                    Name</label>
-                                                <input type="text" class="form-control" id="currentEmployerNameInput"
-                                                    name="current_employer_name"
-                                                    value="{{ $profileData->current_employer_name ?? '' }}"
-                                                    placeholder="Enter Current Employer Name">
-                                            </div>
-                                        </div>
-                                        <div id="currentEmployerDateJoined"
-                                            style="display: {{ $profileData->employer == 'Current Employer' ? 'block' : 'none' }};"
-                                            class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label for="currentEmployerDateInput" class="form-label">Date
-                                                    Joined</label>
-                                                <input type="date" class="form-control" id="currentEmployerDateInput"
-                                                    name="current_employer_date"
-                                                    value="{{ $profileData->current_employer_date ?? '' }}"
-                                                    max="{{ date('Y-m-d') }}">
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Hidden input fields for Previous Employer -->
-                                        <!-- Previous Employer -->
-                                        <div id="previousEmployerName"
-                                            style="display: {{ $profileData->employer == 'Previous Employer' ? 'block' : 'none' }};"
-                                            class="col-lg-4">
-                                            <div class="mb-3">
-                                                <label for="previousEmployerNameInput" class="form-label">Previous
-                                                    Employer Name</label>
-                                                <input type="text" class="form-control" id="previousEmployerNameInput"
-                                                    name="previous_employer_name"
-                                                    value="{{ $profileData->previous_employer_name ?? '' }}"
-                                                    placeholder="Enter Previous Employer Name">
-                                            </div>
-                                        </div>
-                                        <div id="previousEmployerStartDate"
-                                            style="display: {{ $profileData->employer == 'Previous Employer' ? 'block' : 'none' }};"
-                                            class="col-lg-4">
-                                            <div class="mb-3">
-                                                <label for="previousEmployerStartDateInput" class="form-label">Start
-                                                    Date</label>
-                                                <input type="date" class="form-control"
-                                                    id="previousEmployerStartDateInput"
-                                                    name="previous_employer_start_date"
-                                                    value="{{ $profileData->previous_employer_start_date ?? '' }}"
-                                                    max="{{ date('Y-m-d') }}">
-                                            </div>
-                                        </div>
-                                        <div id="previousEmployerEndDate"
-                                            style="display: {{ $profileData->employer == 'Previous Employer' ? 'block' : 'none' }};"
-                                            class="col-lg-4">
-                                            <div class="mb-3">
-                                                <label for="previousEmployerEndDateInput" class="form-label">End
-                                                    Date</label>
-                                                <input type="date" class="form-control"
-                                                    id="previousEmployerEndDateInput" name="previous_employer_end_date"
-                                                    value="{{ $profileData->previous_employer_end_date ?? '' }}"
-                                                    max="{{ date('Y-m-d') }}">
-                                            </div>
-                                        </div>
-
-
-
-                                        <!--end col-->
-
                                         <div class="col-lg-12">
                                             <div class="mb-3 pb-2">
                                                 <label for="exampleFormControlTextarea" class="form-label">Short
@@ -463,15 +249,15 @@
 
 
                     <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseExample" aria-expanded="true"
-                                    aria-controls="collapseExample">
-                                    Add Socials
-                                </button>
-                            </h5>
-                        </div>
+    <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+            <button class="btn btn-link d-flex w-100 justify-content-between align-items-center" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Add Socials
+                <i class="ri-arrow-down-s-line rotate-icon"></i> <!-- Arrow icon aligned to the right -->
+            </button>
+        </h5>
+    </div>
 
                         <div id="collapseExample" class="collapse" aria-labelledby="headingOne">
                             <div class="card-body">
@@ -623,37 +409,6 @@
         //     });
         // });
 
-        document.getElementById('employerInput').addEventListener('change', function() {
-            var selectedEmployer = this.value;
-
-            // Toggle visibility for current employer
-            if (selectedEmployer === 'Current Employer') {
-                document.getElementById('currentEmployerName').style.display = 'block';
-                document.getElementById('currentEmployerDateJoined').style.display = 'block';
-            } else if (selectedEmployer === 'Others') {
-                document.getElementById('otherEmployer').style.display = 'block';
-
-            } else {
-                document.getElementById('currentEmployerName').style.display = 'none';
-                document.getElementById('currentEmployerDateJoined').style.display = 'none';
-            }
-
-            // Toggle visibility for previous employer
-            if (selectedEmployer === 'Previous Employer') {
-                document.getElementById('previousEmployerName').style.display = 'block';
-                document.getElementById('previousEmployerStartDate').style.display = 'block';
-                document.getElementById('previousEmployerEndDate').style.display = 'block';
-            } else {
-                document.getElementById('previousEmployerName').style.display = 'none';
-                document.getElementById('previousEmployerStartDate').style.display = 'none';
-                document.getElementById('previousEmployerEndDate').style.display = 'none';
-            }
-        });
-
-        // Trigger change event on page load to show the fields if values exist
-        window.addEventListener('load', function() {
-            var employerSelect = document.getElementById('employerInput');
-            employerSelect.dispatchEvent(new Event('change'));
-        });
+     
     </script>
 @endsection

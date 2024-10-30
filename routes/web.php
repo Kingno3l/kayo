@@ -61,19 +61,22 @@ Route::get('registration/confirm/{token}', [RegisteredUserController::class, 'co
 
 Route::post('registration/complete/{token}', [RegisteredUserController::class, 'completeRegistration'])->name('registration.complete');
 
+// Route::middleware(['auth', 'verified', 'user'])->group(function () {
+//      Route::get('/profile/complete', [UserController::class, 'showCompleteProfileForm'])->name('profile.complete');
 
+//     Route::post('/profile/complete', [UserController::class, 'userProfilecomplete'])->name('user.profile.complete');
+// });
 
-Route::middleware(['auth', 'verified', 'check.status', 'user'])->group(function () {
-    Route::get('/dashboard', [UserController::class, 'userDashboard'])->name('dashboard');
+Route::middleware(['auth', 'verified', 'user'])->group(function () {
+    Route::get('/dashboard', [UserController::class, 'userDashboard'])->middleware(['CheckUserProfile'])->name('dashboard');
 
     Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
 
     Route::get('/profile/edit', [UserController::class, 'userProfileEdit'])->name('user.profile.edit');
 
-    Route::get('/profile/complete', [UserController::class, 'showCompleteProfileForm'])->name('profile.complete');
-
-
     Route::post('/profile/save', [UserController::class, 'userProfileSave'])->name('user.profile.update');
+
+    Route::get('/profile/complete', [UserController::class, 'showCompleteProfileForm'])->middleware(['CheckUserProfile'])->name('profile.complete');
 
     Route::post('/profile/complete', [UserController::class, 'userProfilecomplete'])->name('user.profile.complete');
 

@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Profile Settings | Velzon - Admin & Dashboard Template</title>
+    <title>Profile Settings | YIPs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -24,8 +24,8 @@
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
 
 
@@ -336,7 +336,7 @@
                                                             Name</label>
                                                         <input type="text" class="form-control" name="name"
                                                             id="firstnameInput" placeholder="Enter your firstname"
-                                                            value="{{ $profileData->name }}">
+                                                            value="{{ $profileData->name }}" readonly>
                                                     </div>
                                                 </div>
 
@@ -347,151 +347,189 @@
                                                             Address</label>
                                                         <input type="email" class="form-control" name="email"
                                                             id="emailInput" placeholder="Enter your email"
-                                                            value="{{ $profileData->email }}">
+                                                            value="{{ $profileData->email }}" readonly>
                                                     </div>
                                                 </div>
 
                                                 <!--end col-->
                                                 @include('user._partials.countries')
-                                               
+
 
 
                                                 <!--end col-->
                                                 {{-- @include('user._partials.phone_number') --}}
-                                               <div class="col-lg-6">
-    <div class="mb-3">
-        <label for="phone" class="form-label">Phone Number</label>
-        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter your phone number" value="{{ old('phone', $profileData->phone) }}">
-    </div>
-</div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="phone" class="form-label">Phone Number</label>
+                                                        <input type="tel" class="form-control" name="phone"
+                                                            id="phone" placeholder="Enter your phone number"
+                                                            value="{{ old('phone', $profileData->phone) }}">
+                                                    </div>
+                                                </div>
 
                                                 <!--end col-->
 
+{{-- 
+
+                                                <div class="col-lg-4">
+                                                    <div class="mb-3">
+                                                        <label for="maritalStatusInput" class="form-label">Marital
+                                                            Status</label>
+                                                        <select class="form-select mb-3" id="maritalStatusInput"
+                                                            name="marital_status" aria-label="Marital Status">
+                                                            <option value=""
+                                                                {{ old('marital_status', $profileData->marital_status) == '' ? 'selected' : '' }}>
+                                                                Select Marital Status
+                                                            </option>
+                                                            <option value="Single"
+                                                                {{ old('marital_status', $profileData->marital_status) == 'Single' ? 'selected' : '' }}>
+                                                                Single
+                                                            </option>
+                                                            <option value="Married"
+                                                                {{ old('marital_status', $profileData->marital_status) == 'Married' ? 'selected' : '' }}>
+                                                                Married
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4">
+                                                    <div class="mb-3">
+                                                        <label for="genderInput" class="form-label">Gender</label>
+                                                        <select class="form-select mb-3" id="genderInput"
+                                                            name="gender" aria-label="Gender">
+                                                            <option value=""
+                                                                {{ old('gender', $profileData->gender) == '' ? 'selected' : '' }}>
+                                                                Select Gender
+                                                            </option>
+                                                            <option value="Male"
+                                                                {{ old('gender', $profileData->gender) == 'Male' ? 'selected' : '' }}>
+                                                                Male
+                                                            </option>
+                                                            <option value="Female"
+                                                                {{ old('gender', $profileData->gender) == 'Female' ? 'selected' : '' }}>
+                                                                Female
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4">
+                                                    <div class="mb-3">
+                                                        <label for="dobInput" class="form-label">Date of Birth</label>
+                                                        <input type="date" class="form-control" id="dobInput"
+                                                            name="date_of_birth"
+                                                            value="{{ old('date_of_birth', $profileData->date_of_birth) }}"
+                                                            aria-label="Date of Birth">
+                                                    </div>
+                                                </div>
 
 
-                                             <div class="col-lg-4">
-    <div class="mb-3">
-        <label for="maritalStatusInput" class="form-label">Marital Status</label>
-        <select class="form-select mb-3" id="maritalStatusInput" name="marital_status" aria-label="Marital Status">
-            <option value="" {{ old('marital_status', $profileData->marital_status) == '' ? 'selected' : '' }}>
-                Select Marital Status
-            </option>
-            <option value="Single" {{ old('marital_status', $profileData->marital_status) == 'Single' ? 'selected' : '' }}>
-                Single
-            </option>
-            <option value="Married" {{ old('marital_status', $profileData->marital_status) == 'Married' ? 'selected' : '' }}>
-                Married
-            </option>
-            
-        </select>
-    </div>
-</div>
-
-<div class="col-lg-4">
-    <div class="mb-3">
-        <label for="genderInput" class="form-label">Gender</label>
-        <select class="form-select mb-3" id="genderInput" name="gender" aria-label="Gender">
-            <option value="" {{ old('gender', $profileData->gender) == '' ? 'selected' : '' }}>
-                Select Gender
-            </option>
-            <option value="Male" {{ old('gender', $profileData->gender) == 'Male' ? 'selected' : '' }}>
-                Male
-            </option>
-            <option value="Female" {{ old('gender', $profileData->gender) == 'Female' ? 'selected' : '' }}>
-                Female
-            </option>
-        </select>
-    </div>
-</div>
-
-<div class="col-lg-4">
-    <div class="mb-3">
-        <label for="dobInput" class="form-label">Date of Birth</label>
-        <input type="date" class="form-control" id="dobInput" name="date_of_birth" value="{{ old('date_of_birth', $profileData->date_of_birth) }}" aria-label="Date of Birth">
-    </div>
-</div>
 
 
+                                                <div class="col-lg-4">
+                                                    <div class="mb-3">
+                                                        <label for="educationInput" class="form-label">Highest level
+                                                            of Education</label>
+                                                        <select class="form-select mb-3" id="educationInput"
+                                                            name="education" aria-label="Default select example">
+                                                            <option value=""
+                                                                {{ old('education', $profileData->education) == '' ? 'selected' : '' }}>
+                                                                Select your Highest level of Education
+                                                            </option>
+                                                            <option value="High School Diploma"
+                                                                {{ old('education', $profileData->education) == 'High School Diploma' ? 'selected' : '' }}>
+                                                                High School Diploma
+                                                            </option>
+                                                            <option value="Associate Degree"
+                                                                {{ old('education', $profileData->education) == 'Associate Degree' ? 'selected' : '' }}>
+                                                                Associate Degree
+                                                            </option>
+                                                            <option value="Bachelor’s Degree"
+                                                                {{ old('education', $profileData->education) == 'Bachelor’s Degree' ? 'selected' : '' }}>
+                                                                Bachelor’s Degree
+                                                            </option>
+                                                            <option value="Master’s Degree"
+                                                                {{ old('education', $profileData->education) == 'Master’s Degree' ? 'selected' : '' }}>
+                                                                Master’s Degree
+                                                            </option>
+                                                            <option value="Doctorate (Ph.D.)"
+                                                                {{ old('education', $profileData->education) == 'Doctorate (Ph.D.)' ? 'selected' : '' }}>
+                                                                Doctorate (Ph.D.)
+                                                            </option>
+                                                            <option value="Professional Certificate"
+                                                                {{ old('education', $profileData->education) == 'Professional Certificate' ? 'selected' : '' }}>
+                                                                Professional Certificate
+                                                            </option>
+                                                            <option value="Some College (No Degree)"
+                                                                {{ old('education', $profileData->education) == 'Some College (No Degree)' ? 'selected' : '' }}>
+                                                                Some College (No Degree)
+                                                            </option>
+                                                            <option value="Vocational Training"
+                                                                {{ old('education', $profileData->education) == 'Vocational Training' ? 'selected' : '' }}>
+                                                                Vocational Training
+                                                            </option>
+                                                            <option value="Online Course"
+                                                                {{ old('education', $profileData->education) == 'Online Course' ? 'selected' : '' }}>
+                                                                Online Course
+                                                            </option>
+                                                            <option value="Not Applicable"
+                                                                {{ old('education', $profileData->education) == 'Not Applicable' ? 'selected' : '' }}>
+                                                                Not Applicable
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
-
-                                             <div class="col-lg-4">
-    <div class="mb-3">
-        <label for="educationInput" class="form-label">Highest level of Education</label>
-        <select class="form-select mb-3" id="educationInput" name="education" aria-label="Default select example">
-            <option value="" {{ old('education', $profileData->education) == '' ? 'selected' : '' }}>
-                Select your Highest level of Education
-            </option>
-            <option value="High School Diploma" {{ old('education', $profileData->education) == 'High School Diploma' ? 'selected' : '' }}>
-                High School Diploma
-            </option>
-            <option value="Associate Degree" {{ old('education', $profileData->education) == 'Associate Degree' ? 'selected' : '' }}>
-                Associate Degree
-            </option>
-            <option value="Bachelor’s Degree" {{ old('education', $profileData->education) == 'Bachelor’s Degree' ? 'selected' : '' }}>
-                Bachelor’s Degree
-            </option>
-            <option value="Master’s Degree" {{ old('education', $profileData->education) == 'Master’s Degree' ? 'selected' : '' }}>
-                Master’s Degree
-            </option>
-            <option value="Doctorate (Ph.D.)" {{ old('education', $profileData->education) == 'Doctorate (Ph.D.)' ? 'selected' : '' }}>
-                Doctorate (Ph.D.)
-            </option>
-            <option value="Professional Certificate" {{ old('education', $profileData->education) == 'Professional Certificate' ? 'selected' : '' }}>
-                Professional Certificate
-            </option>
-            <option value="Some College (No Degree)" {{ old('education', $profileData->education) == 'Some College (No Degree)' ? 'selected' : '' }}>
-                Some College (No Degree)
-            </option>
-            <option value="Vocational Training" {{ old('education', $profileData->education) == 'Vocational Training' ? 'selected' : '' }}>
-                Vocational Training
-            </option>
-            <option value="Online Course" {{ old('education', $profileData->education) == 'Online Course' ? 'selected' : '' }}>
-                Online Course
-            </option>
-            <option value="Not Applicable" {{ old('education', $profileData->education) == 'Not Applicable' ? 'selected' : '' }}>
-                Not Applicable
-            </option>
-        </select>
-    </div>
-</div>
-
-<div class="col-lg-4">
-    <div class="mb-3">
-        <label for="positionInput" class="form-label">Position</label>
-        <select class="form-select mb-3" id="positionInput" name="position" aria-label="Default select example">
-            <option value="" {{ old('position', $profileData->position) == '' ? 'selected' : '' }}>
-                Select your Position
-            </option>
-            <option value="Broker/Agent" {{ old('position', $profileData->position) == 'Broker/Agent' ? 'selected' : '' }}>
-                Broker/Agent
-            </option>
-            <option value="Underwriter" {{ old('position', $profileData->position) == 'Underwriter' ? 'selected' : '' }}>
-                Underwriter
-            </option>
-            <option value="Business Development" {{ old('position', $profileData->position) == 'Business Development' ? 'selected' : '' }}>
-                Business Development
-            </option>
-            <option value="Customer Service Representative" {{ old('position', $profileData->position) == 'Customer Service Representative' ? 'selected' : '' }}>
-                Customer Service Representative
-            </option>
-            <option value="Claims Representative" {{ old('position', $profileData->position) == 'Claims Representative' ? 'selected' : '' }}>
-                Claims Representative
-            </option>
-            <option value="Adjuster" {{ old('position', $profileData->position) == 'Adjuster' ? 'selected' : '' }}>
-                Adjuster
-            </option>
-            <option value="Actuary" {{ old('position', $profileData->position) == 'Actuary' ? 'selected' : '' }}>
-                Actuary
-            </option>
-            <option value="Regulator" {{ old('position', $profileData->position) == 'Regulator' ? 'selected' : '' }}>
-                Regulator
-            </option>
-            <option value="Other" {{ old('position', $profileData->position) == 'Other' ? 'selected' : '' }}>
-                Other
-            </option>
-        </select>
-    </div>
-</div>
+                                                <div class="col-lg-4">
+                                                    <div class="mb-3">
+                                                        <label for="positionInput" class="form-label">Position</label>
+                                                        <select class="form-select mb-3" id="positionInput"
+                                                            name="position" aria-label="Default select example">
+                                                            <option value=""
+                                                                {{ old('position', $profileData->position) == '' ? 'selected' : '' }}>
+                                                                Select your Position
+                                                            </option>
+                                                            <option value="Broker/Agent"
+                                                                {{ old('position', $profileData->position) == 'Broker/Agent' ? 'selected' : '' }}>
+                                                                Broker/Agent
+                                                            </option>
+                                                            <option value="Underwriter"
+                                                                {{ old('position', $profileData->position) == 'Underwriter' ? 'selected' : '' }}>
+                                                                Underwriter
+                                                            </option>
+                                                            <option value="Business Development"
+                                                                {{ old('position', $profileData->position) == 'Business Development' ? 'selected' : '' }}>
+                                                                Business Development
+                                                            </option>
+                                                            <option value="Customer Service Representative"
+                                                                {{ old('position', $profileData->position) == 'Customer Service Representative' ? 'selected' : '' }}>
+                                                                Customer Service Representative
+                                                            </option>
+                                                            <option value="Claims Representative"
+                                                                {{ old('position', $profileData->position) == 'Claims Representative' ? 'selected' : '' }}>
+                                                                Claims Representative
+                                                            </option>
+                                                            <option value="Adjuster"
+                                                                {{ old('position', $profileData->position) == 'Adjuster' ? 'selected' : '' }}>
+                                                                Adjuster
+                                                            </option>
+                                                            <option value="Actuary"
+                                                                {{ old('position', $profileData->position) == 'Actuary' ? 'selected' : '' }}>
+                                                                Actuary
+                                                            </option>
+                                                            <option value="Regulator"
+                                                                {{ old('position', $profileData->position) == 'Regulator' ? 'selected' : '' }}>
+                                                                Regulator
+                                                            </option>
+                                                            <option value="Other"
+                                                                {{ old('position', $profileData->position) == 'Other' ? 'selected' : '' }}>
+                                                                Other
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
 
 
@@ -646,11 +684,13 @@
                                                 <!--end col-->
 
                                                 <div class="col-lg-12">
-    <div class="mb-3 pb-2">
-        <label for="exampleFormControlTextarea" class="form-label">Short Bio</label>
-        <textarea class="form-control" name="short_bio" id="exampleFormControlTextarea" placeholder="Enter your description" rows="3">{{ old('short_bio', $profileData->short_bio) }}</textarea>
-    </div>
-</div>
+                                                    <div class="mb-3 pb-2">
+                                                        <label for="exampleFormControlTextarea"
+                                                            class="form-label">Short Bio</label>
+                                                        <textarea class="form-control" name="short_bio" id="exampleFormControlTextarea" placeholder="Enter your description"
+                                                            rows="3">{{ old('short_bio', $profileData->short_bio) }}</textarea>
+                                                    </div>
+                                                </div> --}}
 
                                                 <!--end col-->
                                                 <div class="col-lg-12">

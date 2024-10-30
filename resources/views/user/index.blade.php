@@ -63,7 +63,7 @@
                 <div class="row dash-nft">
                     <div class="col-xxl-12">
                         <div class="row">
-                            <div class="col-xl-8">
+                            <div class="col-xl-12">
                                 <div class="card overflow-hidden">
                                     <div class="card-body bg-marketplace d-flex">
                                         <div class="flex-grow-1">
@@ -71,7 +71,8 @@
                                                 <span class="text-success">Membership ID Card. <a href="{{ route('id-card.show') }}"
                                                             class="btn btn-success">Here!</a></span>
                                             </h4>
-                                            @if ($hasPaidDues)
+
+                                            {{-- @if ($hasProfileDetails)
                                                 <p class="mb-0 mt-2 text-muted">Your ID Card is ready!</p>
                                                 <div class="d-flex gap-3 mt-4">
                                                     <a href="{{ route('id-card.show') }}" class="btn btn-success">Download
@@ -80,14 +81,14 @@
                                             @else
                                                 <div class="text-danger pt-5">Kindly pay your yearly dues to access your
                                                     membership card.</div>
-                                            @endif
+                                            @endif --}}
 
                                         </div>
                                         <img src="assets/images/bg-d.png" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             </div><!--end col-->
-                            <div class="col-xl-4 col-md-6">
+                            {{-- <div class="col-xl-4 col-md-6">
                                 <div class="card card-height-100">
                                     <div class="card-body">
 
@@ -105,7 +106,7 @@
                                             <h4 class="fs-22 fw-semibold ff-secondary mb-0">#<span class="counter-value"
                                                     data-target="50000">50,000</span> </h4>
 
-                                            @if ($hasPaidDues)
+                                            @if ($hasProfileDetails)
                                                 <p class="mt-2 mb-0 text-muted"><span
                                                         class="badge bg-success-subtle text-success mb-0 me-1"> <span>
                                                             <i class="ri-arrow-down-line align-middle"></i> Your annual dues
@@ -130,7 +131,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!--end col-->
+                            </div><!--end col--> --}}
 
 
 

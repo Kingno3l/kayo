@@ -186,8 +186,9 @@
                           <div class="collapse menu-dropdown" id="financialManagement">
                               <ul class="nav nav-sm flex-column">
                                   <li class="nav-item">
-                                      <a href="{{ route('pay.view') }}" class="nav-link" data-key="t-all-users">Yearly
-                                          Dues</a>
+                                      {{-- <a href="{{ route('pay.view') }}" class="nav-link" data-key="t-all-users">Yearly
+                                          Dues</a> --}}
+                                          <a href="#" class="nav-link" data-key="t-all-users">Coming Soon...</a>
                                   </li>
                               </ul>
                           </div>

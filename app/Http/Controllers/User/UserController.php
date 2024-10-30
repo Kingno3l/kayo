@@ -24,12 +24,16 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $profileData = User::find($id);
 
-        $currentYear = date('Y');
-        $hasPaidDues = Payment::where('user_id', $id)
-            ->whereYear('created_at', $currentYear)
-            ->exists();
+        // $currentYear = date('Y');
+        // $hasPaidDues = Payment::where('user_id', $id)
+        //     ->whereYear('created_at', $currentYear)
+        //     ->exists();
 
-        return view('user.index', compact('profileData', 'hasPaidDues'));
+        // Check if the 'country', 'phone_number', and 'photo' columns have values
+        $hasProfileDetails = $profileData && $profileData->country && $profileData->phone && $profileData->photo;
+
+
+        return view('user.index', compact('profileData', 'hasProfileDetails'));
     }
 
     public function userProfile()
@@ -58,107 +62,6 @@ class UserController extends Controller
         return view('user.complete_profile', compact('profileData', 'socials'));
     }
 
-    // public function userProfileSave(Request $request)
-    // {
-    //     $id = Auth::user()->id;
-    //     $data = User::find($id);
-    //     $data->name = $request->name;
-    //     $data->email = $request->email;
-    //     $data->education = $request->education;
-    //     $data->position = $request->position;
-    //     $data->employer = $request->employer;
-    //     $data->short_bio = $request->short_bio;
-    //     $data->country = $request->country;
-    //     $data->phone = $request->phone;
-
-    //     $data->country_code = $request->input('country_code');
-
-
-    //     if ($request->file('photo')) {
-    //         $file = $request->file('photo');
-    //         @unlink(public_path('uploads/user_images/' . $data->photo));
-    //         $filename = date('YmdHi') . $file->getClientOriginalName();
-    //         $file->move(public_path('uploads/user_images'), $filename);
-    //         $data['photo'] = $filename;
-    //     }
-
-    //     $data->save();
-
-    //     $notification = array(
-    //         'message' => 'User Profile Updated Successfully',
-    //         'alert-type' => 'success'
-    //     );
-
-    //     return redirect()->back()->with($notification);
-    // }
-
-//     public function userProfilecomplete(Request $request)
-// {
-//     $id = Auth::user()->id;
-//     $data = User::find($id);
-
-//     $request->validate([
-//         'name' => 'required|string|max:255',
-//         'email' => 'required|string|email|max:255',
-//         'education' => 'required|string|max:255',
-//         'position' => 'required|string|max:255',
-//         'employer' => 'required|string|max:255',
-//         'country' => 'required|string|max:255',
-//         'phone' => 'required|string|max:20',
-//         'marital_status' => 'required|string|max:20',
-//         'gender' => 'required|string|max:10',
-//         'date_of_birth' => 'required|date',
-//         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Optional image
-//     ]);
-
-//     // Updating user information from request
-//     $data->name = $request->name;
-//     $data->email = $request->email;
-//     $data->education = $request->education;
-//     $data->position = $request->position;
-//     $data->employer = $request->employer;
-//     $data->country = $request->country;
-//     $data->phone = $request->phone;
-//     $data->marital_status = $request->marital_status;
-//     $data->gender = $request->gender;
-//     $data->date_of_birth = $request->date_of_birth;
-
-//     // Ensure that 'country_code' is used to generate the registration number
-//     $country = $request->country;
-//     $countryCodes = config('country_codes');
-
-//     $countryCode = isset($countryCodes[$country]) ? $countryCodes[$country] : 'XX'; // Default to 'XX' if country not found
-
-//     if (is_null($data->registration_number)) {
-//         $rankingNumber = User::where('country', $country)->whereNotNull('registration_number')->count() + 1;
-//         $formattedRankingNumber = str_pad($rankingNumber, 3, '0', STR_PAD_LEFT);  
-//         $yearJoined = date('y');  
-
-//         $data->registration_number = "YIP-{$countryCode}-{$formattedRankingNumber}-{$yearJoined}";
-//     }
-
-//     if ($request->file('photo')) {
-//         $file = $request->file('photo');
-//         @unlink(public_path('uploads/user_images/' . $data->photo));
-//         $filename = date('YmdHi') . $file->getClientOriginalName();
-//         $file->move(public_path('uploads/user_images'), $filename);
-//         $data->photo = $filename;
-//     }
-
-//     try {
-//         $data->save();
-//     } catch (\Exception $e) {
-//         return back()->withErrors(['error' => 'An error occurred while saving.']);
-//     }
-
-//     $notification = [
-//         'message' => 'User Profile Saved Successfully.',
-//         'alert-type' => 'success'
-//     ];
-    
-//     return redirect()->route('dashboard')->with($notification);
-// }
-
     public function userProfilecomplete(Request $request)
     {
         $id = Auth::user()->id;
@@ -168,15 +71,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'education' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'employer' => 'required|string|max:255',
+            // 'education' => 'required|string|max:255',
+            // 'position' => 'required|string|max:255',
+            // 'employer' => 'required|string|max:255',
             'country' => 'required|string|max:255',  // Country name
-            'country_code' => 'required|string|max:10',  // Country code
+            // 'country_code' => 'required|string|max:10',  // Country code
             'phone' => 'required|string|max:20',
-            'marital_status' => 'required|string|max:20',
-            'gender' => 'required|string|max:10',
-            'date_of_birth' => 'required|date',
+            // 'marital_status' => 'required|string|max:20',
+            // 'gender' => 'required|string|max:10',
+            // 'date_of_birth' => 'required|date',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Optional image
         ]);
 
@@ -196,6 +99,8 @@ class UserController extends Controller
         // Handle country code logic for the registration number
         $country = $request->country;
         $countryCode = strtoupper($request->country_code);  // Ensure country code is in uppercase
+
+        
 
         if (is_null($data->registration_number)) {
             $rankingNumber = User::where('country', $country)->whereNotNull('registration_number')->count() + 1;

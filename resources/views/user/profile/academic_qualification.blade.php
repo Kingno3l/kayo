@@ -44,7 +44,7 @@
                                 <div class="tab-pane active" id="academicQualification" role="tabpanel">
                                     <div class="row">
                                         <form action="{{ route('profile-management.academic-qualification.store') }}"
-                                            method="POST" enctype="multipart/form-data">
+                                            method="POST" enctype="multipart/form-data" id="qualificationForm">
                                             @csrf
 
                                             @if ($errors->any())
@@ -66,14 +66,13 @@
                                                     </div>
                                                 </div>
 
-                                                @forelse ($qualifications as $index => $qualification)
+                                                @foreach ($qualifications as $index => $qualification)
                                                     <div class="col-lg-12 academic-qualification-item"
                                                         data-index="{{ $index }}">
                                                         <div class="card">
                                                             <div class="card-header align-items-center d-flex">
                                                                 <h4 class="card-title mb-0 flex-grow-1">Academic
-                                                                    Qualification
-                                                                </h4>
+                                                                    Qualification</h4>
                                                                 <button type="button" class="btn btn-danger btn-sm ms-2"
                                                                     onclick="removeAcademicQualification({{ $index }})">
                                                                     Remove
@@ -86,7 +85,8 @@
                                                                             <label for="degreeInput{{ $index }}"
                                                                                 class="form-label">Degree</label>
                                                                             <select name="degree[]" class="form-control"
-                                                                                id="degreeInput{{ $index }}">
+                                                                                id="degreeInput{{ $index }}"
+                                                                                style="pointer-events: none;">
                                                                                 <option value="" disabled selected>
                                                                                     Select Degree</option>
                                                                                 <option value="Bachelor of Science"
@@ -119,17 +119,19 @@
                                                                             <input type="text" name="institution[]"
                                                                                 class="form-control"
                                                                                 id="institutionInput{{ $index }}"
-                                                                                value="{{ $qualification->institution }}">
+                                                                                value="{{ $qualification->institution }}"
+                                                                                {{ $qualification->institution ? 'readonly' : '' }}>
                                                                         </div>
                                                                         <div class="col-lg-6 mt-2">
                                                                             <label
                                                                                 for="academicYearInput{{ $index }}"
                                                                                 class="form-label">Graduation Year</label>
-                                                                                
                                                                             <select name="graduation_year[]"
                                                                                 class="form-control"
-                                                                                id="academicYearInput{{ $index }}">
-                                                                                
+                                                                                id="academicYearInput{{ $index }}"
+                                                                                style="pointer-events: none;">
+                                                                                <option value="" selected disabled>
+                                                                                    Select Graduation Year</option>
                                                                                 @for ($year = 1980; $year <= date('Y'); $year++)
                                                                                     <option value="{{ $year }}"
                                                                                         {{ $qualification->graduation_year == $year ? 'selected' : '' }}>
@@ -143,83 +145,32 @@
                                                                             <input type="text" name="grade[]"
                                                                                 class="form-control"
                                                                                 id="gradeInput{{ $index }}"
-                                                                                value="{{ $qualification->grade }}">
+                                                                                value="{{ $qualification->grade }}"
+                                                                                {{ $qualification->grade ? 'readonly' : '' }}>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @empty
-                                                    <!-- Empty form for new academic qualification -->
-                                                    <div class="col-lg-12 academic-qualification-item" data-index="0">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <label class="form-label">Degree</label>
-                                                                        <select name="degree[]" class="form-control">
-                                                                            <option value="" disabled selected>Select
-                                                                                Degree</option>
-                                                                            <option value="Bachelor of Science">Bachelor of
-                                                                                Science (B.Sc.)</option>
-                                                                            <option value="Bachelor of Arts">Bachelor of
-                                                                                Arts (B.A.)</option>
-                                                                            <option value="Master of Science">Master of
-                                                                                Science (M.Sc.)</option>
-                                                                            <option value="Master of Arts">Master of Arts
-                                                                                (M.A.)
-                                                                            </option>
-                                                                            <option value="Doctor of Philosophy">Doctor of
-                                                                                Philosophy (Ph.D.)</option>
-                                                                            <option value="Diploma">Diploma</option>
-                                                                            <option value="Other">Other</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <label class="form-label">Institution</label>
-                                                                        <input type="text" name="institution[]"
-                                                                            class="form-control">
-                                                                    </div>
-                                                                    <div class="col-lg-6 mt-2">
-                                                                        <label class="form-label">Graduation Year</label>
-                                                                        <select name="graduation_year[]"
-                                                                            class="form-control">
-                                                                                    <option value="" selected disabled>Select Graduation Year</option>
-
-                                                                            @for ($year = 1980; $year <= date('Y'); $year++)
-                                                                                <option value="{{ $year }}">
-                                                                                    {{ $year }}</option>
-                                                                            @endfor
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-lg-6 mt-2">
-                                                                        <label class="form-label">Grade</label>
-                                                                        <input type="text" name="grade[]"
-                                                                            class="form-control">
+                                                                    <!-- Edit Button -->
+                                                                    <div class="col-lg-12 mt-2">
+                                                                        <button type="button" class="btn btn-primary"
+                                                                            id="editButton{{ $index }}"
+                                                                            onclick="toggleEditMode({{ $index }})">
+                                                                            Edit
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endforelse
+                                                @endforeach
                                             </div>
-                                            {{-- <input type="file" name="document" id=""> --}}
 
+                                            <!-- File Upload -->
                                             <label for="file-upload"
-                                                style="
-    display: inline-block; 
-    padding: 6px 12px; 
-    cursor: pointer; 
-    background-color: #5f5959; 
-    color: white; 
-    border-radius: 4px; 
-    font-size: 14px;">
-                                                Kindly Merge to PDF and Upload 
+                                                style="display: inline-block; padding: 6px 12px; cursor: pointer; background-color: #5f5959; color: white; border-radius: 4px; font-size: 14px;">
+                                                Kindly Merge to PDF and Upload
                                             </label>
                                             <input type="file" id="file-upload" name="document"
                                                 style="display: none;" />
-
 
                                             <!-- Submit Button -->
                                             <div class="col-lg-12 mt-4">
@@ -240,10 +191,34 @@
             </div><!-- End Page-content -->
 
             <script>
-                // Function to add a new academic qualification entry
+                function toggleEditMode(index) {
+                    const institutionField = document.getElementById(`institutionInput${index}`);
+                    const gradeField = document.getElementById(`gradeInput${index}`);
+                    const degreeField = document.getElementById(`degreeInput${index}`);
+                    const academicYearField = document.getElementById(`academicYearInput${index}`);
+                    const editButton = document.getElementById(`editButton${index}`);
+
+                    // Toggle readonly attribute for text fields
+                    const isReadOnly = institutionField.hasAttribute('readonly');
+                    institutionField.toggleAttribute('readonly');
+                    gradeField.toggleAttribute('readonly');
+
+                    // Allow interaction with select fields in edit mode
+                    if (isReadOnly) {
+                        degreeField.style.pointerEvents = 'auto';
+                        academicYearField.style.pointerEvents = 'auto';
+                                editButton.style.display = 'none'; // Hide the button in edit mode
+
+                    } else {
+                        degreeField.style.pointerEvents = 'none';
+                        academicYearField.style.pointerEvents = 'none';
+        editButton.style.display = 'inline-block'; // Show the button when exiting edit mode
+                    }
+                }
+
                 function addAcademicQualification() {
                     const academicQualificationContainer = document.getElementById('academic-qualification-container');
-                    const index = academicQualificationContainer.querySelectorAll('.academic-qualification-item').length;
+                    const index = Date.now(); // Use unique timestamp as index
                     const newAcademicQualificationItem = document.createElement('div');
                     newAcademicQualificationItem.classList.add('col-lg-12', 'academic-qualification-item');
                     newAcademicQualificationItem.setAttribute('data-index', index);
@@ -291,7 +266,12 @@
                         </div>
                     `;
                     academicQualificationContainer.appendChild(newAcademicQualificationItem);
+
+                    
                 }
+
+                
+
 
                 // Function to remove an academic qualification entry
                 function removeAcademicQualification(index) {

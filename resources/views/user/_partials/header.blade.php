@@ -78,7 +78,7 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="en"
                             title="English">
-                            <img src="assets/images/flags/us.svg" alt="user-image" class="me-2 rounded" height="18">
+                            <img src="{{ asset('assets/images/flags/us.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">English</span>
                         </a>
 
@@ -87,7 +87,7 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ar"
                             title="Arabic">
-                            <img src="assets/images/flags/fr.svg" alt="user-image" class="me-2 rounded" height="18">
+                            <img src="{{ asset('assets/images/flags/us.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">French</span>
                         </a>
                     </div>

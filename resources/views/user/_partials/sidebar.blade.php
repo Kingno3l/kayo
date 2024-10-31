@@ -145,37 +145,47 @@
                   <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Menu</span></li>
 
                   @if ($status === '1')
+                     
+
                       <li class="nav-item">
-                          <a class="nav-link menu-link" href="#profileManagement" data-bs-toggle="collapse"
-                              role="button" aria-expanded="false" aria-controls="profileManagement">
-                              <i data-feather="users" class="icon-dual"></i>
-                              <span data-key="t-authentication">Profile Management</span>
-                          </a>
-                          <div class="collapse menu-dropdown" id="profileManagement">
-                              <ul class="nav nav-sm flex-column">
-                                  <li class="nav-item">
-                                      <a href="{{ route('user.profile') }}" class="nav-link"
-                                          data-key="t-all-users">Manage Profile</a>
-                                  </li>
-                                  <li class="nav-item">
-                                      <a href="{{ route('profile-management.academic-qualification') }}"
-                                          class="nav-link" data-key="t-all-users">Academic Qualification</a>
-                                  </li>
-                                  <li class="nav-item">
-                                      <a href="{{ route('profile-management.employment-history') }}" class="nav-link"
-                                          data-key="t-all-users">Employment History</a>
-                                  </li>
-                                  <li class="nav-item">
-                                      <a href="{{ route('profile-management.next-of-kin-and-referee') }}"
-                                          class="nav-link" data-key="t-all-users">Next of Kin & Referee Information</a>
-                                  </li>
-                                  <li class="nav-item">
-                                      <a href="{{ route('profile-management.document-upload') }}" class="nav-link"
-                                          data-key="t-all-users">Document Uploads</a>
-                                  </li>
-                              </ul>
-                          </div>
-                      </li>
+    <a class="nav-link menu-link" href="#profileManagement" data-bs-toggle="collapse"
+        role="button" 
+        aria-expanded="{{ Request::is('profile-management/*') || Route::is('user.profile') ? 'true' : 'false' }}" 
+        aria-controls="profileManagement">
+        <i data-feather="users" class="icon-dual"></i>
+        <span data-key="t-authentication">Profile Management</span>
+    </a>
+    <div class="collapse menu-dropdown {{ Request::is('profile-management/*') || Route::is('user.profile') ? 'show' : '' }}" id="profileManagement">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="{{ route('user.profile') }}" 
+                   class="nav-link {{ Route::is('user.profile') ? 'active' : '' }}" 
+                   data-key="t-all-users">Manage Profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('profile-management.academic-qualification') }}" 
+                   class="nav-link {{ Route::is('profile-management.academic-qualification') ? 'active' : '' }}" 
+                   data-key="t-all-users">Academic Qualification</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('profile-management.employment-history') }}" 
+                   class="nav-link {{ Route::is('profile-management.employment-history') ? 'active' : '' }}" 
+                   data-key="t-all-users">Employment History</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('profile-management.next-of-kin-and-referee') }}" 
+                   class="nav-link {{ Route::is('profile-management.next-of-kin-and-referee') ? 'active' : '' }}" 
+                   data-key="t-all-users">Next of Kin & Referee Information</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('profile-management.document-upload') }}" 
+                   class="nav-link {{ Route::is('profile-management.document-upload') ? 'active' : '' }}" 
+                   data-key="t-all-users">Document Uploads</a>
+            </li>
+        </ul>
+    </div>
+</li>
+
 
                       <li class="nav-item">
                           <a class="nav-link menu-link" href="#financialManagement" data-bs-toggle="collapse"

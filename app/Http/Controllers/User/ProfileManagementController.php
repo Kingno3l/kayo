@@ -126,7 +126,7 @@ class ProfileManagementController extends Controller
             'institution.*' => 'required|string',
             'graduation_year.*' => 'required|integer',
             'grade.*' => 'nullable|string',
-            'document' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Single file upload validation
+            'document' => 'nullable|file|mimes:pdf|max:3048', // Single file upload validation
         ]);
 
         // Retrieve the currently authenticated user
@@ -506,14 +506,108 @@ class ProfileManagementController extends Controller
     // }
 
 
+    // public function documentUploadStore(Request $request)
+    // {
+    //     // Validate incoming request
+    //     $request->validate([
+    //         'means_of_identification' => 'required|string',
+    //         'meansofid' => 'nullable|file|mimes:pdf|max:3048', // Means of ID file
+    //         'other' => 'nullable|string',
+    //         'other_document' => 'nullable|file|mimes:pdf|max:3048', // Other document file
+    //     ]);
+
+    //     // Retrieve the currently authenticated user
+    //     $user = auth()->user();
+
+    //     // Handle Means of Identification
+    //     $meansOfIdDocument = $request->file('meansofid');
+    //     $meansOfIdentificationType = $request->input('means_of_identification');
+
+    //     if ($meansOfIdDocument) {
+    //         // Generate documentable type for means of identification
+    //         $meansOfIdentificationTypeWithId = 'means of id - ' . $meansOfIdentificationType;
+
+    //         // Find the existing document entry for means of identification
+    //         $existingIdDocs = Document::where('user_id', $user->id)
+    //             ->where('documentable_type', 'like', 'means of id - %')
+    //             ->get();
+
+    //         // Delete any existing document for means of identification
+    //         foreach ($existingIdDocs as $existingIdDoc) {
+    //             // Remove the old file from the storage
+    //             $filePath = public_path('profile_management/identification/' . $existingIdDoc->document);
+    //             if (file_exists($filePath)) {
+    //                 @unlink($filePath);
+    //             }
+
+    //             // Delete the entry from the documents table
+    //             $existingIdDoc->delete();
+    //         }
+
+    //         // Save the new means of identification document
+    //         $filename = date('YmdHi') . $meansOfIdDocument->getClientOriginalName();
+    //         $meansOfIdDocument->move(public_path('profile_management/identification'), $filename);
+
+    //         // Create a new document record
+    //         $doc = new Document();
+    //         $doc->user_id = $user->id;
+    //         $doc->documentable_type = $meansOfIdentificationTypeWithId;
+    //         $doc->document = $filename;
+    //         $doc->save();
+    //     }
+
+    //     // Handle "Other" document
+    //     $otherDocument = $request->file('other_document');
+    //     $otherDocumentType = $request->input('other');
+
+    //     if ($otherDocument) {
+    //         // Generate documentable type for other document
+    //         $otherDocumentTypeWithId = 'others - ' . $otherDocumentType;
+
+    //         // Find the existing document entry for 'others'
+    //         $existingOtherDocs = Document::where('user_id', $user->id)
+    //             ->where('documentable_type', 'like', 'others - %')
+    //             ->get();
+
+    //         // Delete any existing document for 'others'
+    //         foreach ($existingOtherDocs as $existingOtherDoc) {
+    //             // Remove the old file from the storage
+    //             $filePath = public_path('profile_management/others/' . $existingOtherDoc->document);
+    //             if (file_exists($filePath)) {
+    //                 @unlink($filePath);
+    //             }
+
+    //             // Delete the entry from the documents table
+    //             $existingOtherDoc->delete();
+    //         }
+
+    //         // Save the new other document
+    //         $filename = date('YmdHi') . $otherDocument->getClientOriginalName();
+    //         $otherDocument->move(public_path('profile_management/others'), $filename);
+
+    //         // Create a new document record
+    //         $doc = new Document();
+    //         $doc->user_id = $user->id;
+    //         $doc->documentable_type = $otherDocumentTypeWithId;
+    //         $doc->document = $filename;
+    //         $doc->save();
+    //     }
+
+    //     $notification = array(
+    //         'message' => 'Documents Updated Successfully!',
+    //         'alert-type' => 'success'
+    //     );
+    //     return redirect()->back()->with($notification);
+    // }
+
     public function documentUploadStore(Request $request)
     {
         // Validate incoming request
         $request->validate([
             'means_of_identification' => 'required|string',
-            'meansofid' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Means of ID file
+            'meansofid' => 'nullable|file|mimes:pdf|max:3072000', // Only allow PDF files, max 3GB
             'other' => 'nullable|string',
-            'other_document' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048', // Other document file
+            'other_document' => 'nullable|file|mimes:pdf|max:3072000', // Only allow PDF files, max 3GB
         ]);
 
         // Retrieve the currently authenticated user
@@ -599,6 +693,7 @@ class ProfileManagementController extends Controller
         );
         return redirect()->back()->with($notification);
     }
+
 
     public function socialsStore(Request $request)
     {

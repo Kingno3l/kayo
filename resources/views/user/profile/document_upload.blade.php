@@ -61,12 +61,12 @@
                                             @endif
 
                                             <!-- Means of Identification Section -->
-                                            <div class="row">
+                                            {{-- <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="card">
                                                         <div class="card-header align-items-center d-flex">
                                                             <h4 class="card-title mb-0 flex-grow-1">Upload Means of
-                                                                Identification</h4>
+                                                                Identification</h4> <h6 class="text-danger">Document must be in PDF and not more than 3mb</h6>
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="live-preview">
@@ -167,7 +167,95 @@
                                             <div class="col-lg-12 mt-4">
                                                 <button type="submit" class="btn btn-primary w-100">Upload
                                                     Documents</button>
-                                            </div>
+                                            </div> --}}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Upload Means of Identification</h4> 
+                <h6 class="text-danger">Document must be in PDF and not more than 3MB</h6>
+            </div>
+            <div class="card-body">
+                <div class="live-preview">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="identificationInput" class="form-label">Means of Identification</label>
+                            <select name="means_of_identification" class="form-control" id="identificationInput" required>
+                                <option value="" selected disabled>Select Means of Identification</option>
+                                <option value="National ID" {{ trim($meansOfIdentificationType) == 'National ID' ? 'selected' : '' }}>National ID</option>
+                                <option value="Driver's License" {{ trim($meansOfIdentificationType) == "Driver's License" ? 'selected' : '' }}>Driver's License</option>
+                                <option value="International Passport" {{ trim($meansOfIdentificationType) == 'International Passport' ? 'selected' : '' }}>International Passport</option>
+                                <option value="Voter's Card" {{ trim($meansOfIdentificationType) == "Voter's Card" ? 'selected' : '' }}>Voter's Card</option>
+                                <option value="Other" {{ trim($meansOfIdentificationType) == 'Other' ? 'selected' : '' }}>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6 mt-4">
+                            @php
+                                // Retrieve the selected means of identification type from the old input or the database
+                                $meansOfIdDocType = old('means_of_identification', $meansOfIdentificationType);
+                                // Check if there's an existing document for the selected type
+                                $existingIdDoc = $documents
+                                    ->where('documentable_type', 'means of id - ' . $meansOfIdDocType)
+                                    ->first();
+                            @endphp
+
+                            <input type="file" name="meansofid" {{ $existingIdDoc ? '' : 'required' }}>
+
+                            @if ($existingIdDoc)
+                                <a href="{{ asset('profile_management/identification/' . $existingIdDoc->document) }}" target="_blank" class="ms-2">
+                                    View Current Document
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Other Relevant Document Section -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Other Relevant Document</h4>
+            </div>
+            <div class="card-body">
+                <div class="live-preview">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="otherInput" class="form-label">Other Document</label>
+                            <input type="text" name="other" class="form-control" id="otherInput" value="{{ old('other', $documentName) }}" required>
+                        </div>
+
+                        <div class="col-lg-6 mt-4">
+                            <input type="file" name="other_document">
+
+                            @php
+                                // Check if there's an existing document for "Other"
+                                $existingOtherDoc = $documents
+                                    ->where('documentable_type', 'others - ' . old('other', $documentName))
+                                    ->first();
+                            @endphp
+
+                            @if ($existingOtherDoc)
+                                <a href="{{ asset('profile_management/others/' . $existingOtherDoc->document) }}" target="_blank" class="ms-2">
+                                    View Current Document
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Submit Button -->
+<div class="col-lg-12 mt-4">
+    <button type="submit" class="btn btn-primary w-100">Upload Documents</button>
+</div>
+
                                         </form>
 
 

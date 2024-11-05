@@ -79,6 +79,7 @@
                                                             <div class="card-body">
                                                                 <div class="live-preview">
                                                                     <div class="row employment-history-item">
+                                                                        
                                                                         <div class="col-lg-6">
                                                                             <label for="jobTitleInput{{ $index }}"
                                                                                 class="form-label">Job Title</label>
@@ -88,6 +89,8 @@
                                                                                 value="{{ $employment->job_title }}"
                                                                                 readonly>
                                                                         </div>
+
+                                                                        
                                                                         <div class="col-lg-6">
                                                                             <label for="companyInput{{ $index }}"
                                                                                 class="form-label">Company</label>

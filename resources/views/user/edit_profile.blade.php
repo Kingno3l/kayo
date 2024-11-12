@@ -1,14 +1,15 @@
 @extends('user.user_dashboard')
 @section('user')
 
-<style>
-    .rotate-icon {
-        transition: transform 0.3s ease;
-    }
-    .btn[aria-expanded="true"] .rotate-icon {
-        transform: rotate(180deg);
-    }
-</style>
+    <style>
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .btn[aria-expanded="true"] .rotate-icon {
+            transform: rotate(180deg);
+        }
+    </style>
     <div class="page-content">
         <div class="container-fluid">
 
@@ -249,15 +250,17 @@
 
 
                     <div class="card">
-    <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-            <button class="btn btn-link d-flex w-100 justify-content-between align-items-center" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Add Socials
-                <i class="ri-arrow-down-s-line rotate-icon"></i> <!-- Arrow icon aligned to the right -->
-            </button>
-        </h5>
-    </div>
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link d-flex w-100 justify-content-between align-items-center"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                                    aria-expanded="false" aria-controls="collapseExample">
+                                    Add Socials
+                                    <i class="ri-arrow-down-s-line rotate-icon"></i>
+                                    <!-- Arrow icon aligned to the right -->
+                                </button>
+                            </h5>
+                        </div>
 
                         <div id="collapseExample" class="collapse" aria-labelledby="headingOne">
                             <div class="card-body">
@@ -408,7 +411,5 @@
         //         }
         //     });
         // });
-
-     
     </script>
 @endsection

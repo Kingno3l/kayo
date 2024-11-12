@@ -11,19 +11,19 @@
                 <div class="navbar-brand-box horizontal-logo">
                     <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                            <img src="{{ asset('assets/images/logo-sm.png')}}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo-dark.png" alt="" height="17">
+                            <img src="{{ asset('assets/images/logo-dark.png')}}" alt="" height="17">
                         </span>
                     </a>
 
                     <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                            <img src="{{ asset('assets/images/logo-sm.png')}}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo-light.png" alt="" height="17">
+                            <img src="{{ asset('assets/images/logo-light.png')}}" alt="" height="17">
                         </span>
                     </a>
                 </div>
@@ -65,7 +65,7 @@
 
                 
 
-                <div class="dropdown ms-1 topbar-head-dropdown header-item">
+                {{-- <div class="dropdown ms-1 topbar-head-dropdown header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img id="header-lang-img" src="{{ asset('assets/images/flags/us.svg') }}" alt="Header Language"
@@ -87,9 +87,33 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ar"
                             title="Arabic">
-                            <img src="{{ asset('assets/images/flags/us.svg') }}" alt="user-image" class="me-2 rounded" height="18">
+                            <img src="{{ asset('assets/images/flags/fr.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">French</span>
                         </a>
+                    </div>
+                </div> --}}
+
+               <div class="dropdown ms-1 topbar-head-dropdown header-item">
+                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img id="header-lang-img" src="{{ asset('assets/images/flags/us.svg') }}" alt="Header Language" height="20" class="rounded">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" style="">
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
+                            <img src="{{ asset('assets/images/flags/us.svg') }}" alt="user-image" class="me-2 rounded" height="18">
+                            <span class="align-middle">English</span>
+                        </a>
+
+
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="fr" title="French">
+                            <img src="{{ asset('assets/images/flags/french.svg') }}" alt="user-image" class="me-2 rounded" height="18">
+                            <span class="align-middle">français</span>
+                        </a>
+
+                        
                     </div>
                 </div>
 

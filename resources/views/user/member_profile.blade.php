@@ -121,7 +121,7 @@
                                     <p>
                                         {!! !empty($profileData->short_bio) ? $profileData->short_bio : '<em>No record for this</em>' !!}
                                     </p>
-                                    <div class="row mt-4">
+                                    {{-- <div class="row mt-4">
                                         <div class="col-6 col-md-4">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 avatar-xs align-self-center me-3">
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                                         <!--end col-->
-                                    </div>
+                                    </div> --}}
                                     <!--end row-->
                                 </div>
                                 <!--end card-body-->

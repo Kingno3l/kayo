@@ -64,7 +64,7 @@
                                     <div class="col-xxl-3">
 
 
-                                        <div class="card">
+                                        {{-- <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-3">Info</h5>
                                                 <div class="table-responsive">
@@ -121,101 +121,108 @@
                                                     </table>
                                                 </div>
                                             </div><!-- end card body -->
-                                        </div><!-- end card -->
+                                        </div><!-- end card --> --}}
 
                                         <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link d-flex w-100 justify-content-between align-items-center"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-                                    aria-expanded="false" aria-controls="collapseExample">
-                                    Add Socials
-                                    <i class="ri-arrow-down-s-line rotate-icon"></i>
-                                    <!-- Arrow icon aligned to the right -->
-                                </button>
-                            </h5>
-                        </div>
+                                            <div class="card-header" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <button
+                                                        class="btn btn-link d-flex w-100 justify-content-between align-items-center"
+                                                        type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseExample" aria-expanded="false"
+                                                        aria-controls="collapseExample">
+                                                        Add Socials
+                                                        <i class="ri-arrow-down-s-line rotate-icon"></i>
+                                                        <!-- Arrow icon aligned to the right -->
+                                                    </button>
+                                                </h5>
+                                            </div>
 
-                        <div id="collapseExample" class="collapse" aria-labelledby="headingOne">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div class="flex-grow-1">
-                                        <h5 class="card-title mb-0">Socials</h5>
-                                    </div>
+                                            <div id="collapseExample" class="collapse" aria-labelledby="headingOne">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-4">
+                                                        <div class="flex-grow-1">
+                                                            <h5 class="card-title mb-0">Socials</h5>
+                                                        </div>
 
-                                </div>
+                                                    </div>
 
 
-                                <form action="{{ route('socials.store') }}" method="POST">
-                                    @csrf
+                                                    <form action="{{ route('socials.store') }}" method="POST">
+                                                        @csrf
 
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
+                                                        @if ($errors->any())
+                                                            <div class="alert alert-danger">
+                                                                <ul>
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <li>{{ $error }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        @endif
+
+
+
+                                                        <div class="mb-3 d-flex">
+                                                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                                                <span
+                                                                    class="avatar-title rounded-circle fs-16 bg-info text-light">
+                                                                    <i class="ri-linkedin-fill"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="url" class="form-control" name="linkedin"
+                                                                placeholder="www.linkedin.com/yourname"
+                                                                value="{{ old('linkedin', $socials->linkedin ?? '') }}">
+                                                        </div>
+
+                                                        <div class="mb-3 d-flex">
+                                                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                                                <span
+                                                                    class="avatar-title rounded-circle fs-16 bg-primary text-light">
+                                                                    <i class="ri-facebook-fill"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="url" class="form-control" name="facebook"
+                                                                placeholder="www.facebook.com/yourname"
+                                                                value="{{ old('facebook', $socials->facebook ?? '') }}">
+                                                        </div>
+
+                                                        <div class="mb-3 d-flex">
+                                                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                                                <span
+                                                                    class="avatar-title rounded-circle fs-16 bg-danger text-light">
+                                                                    <i class="ri-instagram-fill"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="url" class="form-control" name="instagram"
+                                                                placeholder="www.instagram.com/yourname"
+                                                                value="{{ old('instagram', $socials->instagram ?? '') }}">
+                                                        </div>
+
+                                                        <div class="mb-3 d-flex">
+                                                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                                                <span
+                                                                    class="avatar-title rounded-circle fs-16 bg-warning text-light">
+                                                                    <i class="ri-snapchat-fill"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="url" class="form-control" name="snapchat"
+                                                                placeholder="www.snapchat.com/yourname"
+                                                                value="{{ old('snapchat', $socials->snapchat ?? '') }}">
+                                                        </div>
+
+                                                        <div class="col-lg-12 mt-4">
+                                                            <button type="submit" class="btn btn-success w-100">Save
+                                                                Socials</button>
+                                                        </div>
+                                                    </form>
+
+
+
+
+                                                </div>
+                                            </div>
                                         </div>
-                                    @endif
-
-
-
-                                    <div class="mb-3 d-flex">
-                                        <div class="avatar-xs d-block flex-shrink-0 me-3">
-                                            <span class="avatar-title rounded-circle fs-16 bg-info text-light">
-                                                <i class="ri-linkedin-fill"></i>
-                                            </span>
-                                        </div>
-                                        <input type="url" class="form-control" name="linkedin"
-                                            placeholder="www.linkedin.com/yips-africa"
-                                            value="{{ old('linkedin', $socials->linkedin ?? '') }}">
-                                    </div>
-
-                                    <div class="mb-3 d-flex">
-                                        <div class="avatar-xs d-block flex-shrink-0 me-3">
-                                            <span class="avatar-title rounded-circle fs-16 bg-primary text-light">
-                                                <i class="ri-facebook-fill"></i>
-                                            </span>
-                                        </div>
-                                        <input type="url" class="form-control" name="facebook"
-                                            placeholder="www.facebook.com/yips-africa"
-                                            value="{{ old('facebook', $socials->facebook ?? '') }}">
-                                    </div>
-
-                                    <div class="mb-3 d-flex">
-                                        <div class="avatar-xs d-block flex-shrink-0 me-3">
-                                            <span class="avatar-title rounded-circle fs-16 bg-danger text-light">
-                                                <i class="ri-instagram-fill"></i>
-                                            </span>
-                                        </div>
-                                        <input type="url" class="form-control" name="instagram"
-                                            placeholder="www.instagram.com/yips-africa"
-                                            value="{{ old('instagram', $socials->instagram ?? '') }}">
-                                    </div>
-
-                                    <div class="mb-3 d-flex">
-                                        <div class="avatar-xs d-block flex-shrink-0 me-3">
-                                            <span class="avatar-title rounded-circle fs-16 bg-warning text-light">
-                                                <i class="ri-snapchat-fill"></i>
-                                            </span>
-                                        </div>
-                                        <input type="url" class="form-control" name="snapchat"
-                                            placeholder="www.snapchat.com/yips-africa"
-                                            value="{{ old('snapchat', $socials->snapchat ?? '') }}">
-                                    </div>
-
-                                    <div class="col-lg-12 mt-4">
-                                        <button type="submit" class="btn btn-success w-100">Save Socials</button>
-                                    </div>
-                                </form>
-
-
-
-
-                            </div>
-                        </div>
-                    </div>
 
                                         @if ($socials)
                                             <div class="card">
@@ -320,7 +327,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title mb-3">About</h5>
                                                 <p>{!! !empty($profileData->short_bio) ? $profileData->short_bio : '<em>Update your profile</em>' !!}</p>
-                                                <div class="row">
+                                                {{-- <div class="row">
                                                     <div class="col-6 col-md-4">
                                                         <div class="d-flex mt-4">
                                                             <div class="flex-shrink-0 avatar-xs align-self-center me-3">
@@ -336,15 +343,78 @@
                                                         </div>
                                                     </div>
                                                     <!--end col-->
-                                                </div>
+                                                </div> --}}
                                                 <!--end row-->
                                             </div>
                                             <!--end card-body-->
                                         </div><!-- end card -->
 
 
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-3">Info</h5>
+                                                <div class="table-responsive">
+                                                    <table class="table table-borderless mb-0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">Full Name :</th>
+                                                                <td class="text-muted">{{ $profileData->name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">E-mail :</th>
+                                                                <td class="text-muted">{{ $profileData->email }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">Mobile:</th>
+                                                                <td class="text-muted">
+                                                                    {!! !empty($profileData->phone) ? $profileData->phone : '<em>No record for this</em>' !!}
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">Country:</th>
+                                                                <td class="text-muted">
+                                                                    {!! !empty($profileData->country) ? $profileData->country : '<em>Update your profile</em>' !!}
+                                                                </td>
+                                                            </tr>
+                                                            {{-- <tr>
+                                                                <th class="ps-0" scope="row">Employer:</th>
+                                                                <td class="text-muted">
+                                                                    {!! !empty($profileData->employer) ? $profileData->employer : '<em>Update your profile</em>' !!}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">Position:</th>
+                                                                <td class="text-muted">
+                                                                    {!! !empty($profileData->position) ? $profileData->position : '<em>Update your profile</em>' !!}
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">Highest level of
+                                                                    Education:</th>
+                                                                <td class="text-muted">
+                                                                    {!! !empty($profileData->education) ? $profileData->education : '<em>Update your profile</em>' !!}
+
+                                                                </td>
+                                                            </tr> --}}
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">Joined Date</th>
+                                                                <td class="text-muted">
+                                                                    {{ $profileData->created_at->format('d M Y') }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+
                                     </div>
-                                    <!--end col-->
+
+
+
+
+                               
                                 </div>
                                 <!--end row-->
                             </div>

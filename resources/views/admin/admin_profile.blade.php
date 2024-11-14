@@ -158,7 +158,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title mb-3">About</h5>
                                                 <p>{!! !empty($profileData->short_bio) ? $profileData->short_bio : '<em>Update your profile</em>' !!}</p>
-                                                <div class="row">
+                                                {{-- <div class="row">
                                                     <div class="col-6 col-md-4">
                                                         <div class="d-flex mt-4">
                                                             <div class="flex-shrink-0 avatar-xs align-self-center me-3">
@@ -174,7 +174,7 @@
                                                         </div>
                                                     </div>
                                                     <!--end col-->
-                                                </div>
+                                                </div> --}}
                                                 <!--end row-->
                                             </div>
                                             <!--end card-body-->

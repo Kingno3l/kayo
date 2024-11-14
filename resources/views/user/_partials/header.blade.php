@@ -93,9 +93,18 @@
                     </div>
                 </div> --}}
 
+
+                
+
+
                <div class="dropdown ms-1 topbar-head-dropdown header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img id="header-lang-img" src="{{ asset('assets/images/flags/us.svg') }}" alt="Header Language" height="20" class="rounded">
+                        <img id="header-lang-img" height="20" class="rounded" src="{{ asset('assets/images/flags/us.svg') }}" alt="">
+                        &nbsp;
+                        <img id="header-lang-img" src="{{ asset('assets/images/flags/us.svg') }}"  height="20" class="rounded">
+                        &nbsp;
+                       
+
                     </button>
                     <div class="dropdown-menu dropdown-menu-end" style="">
 

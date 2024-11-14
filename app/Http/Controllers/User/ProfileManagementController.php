@@ -283,35 +283,13 @@ class ProfileManagementController extends Controller
     // }
     public function nextOfKinAndReferee()
     {
-        // $userId = Auth::user()->id;
-        // // Fetch existing record or create a new instance if not found
-        // $profileData = NextOfKinAndReferee::where('user_id', $userId)->first();
-
-        // // If no record found, create a new instance with default values (optional)
-        // if (!$profileData) {
-        //     $profileData = new NextOfKinAndReferee;
-        // }
-
-
+        
         $id = Auth::user()->id;
         $profileData = User::find($id);
+        // Retrieve Next Of kin and referee records
+        $nextOfKinAndReferee = nextOfKinAndReferee::where('user_id', $id)->first();
 
-        // // Retrieve the academic qualifications for the specified user
-        // $qualifications = AcademicQualification::where('user_id', $id)->get();
-
-
-        // // Optionally, you can include the associated document if needed
-        // $document = Document::where('user_id', $id)
-        //     ->where('documentable_type', 'academic qualification')
-        //     ->first();
-
-        // return view('user.profile.academic_qualification', compact('profileData', 'qualifications', 'document'));
-
-
-
-
-
-        return view('user.profile.next_of_kin_and_referee', compact('profileData'));
+        return view('user.profile.next_of_kin_and_referee', compact('profileData', 'nextOfKinAndReferee'));
     }
 
 
@@ -378,7 +356,7 @@ class ProfileManagementController extends Controller
                 'referee1_email' => $request->input('referee1_email', null),
                 'referee1_phone' => $request->input('referee1_phone', null),
                 'referee1_address' => $request->input('referee1_address', null),
-                'referee2_full_name' => $request->input('referee2_fullname', null),
+                'referee2_full_name' => $request->input('referee2_full_name', null),
                 'referee2_relationship' => $request->input('referee2_relationship', null),
                 'referee2_email' => $request->input('referee2_email', null),
                 'referee2_phone' => $request->input('referee2_phone', null),

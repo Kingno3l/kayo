@@ -365,8 +365,17 @@
                                                 </div>
 
                                                 <!--end col-->
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label for="dobInput" class="form-label">Date of Birth</label>
+                                                        <input type="date" class="form-control" id="dobInput"
+                                                            name="date_of_birth"
+                                                            value="{{ old('date_of_birth', $profileData->date_of_birth) }}"
+                                                            aria-label="Date of Birth" required>
+                                                    </div>
+                                                </div>
 
-{{-- 
+                                                {{-- 
 
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
@@ -412,15 +421,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-4">
-                                                    <div class="mb-3">
-                                                        <label for="dobInput" class="form-label">Date of Birth</label>
-                                                        <input type="date" class="form-control" id="dobInput"
-                                                            name="date_of_birth"
-                                                            value="{{ old('date_of_birth', $profileData->date_of_birth) }}"
-                                                            aria-label="Date of Birth">
-                                                    </div>
-                                                </div>
+                                           
 
 
 

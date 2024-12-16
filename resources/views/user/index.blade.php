@@ -4,6 +4,13 @@
         $id = Auth::user()->id;
         $userId = App\Models\User::find($id);
         $status = $userId->status;
+        $dateOfBirth = $userId->date_of_birth; // Get the user's date_of_birth
+$age = \Carbon\Carbon::parse($dateOfBirth)->age; // Calculate age
+
+// Check academic qualifications
+$qualification = App\Models\ProfileManagement\AcademicQualification::where('user_id', $id)->latest()->first();
+        $graduationYear = $qualification ? $qualification->graduation_year : null;
+        $currentYear = \Carbon\Carbon::now()->year; // Get the current year
     @endphp
 
     <div class="page-content">
@@ -53,6 +60,7 @@
                         </div>
                     </div>
 
+
                 </div>
             </div>
 
@@ -68,8 +76,9 @@
                                     <div class="card-body bg-marketplace d-flex">
                                         <div class="flex-grow-1">
                                             <h4 class="fs-18 lh-base mb-0">View and download your <br>
-                                                <span class="text-success">Membership ID Card. <a href="{{ route('id-card.show') }}"
-                                                            class="btn btn-success">Here!</a></span>
+                                                <span class="text-success">Membership ID Card. <a
+                                                        href="{{ route('id-card.show') }}"
+                                                        class="btn btn-success">Here!</a></span>
                                             </h4>
 
                                             {{-- @if ($hasProfileDetails)
@@ -88,7 +97,114 @@
                                     </div>
                                 </div>
                             </div><!--end col-->
-                            {{-- <div class="col-xl-4 col-md-6">
+
+                            {{-- @if ($age < 40)
+                                <div class="card overflow-hidden shadow-none">
+                                    <div class="card-body bg-success-subtle">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="avatar-sm">
+                                                    <div
+                                                        class="avatar-title bg-success bg-opacity-10 text-success rounded-circle fs-17">
+                                                        <i class="ri-user-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6 class="fs-16">You are {{ $age }} years old.</h6>
+                                                <p class="text-muted mb-0">You are a member.</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            @else
+                                <div class="card overflow-hidden shadow-none">
+                                    <div class="card-body bg-warning-subtle">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="avatar-sm">
+                                                    <div
+                                                        class="avatar-title bg-warning bg-opacity-10 text-warning rounded-circle fs-17">
+                                                        <i class="ri-gift-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6 class="fs-16">You are {{ $age }} years old.</h6>
+                                                <p class="text-muted mb-0">You are an associate member.</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            @endif --}}
+
+                            @if ($graduationYear && $graduationYear > $currentYear)
+                                <div class="card overflow-hidden shadow-none">
+                                    <div class="card-body bg-primary-subtle">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="avatar-sm">
+                                                    <div
+                                                        class="avatar-title bg-primary bg-opacity-10 text-primary rounded-circle fs-17">
+                                                        <i class="ri-book-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6 class="fs-16">You are a student member.</h6>
+                                                <p class="text-muted mb-0">Your graduation year is {{ $graduationYear }}.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @elseif ($age < 40)
+                                <div class="card overflow-hidden shadow-none">
+                                    <div class="card-body bg-success-subtle">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="avatar-sm">
+                                                    <div
+                                                        class="avatar-title bg-success bg-opacity-10 text-success rounded-circle fs-17">
+                                                        <i class="ri-user-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6 class="fs-16">You are {{ $age }} years old.</h6>
+                                                <p class="text-muted mb-0">You are a member.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="card overflow-hidden shadow-none">
+                                    <div class="card-body bg-warning-subtle">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="avatar-sm">
+                                                    <div
+                                                        class="avatar-title bg-warning bg-opacity-10 text-warning rounded-circle fs-17">
+                                                        <i class="ri-gift-line"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6 class="fs-16">You are {{ $age }} years old.</h6>
+                                                <p class="text-muted mb-0">You are an associate member.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                        </div>
+
+
+
+                        {{-- <div class="col-xl-4 col-md-6">
                                 <div class="card card-height-100">
                                     <div class="card-body">
 
@@ -136,18 +252,18 @@
 
 
 
-                        </div><!--end row-->
+                    </div><!--end row-->
 
 
-                    </div><!--end col-->
+                </div><!--end col-->
 
 
-                </div>
-            @else
-                <h4>Member Account is blocked and therefore <span class="text-danger">Inactive</span></h4>
-                <p class="text-danger"> <b>Kindly contact administor for further details.</b></p>
-            @endif
         </div>
-        <!-- container-fluid -->
+    @else
+        <h4>Member Account is blocked and therefore <span class="text-danger">Inactive</span></h4>
+        <p class="text-danger"> <b>Kindly contact administor for further details.</b></p>
+        @endif
+    </div>
+    <!-- container-fluid -->
     </div>
 @endsection

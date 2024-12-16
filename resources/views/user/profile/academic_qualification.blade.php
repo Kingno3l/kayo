@@ -132,7 +132,7 @@
                                                                                 style="pointer-events: none;">
                                                                                 <option value="" selected disabled>
                                                                                     Select Graduation Year</option>
-                                                                                @for ($year = 1980; $year <= date('Y'); $year++)
+                                                                                @for ($year = 1990; $year <= 2035; $year++)
                                                                                     <option value="{{ $year }}"
                                                                                         {{ $qualification->graduation_year == $year ? 'selected' : '' }}>
                                                                                         {{ $year }}</option>
@@ -251,7 +251,7 @@
                                         <div class="col-lg-6 mt-2">
                                             <label class="form-label">Graduation Year</label>
                                             <select name="graduation_year[]" class="form-control">
-                                                @for ($year = 1980; $year <= date('Y'); $year++)
+                                                @for ($year = 1990; $year <= 2035; $year++)
                                                     <option value="{{ $year }}">{{ $year }}</option>
                                                 @endfor
                                             </select>

@@ -73,39 +73,44 @@
                                                                         <input type="text" name="next_of_kin_full_name"
                                                                             placeholder="Next of Kin  Full Name"
                                                                             class="form-control" id="Fullname"
-                                                                            value="{{ old('next_of_kin_full_name', $nextOfKinAndReferee->next_of_kin_full_name) }}">
+                                                                            value="{{ old('next_of_kin_full_name', $nextOfKinAndReferee->next_of_kin_full_name ?? '') }}">
                                                                     </div>
 
-                                                                    <div class="col-lg-6">
-                                                                        <label for="relationshipInput"
-                                                                            class="form-label">Relationship</label>
-                                                                        <select name="next_of_kin_relationship"
-                                                                            class="form-control" id="relationshipInput">
-                                                                            <option value="" disabled>Select
-                                                                                Relationship</option>
-                                                                            <option value="Parent"
-                                                                                {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship) == 'Parent' ? 'selected' : '' }}>
-                                                                                Parent</option>
-                                                                            <option value="Sibling"
-                                                                                {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship) == 'Sibling' ? 'selected' : '' }}>
-                                                                                Sibling</option>
-                                                                            <option value="Spouse"
-                                                                                {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship) == 'Spouse' ? 'selected' : '' }}>
-                                                                                Spouse</option>
-                                                                            <option value="Child"
-                                                                                {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship) == 'Child' ? 'selected' : '' }}>
-                                                                                Child</option>
-                                                                            <option value="Friend"
-                                                                                {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship) == 'Friend' ? 'selected' : '' }}>
-                                                                                Friend</option>
-                                                                            <option value="Colleague"
-                                                                                {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship) == 'Colleague' ? 'selected' : '' }}>
-                                                                                Colleague</option>
-                                                                            <option value="Other"
-                                                                                {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship) == 'Other' ? 'selected' : '' }}>
-                                                                                Other</option>
-                                                                        </select>
-                                                                    </div>
+                                                                   <div class="col-lg-6">
+    <label for="relationshipInput" class="form-label">Relationship</label>
+    <select name="next_of_kin_relationship" class="form-control" id="relationshipInput">
+        <option value="" disabled>Select Relationship</option>
+        <option value="Parent"
+            {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship ?? '') == 'Parent' ? 'selected' : '' }}>
+            Parent
+        </option>
+        <option value="Sibling"
+            {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship ?? '') == 'Sibling' ? 'selected' : '' }}>
+            Sibling
+        </option>
+        <option value="Spouse"
+            {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship ?? '') == 'Spouse' ? 'selected' : '' }}>
+            Spouse
+        </option>
+        <option value="Child"
+            {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship ?? '') == 'Child' ? 'selected' : '' }}>
+            Child
+        </option>
+        <option value="Friend"
+            {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship ?? '') == 'Friend' ? 'selected' : '' }}>
+            Friend
+        </option>
+        <option value="Colleague"
+            {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship ?? '') == 'Colleague' ? 'selected' : '' }}>
+            Colleague
+        </option>
+        <option value="Other"
+            {{ old('next_of_kin_relationship', $nextOfKinAndReferee->next_of_kin_relationship ?? '') == 'Other' ? 'selected' : '' }}>
+            Other
+        </option>
+    </select>
+</div>
+
 
                                                                     <div class="col-lg-6 mt-2">
                                                                         <label for="email"
@@ -113,7 +118,7 @@
                                                                         <input type="text" name="next_of_kin_email"
                                                                             placeholder="Next of Kin Email"
                                                                             class="form-control" id="email"
-                                                                            value="{{ old('next_of_kin_email', $nextOfKinAndReferee->next_of_kin_email) }}">
+                                                                            value="{{ old('next_of_kin_email', $nextOfKinAndReferee->next_of_kin_email ?? '') }}">
                                                                     </div>
 
                                                                     <div class="col-lg-6 mt-2">
@@ -122,13 +127,13 @@
                                                                         <input type="tel" name="next_of_kin_phone"
                                                                             class="form-control" id="phone"
                                                                             placeholder="Kindly include country code"
-                                                                            value="{{ old('next_of_kin_phone', $nextOfKinAndReferee->next_of_kin_phone) }}">
+                                                                            value="{{ old('next_of_kin_phone', $nextOfKinAndReferee->next_of_kin_phone ?? '') }}">
                                                                     </div>
 
                                                                     <div class="col-lg-12 mt-2">
                                                                         <label for="address" class="form-label">Next of Kin
                                                                             Address</label>
-                                                                        <textarea name="next_of_kin_address" class="form-control" id="address" rows="3">{{ old('next_of_kin_address', $nextOfKinAndReferee->next_of_kin_address) }}</textarea>
+                                                                        <textarea name="next_of_kin_address" class="form-control" id="address" rows="3">{{ old('next_of_kin_address', $nextOfKinAndReferee->next_of_kin_address ?? '') }}</textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -230,40 +235,44 @@
                                                                         <input type="text" name="referee1_full_name"
                                                                             placeholder="Referee 1 Full Name"
                                                                             class="form-control" id="referee1FullName"
-                                                                            value="{{ old('referee1_full_name', $nextOfKinAndReferee->referee1_full_name) }}">
+                                                                            value="{{ old('referee1_full_name', $nextOfKinAndReferee->referee1_full_name ?? '') }}">
                                                                     </div>
 
-                                                                    <div class="col-lg-6">
-                                                                        <label for="referee1Relationship"
-                                                                            class="form-label">Relationship</label>
-                                                                        <select name="referee1_relationship"
-                                                                            class="form-control"
-                                                                            id="referee1Relationship">
-                                                                            <option value="" disabled>Select
-                                                                                Relationship</option>
-                                                                            <option value="Parent"
-                                                                                {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship) == 'Parent' ? 'selected' : '' }}>
-                                                                                Parent</option>
-                                                                            <option value="Sibling"
-                                                                                {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship) == 'Sibling' ? 'selected' : '' }}>
-                                                                                Sibling</option>
-                                                                            <option value="Spouse"
-                                                                                {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship) == 'Spouse' ? 'selected' : '' }}>
-                                                                                Spouse</option>
-                                                                            <option value="Child"
-                                                                                {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship) == 'Child' ? 'selected' : '' }}>
-                                                                                Child</option>
-                                                                            <option value="Friend"
-                                                                                {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship) == 'Friend' ? 'selected' : '' }}>
-                                                                                Friend</option>
-                                                                            <option value="Colleague"
-                                                                                {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship) == 'Colleague' ? 'selected' : '' }}>
-                                                                                Colleague</option>
-                                                                            <option value="Other"
-                                                                                {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship) == 'Other' ? 'selected' : '' }}>
-                                                                                Other</option>
-                                                                        </select>
-                                                                    </div>
+                                                                   <div class="col-lg-6">
+    <label for="referee1Relationship" class="form-label">Relationship</label>
+    <select name="referee1_relationship" class="form-control" id="referee1Relationship">
+        <option value="" disabled>Select Relationship</option>
+        <option value="Parent"
+            {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship ?? '') == 'Parent' ? 'selected' : '' }}>
+            Parent
+        </option>
+        <option value="Sibling"
+            {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship ?? '') == 'Sibling' ? 'selected' : '' }}>
+            Sibling
+        </option>
+        <option value="Spouse"
+            {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship ?? '') == 'Spouse' ? 'selected' : '' }}>
+            Spouse
+        </option>
+        <option value="Child"
+            {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship ?? '') == 'Child' ? 'selected' : '' }}>
+            Child
+        </option>
+        <option value="Friend"
+            {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship ?? '') == 'Friend' ? 'selected' : '' }}>
+            Friend
+        </option>
+        <option value="Colleague"
+            {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship ?? '') == 'Colleague' ? 'selected' : '' }}>
+            Colleague
+        </option>
+        <option value="Other"
+            {{ old('referee1_relationship', $nextOfKinAndReferee->referee1_relationship ?? '') == 'Other' ? 'selected' : '' }}>
+            Other
+        </option>
+    </select>
+</div>
+
 
                                                                     <div class="col-lg-6 mt-2">
                                                                         <label for="referee1Email"
@@ -271,7 +280,7 @@
                                                                         <input type="email" name="referee1_email"
                                                                             placeholder="Referee 1 Email"
                                                                             class="form-control" id="referee1Email"
-                                                                            value="{{ old('referee1_email', $nextOfKinAndReferee->referee1_email) }}">
+                                                                            value="{{ old('referee1_email', $nextOfKinAndReferee->referee1_email ?? '') }}">
                                                                     </div>
 
                                                                     <div class="col-lg-6 mt-2">
@@ -280,13 +289,13 @@
                                                                         <input type="tel" name="referee1_phone"
                                                                             class="form-control" id="referee1Phone"
                                                                             placeholder="Kindly include country code"
-                                                                            value="{{ old('referee1_phone', $nextOfKinAndReferee->referee1_phone) }}">
+                                                                            value="{{ old('referee1_phone', $nextOfKinAndReferee->referee1_phone ?? '') }}">
                                                                     </div>
 
                                                                     <div class="col-lg-12 mt-2">
                                                                         <label for="referee1Address"
                                                                             class="form-label">Address</label>
-                                                                        <textarea name="referee1_address" class="form-control" id="referee1Address" rows="3">{{ old('referee1_address', $nextOfKinAndReferee->referee1_address) }}</textarea>
+                                                                        <textarea name="referee1_address" class="form-control" id="referee1Address" rows="3">{{ old('referee1_address', $nextOfKinAndReferee->referee1_address ?? '') }}</textarea>
                                                                     </div>
 
 
@@ -325,40 +334,44 @@
                                                                         <input type="text" name="referee2_full_name"
                                                                             placeholder="Referee 2 Full Name"
                                                                             class="form-control" id="referee2FullName"
-                                                                            value="{{ old('referee2_full_name', $nextOfKinAndReferee->referee2_full_name) }}">
+                                                                            value="{{ old('referee2_full_name', $nextOfKinAndReferee->referee2_full_name ?? '') }}">
                                                                     </div>
 
-                                                                    <div class="col-lg-6">
-                                                                        <label for="referee2Relationship"
-                                                                            class="form-label">Relationship</label>
-                                                                        <select name="referee2_relationship"
-                                                                            class="form-control"
-                                                                            id="referee2Relationship">
-                                                                            <option value="" disabled>Select
-                                                                                Relationship</option>
-                                                                            <option value="Parent"
-                                                                                {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship) == 'Parent' ? 'selected' : '' }}>
-                                                                                Parent</option>
-                                                                            <option value="Sibling"
-                                                                                {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship) == 'Sibling' ? 'selected' : '' }}>
-                                                                                Sibling</option>
-                                                                            <option value="Spouse"
-                                                                                {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship) == 'Spouse' ? 'selected' : '' }}>
-                                                                                Spouse</option>
-                                                                            <option value="Child"
-                                                                                {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship) == 'Child' ? 'selected' : '' }}>
-                                                                                Child</option>
-                                                                            <option value="Friend"
-                                                                                {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship) == 'Friend' ? 'selected' : '' }}>
-                                                                                Friend</option>
-                                                                            <option value="Colleague"
-                                                                                {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship) == 'Colleague' ? 'selected' : '' }}>
-                                                                                Colleague</option>
-                                                                            <option value="Other"
-                                                                                {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship) == 'Other' ? 'selected' : '' }}>
-                                                                                Other</option>
-                                                                        </select>
-                                                                    </div>
+                                                                   <div class="col-lg-6">
+    <label for="referee2Relationship" class="form-label">Relationship</label>
+    <select name="referee2_relationship" class="form-control" id="referee2Relationship">
+        <option value="" disabled>Select Relationship</option>
+        <option value="Parent"
+            {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship ?? '') == 'Parent' ? 'selected' : '' }}>
+            Parent
+        </option>
+        <option value="Sibling"
+            {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship ?? '') == 'Sibling' ? 'selected' : '' }}>
+            Sibling
+        </option>
+        <option value="Spouse"
+            {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship ?? '') == 'Spouse' ? 'selected' : '' }}>
+            Spouse
+        </option>
+        <option value="Child"
+            {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship ?? '') == 'Child' ? 'selected' : '' }}>
+            Child
+        </option>
+        <option value="Friend"
+            {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship ?? '') == 'Friend' ? 'selected' : '' }}>
+            Friend
+        </option>
+        <option value="Colleague"
+            {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship ?? '') == 'Colleague' ? 'selected' : '' }}>
+            Colleague
+        </option>
+        <option value="Other"
+            {{ old('referee2_relationship', $nextOfKinAndReferee->referee2_relationship ?? '') == 'Other' ? 'selected' : '' }}>
+            Other
+        </option>
+    </select>
+</div>
+
 
                                                                     <div class="col-lg-6 mt-2">
                                                                         <label for="referee2Email"
@@ -366,7 +379,7 @@
                                                                         <input type="email" name="referee2_email"
                                                                             placeholder="Referee 2 Email"
                                                                             class="form-control" id="referee2Email"
-                                                                            value="{{ old('referee2_email', $nextOfKinAndReferee->referee2_email) }}">
+                                                                            value="{{ old('referee2_email', $nextOfKinAndReferee->referee2_email ?? '') }}">
                                                                     </div>
 
                                                                     <div class="col-lg-6 mt-2">
@@ -375,13 +388,13 @@
                                                                         <input type="tel" name="referee2_phone"
                                                                             class="form-control" id="referee2Phone"
                                                                             placeholder="Kindly include country code"
-                                                                            value="{{ old('referee2_phone', $nextOfKinAndReferee->referee2_phone) }}">
+                                                                            value="{{ old('referee2_phone', $nextOfKinAndReferee->referee2_phone ?? '') }}">
                                                                     </div>
 
                                                                     <div class="col-lg-12 mt-2">
                                                                         <label for="referee2Address"
                                                                             class="form-label">Address</label>
-                                                                        <textarea name="referee2_address" class="form-control" id="referee2Address" rows="3">{{ old('referee2_address', $nextOfKinAndReferee->referee2_address) }}</textarea>
+                                                                        <textarea name="referee2_address" class="form-control" id="referee2Address" rows="3">{{ old('referee2_address', $nextOfKinAndReferee->referee2_address ?? '') }}</textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>

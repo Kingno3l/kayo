@@ -10,7 +10,7 @@
         <meta content="YIPS Africa" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/assets/images/logo-light.png') }}">
 
     <!-- Layout config Js -->
     <script src="{{ asset('assets/js/layout.js') }}"></script>
@@ -95,7 +95,7 @@
                                         <div class="mb-3">
                                             <x-input-label for="email" :value="__('Email')" />
                                             <x-text-input id="email" class="form-control" type="email"
-                                                placeholder="Enter Email" name="email" :value="old('email', $request->email)" required
+                                                placeholder="Enter Email" name="email" :value="old('email', $request->email)" required readonly
                                                 autofocus autocomplete="username" />
                                             <x-input-error :messages="$errors->get('email')" class="mt-2 input-error" />
                                         </div>

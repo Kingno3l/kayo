@@ -10,7 +10,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-<link rel="shortcut icon" href="{{ asset('assets/assets/images/favicon.ico') }}">
+<link rel="shortcut icon" href="{{ asset('assets/assets/images/logo-light.png') }}">
 
    <!-- Layout config Js -->
     <script src="{{ asset('assets/js/layout.js') }}"></script>

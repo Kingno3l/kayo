@@ -1,6 +1,6 @@
 @extends('user.user_dashboard')
 @section('user')
-    @php
+    {{-- @php
         $id = Auth::user()->id;
         $userId = App\Models\User::find($id);
         $status = $userId->status;
@@ -11,7 +11,33 @@ $age = \Carbon\Carbon::parse($dateOfBirth)->age; // Calculate age
 $qualification = App\Models\ProfileManagement\AcademicQualification::where('user_id', $id)->latest()->first();
         $graduationYear = $qualification ? $qualification->graduation_year : null;
         $currentYear = \Carbon\Carbon::now()->year; // Get the current year
-    @endphp
+    @endphp --}}
+
+    @php
+    $id = Auth::user()->id;
+    $userId = App\Models\User::find($id);
+            $status = $userId->status;
+
+    $dateOfBirth = $userId->date_of_birth; // Get the user's date_of_birth
+    $age = \Carbon\Carbon::parse($dateOfBirth)->age; // Calculate age
+
+    // Get the current year
+    $currentYear = \Carbon\Carbon::now()->year;
+
+    // Check academic qualifications
+    $qualification = App\Models\ProfileManagement\AcademicQualification::where('user_id', $id)
+        ->whereIn('degree', ['Bachelor of Arts', 'Bachelor of Science'])  // Only check for BA or BS
+        ->orderBy('graduation_year', 'desc') // Get the most recent qualification
+        ->first();
+    
+    // Check if the user has a valid degree and graduation year
+    $isEligibleForMembership = $qualification && $qualification->graduation_year <= $currentYear;
+    
+    // Check if the user has a valid degree and is eligible as a student member
+    $isStudentMember = $qualification && $qualification->graduation_year > $currentYear;
+
+@endphp
+
 
     <div class="page-content">
 
@@ -98,49 +124,9 @@ $qualification = App\Models\ProfileManagement\AcademicQualification::where('user
                                 </div>
                             </div><!--end col-->
 
-                            {{-- @if ($age < 40)
-                                <div class="card overflow-hidden shadow-none">
-                                    <div class="card-body bg-success-subtle">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="avatar-sm">
-                                                    <div
-                                                        class="avatar-title bg-success bg-opacity-10 text-success rounded-circle fs-17">
-                                                        <i class="ri-user-line"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6 class="fs-16">You are {{ $age }} years old.</h6>
-                                                <p class="text-muted mb-0">You are a member.</p>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            @else
-                                <div class="card overflow-hidden shadow-none">
-                                    <div class="card-body bg-warning-subtle">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="avatar-sm">
-                                                    <div
-                                                        class="avatar-title bg-warning bg-opacity-10 text-warning rounded-circle fs-17">
-                                                        <i class="ri-gift-line"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6 class="fs-16">You are {{ $age }} years old.</h6>
-                                                <p class="text-muted mb-0">You are an associate member.</p>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            @endif --}}
 
-                            @if ($graduationYear && $graduationYear > $currentYear)
+
+                            {{-- @if ($graduationYear && $graduationYear > $currentYear)
                                 <div class="card overflow-hidden shadow-none">
                                     <div class="card-body bg-primary-subtle">
                                         <div class="d-flex align-items-center">
@@ -198,56 +184,90 @@ $qualification = App\Models\ProfileManagement\AcademicQualification::where('user
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            @endif --}}
+
+                          @if (!$isEligibleForMembership)
+    <!-- Not Eligible for Membership -->
+    <div class="card overflow-hidden shadow-none">
+        <div class="card-body bg-danger-subtle">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <div class="avatar-sm">
+                        <div class="avatar-title bg-danger bg-opacity-10 text-danger rounded-circle fs-17">
+                            <i class="ri-alert-line"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h6 class="fs-16">Membership Not Allowed</h6>
+                    <p class="text-muted mb-0">You do not have the necessary academic qualifications to become a member.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@elseif ($isStudentMember)
+    <!-- Student Member -->
+    <div class="card overflow-hidden shadow-none">
+        <div class="card-body bg-primary-subtle">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <div class="avatar-sm">
+                        <div class="avatar-title bg-primary bg-opacity-10 text-primary rounded-circle fs-17">
+                            <i class="ri-book-line"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h6 class="fs-16">You are a student member.</h6>
+                    <p class="text-muted mb-0">Your graduation year is beyond {{ $currentYear }}.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@elseif ($age <= 39)
+    <!-- Regular Member -->
+    <div class="card overflow-hidden shadow-none">
+        <div class="card-body bg-success-subtle">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <div class="avatar-sm">
+                        <div class="avatar-title bg-success bg-opacity-10 text-success rounded-circle fs-17">
+                            <i class="ri-user-line"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h6 class="fs-16">You are {{ $age }} years old.</h6>
+                    <p class="text-muted mb-0">You are a member.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@else
+    <!-- Associate Member -->
+    <div class="card overflow-hidden shadow-none">
+        <div class="card-body bg-warning-subtle">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <div class="avatar-sm">
+                        <div class="avatar-title bg-warning bg-opacity-10 text-warning rounded-circle fs-17">
+                            <i class="ri-gift-line"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h6 class="fs-16">You are {{ $age }} years old.</h6>
+                    <p class="text-muted mb-0">You are an associate member.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 
                         </div>
 
 
 
-                        {{-- <div class="col-xl-4 col-md-6">
-                                <div class="card card-height-100">
-                                    <div class="card-body">
-
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-sm flex-shrink-0">
-                                                <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                                    <i class="bx bx-dollar-circle text-primary"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-grow-1 ps-3">
-                                                <h5 class="text-muted text-uppercase fs-13 mb-0">Yearly Dues</h5>
-                                            </div>
-                                        </div>
-                                        <div class="mt-2 pt-1">
-                                            <h4 class="fs-22 fw-semibold ff-secondary mb-0">#<span class="counter-value"
-                                                    data-target="50000">50,000</span> </h4>
-
-                                            @if ($hasProfileDetails)
-                                                <p class="mt-2 mb-0 text-muted"><span
-                                                        class="badge bg-success-subtle text-success mb-0 me-1"> <span>
-                                                            <i class="ri-arrow-down-line align-middle"></i> Your annual dues
-                                                            are
-                                                            up to date.
-
-                                                        </span>
-
-                                                </p>
-                                            @else
-                                                <p class="mt-2 mb-0 text-muted"><span
-                                                        class="badge bg-danger-subtle text-danger mb-0 me-1"> <span>
-                                                            <i class="ri-arrow-down-line align-middle"></i> Please make your
-                                                            annual
-                                                            dues.
-                                                        </span> <a href="{{ route('pay') }}"
-                                                            class="btn btn-success">Pay!</a>
-
-                                                </p>
-                                            @endif
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col--> --}}
 
 
 

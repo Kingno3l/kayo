@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 
 
 
@@ -42,6 +44,27 @@ class AdminController extends Controller
             ])
             ->get();
 
+        // Calculate the minimum date of birth for users aged 40 years and above
+        $minDateOfBirth = Carbon::now()->subYears(40)->format('Y-m-d');
+
+        // Retrieve users with date_of_birth less than or equal to $minDateOfBirth
+        $associateMember = DB::table('users')
+            ->where('date_of_birth', '<=', $minDateOfBirth)
+            ->get();
+
+
+        // Get the current year
+        $currentYear = Carbon::now()->year;
+
+        // Retrieve users who qualify as student members
+        $studentMember = DB::table('users')
+            ->join('academic_qualifications', 'users.id', '=', 'academic_qualifications.user_id')
+            ->whereIn('academic_qualifications.degree', ['Bachelor of Arts', 'Bachelor of Science']) // Only consider specific degrees
+            ->where('academic_qualifications.graduation_year', '>', $currentYear) // Graduation year must be greater than the current year
+            ->select('users.*', 'academic_qualifications.degree', 'academic_qualifications.graduation_year')
+            ->get();
+
+
         // Calculate total number of completed users
         $totalCompletedUsers = $completedUsers->count();
 
@@ -59,8 +82,10 @@ class AdminController extends Controller
         // Total number of users who have paid dues
         $totalPaidDuesUsers = $paidDuesUsers->count();
 
+        $associateMemberCount = $associateMember->count();
+        $studentMemberCount = $studentMember->count();
 
-        return view('admin.index', compact('totalCompletedUsers', 'totalRegisteredUsers', 'totalPaidDuesUsers'));	
+        return view('admin.index', compact('totalCompletedUsers', 'totalRegisteredUsers', 'totalPaidDuesUsers', 'studentMemberCount', 'associateMemberCount'));	
     }
 
     public function adminProfile()

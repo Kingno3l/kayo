@@ -44,15 +44,15 @@
                                     <table class="table align-middle table-nowrap" id="customerTable">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>S1</th>
+                                                <th>S/N</th>
                                                 <th class="text-center sort" data-sort="customer_name">Full Name</th>
                                                 <th class="text-center sort" data-sort="email">Email</th>
                                                 <th class="text-center sort" data-sort="phone">Phone</th>
                                                 <th class="text-center sort" data-sort="date">Joined Date</th>
-                                                <th class="text-center sort" data-sort="status">Online Status</th>
+                                                
                                                 <th class="text-center sort" data-sort="registration_number">Registration Number</th>
                                                 <th class="text-center sort" data-sort="country">Country</th>
-                                                <th class="text-center sort" data-sort="action">Action</th>
+                                                <th class="text-center sort" data-sort="action">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody class="list form-check-all">
@@ -75,15 +75,7 @@
                                                     <td class="text-center email">{{ $item->email }}</td>
                                                     <td class="text-center phone">{{ $item->country_code }} {{ $item->phone }}</td>
                                                     <td class="text-center date">{{ $item->created_at->format('d M, Y') }}</td>
-                                                    <td class="text-center status">
-                                                        @if ($item->UserOnline())
-                                                            <span
-                                                                class="badge bg-success-subtle text-success text-uppercase">Active</span>
-                                                        @else
-                                                            <span
-                                                                class="badge bg-danger-subtle text-danger text-uppercase">{{ Carbon\Carbon::parse($item->last_seen)->diffForHumans() }}</span>
-                                                        @endif
-                                                    </td>
+                                                    
                                                     @php
                                                         // Retrieve the country code using the country name
                                                         $countryCode = isset($countryCodes[$item->country])
@@ -108,7 +100,7 @@
                                                             class="form-check form-switch form-switch-right form-switch-md">
                                                             <label for="user-status-toggle-{{ $item->id }}"
                                                                 class="form-label text-muted">
-                                                                @if ($item->status == 1)
+                                                                {{-- @if ($item->status == 1)
                                                                     <span
                                                                         class="badge bg-success-subtle text-success">Active</span>
                                                                     Suspend User?
@@ -116,6 +108,15 @@
                                                                     <span
                                                                         class="badge bg-danger-subtle text-danger">Suspended</span>
                                                                     Activate User?
+                                                                @endif --}}
+                                                                 @if ($item->status == 1)
+                                                                    <span
+                                                                        class="badge bg-success-subtle text-success">Active</span>
+                                                                    
+                                                                @else
+                                                                    <span
+                                                                        class="badge bg-danger-subtle text-danger">Suspended</span>
+                                                                    
                                                                 @endif
                                                             </label>
                                                             <input class="form-check-input code-switcher status-toggle"
@@ -194,7 +195,7 @@
     </script>
 
     <!-- Jquery -->
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('.status-toggle').on('change', function() {
                 var userId = $(this).data('user-id');
@@ -224,5 +225,68 @@
                 });
             });
         });
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+    $('.status-toggle').on('change', function() {
+        var userId = $(this).data('user-id');
+        var isChecked = $(this).is(':checked');
+        var toggleSwitch = $(this);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: isChecked ? "Yes, activate user!" : "Yes, suspend user!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ route('update.user.status') }}",
+                    method: 'POST',
+                    data: {
+                        user_id: userId,
+                        is_checked: isChecked ? 1 : 0,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        console.log(response); // Log the response to ensure it's received
+
+                        if (response['alert-type'] === 'success') {
+                            Swal.fire({
+                                title: "Success!",
+                                text: response.message,
+                                icon: "success"
+                            }).then(() => {
+                            location.reload(); // Reload the page after success
+                        });
+                        } else {
+                            Swal.fire({
+                                title: "Error!",
+                                text: response.message,
+                                icon: "error"
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText); // Log the error for debugging
+                        Swal.fire({
+                            title: "Error!",
+                            text: "An error occurred while updating the user status.",
+                            icon: "error"
+                        });
+                        toggleSwitch.prop('checked', !isChecked); // Revert toggle on error
+                    }
+                });
+            } else {
+                toggleSwitch.prop('checked', !isChecked); // Revert toggle if canceled
+            }
+        });
+    });
+});
+
     </script>
 @endsection

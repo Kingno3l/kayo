@@ -3,15 +3,13 @@
     data-preloader="disable">
 
 
-<!-- Mirrored from themesbrand.com/velzon/html/creative/auth-signin-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 14:17:00 GMT -->
-
 <head>
 
     <meta charset="utf-8" />
     <title>Sign In | YIPS - Admin & Dashboard </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Sign In | YIPS - Admin & Dashboard" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Digital Planet X" name="author" />
     <!-- App favicon -->
    <link rel="shortcut icon" href="{{ asset('assets/images/logo-light.png') }}">
 
@@ -170,11 +168,7 @@
                         </form>
                                         </div>
 
-                                        <div class="mt-5 text-center">
-                                            <p class="mb-0">Don't have an account ? <a href="auth-signup-cover.html"
-                                                    class="fw-bold text-primary text-decoration-underline"> Signup</a>
-                                            </p>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                                 <!-- end col -->
@@ -201,8 +195,7 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i>
-                                by Themesbrand
+                                </script> YIPs Africa
                             </p>
                         </div>
                     </div>

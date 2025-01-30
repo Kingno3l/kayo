@@ -44,12 +44,12 @@
                                     <table class="table align-middle table-nowrap" id="customerTable">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>S1</th>
+                                                <th>S/N</th>
                                                 <th class="text-center sort" data-sort="customer_name">Full Name</th>
                                                 <th class="text-center sort" data-sort="email">Email</th>
                                                 <th class="text-center sort" data-sort="phone">Phone</th>
                                                 <th class="text-center sort" data-sort="date">Joined Date</th>
-                                                <th class="text-center sort" data-sort="status">Online Status</th>
+                                                
                                                 <th class="text-center sort" data-sort="registration_number">Registration
                                                     Number</th>
                                                 <th class="text-center sort" data-sort="country">Country</th>
@@ -79,20 +79,12 @@
                                                         {{ $item->phone }}</td>
                                                     <td class="text-center date">{{ $item->created_at->format('d M, Y') }}
                                                     </td>
-                                                    <td class="text-center status">
-                                                        @if ($item->UserOnline())
-                                                            <span
-                                                                class="badge bg-success-subtle text-success text-uppercase">Active</span>
-                                                        @else
-                                                            <span
-                                                                class="badge bg-danger-subtle text-danger text-uppercase">{{ Carbon\Carbon::parse($item->last_seen)->diffForHumans() }}</span>
-                                                        @endif
-                                                    </td>
+                                                    
                                                     @php
-                                                        // Retrieve the country code using the country name
-                                                        $countryCode = isset($countryCodes[$item->country])
-                                                            ? strtolower($countryCodes[$item->country])
-                                                            : 'default';
+    // Retrieve the country code using the country name
+    $countryCode = isset($countryCodes[$item->country])
+        ? strtolower($countryCodes[$item->country])
+        : 'default';
                                                     @endphp
 
                                                  <td class="text-center registration_number">

@@ -10,7 +10,7 @@
         <meta content="YIPS Africa" name="description" />
         <meta content="YIPS" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="assets/images/logo-light.png">
 
         <!--Swiper slider css-->
         <link href="assets/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />

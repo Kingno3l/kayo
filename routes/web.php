@@ -179,6 +179,12 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
         Route::get('/all/users/completed-registered-users', 'completedRegisteredUsers')->name('completed.registered.users');
 
+        Route::get('/all/users/associate-members', 'associateMembers')->name('associate.members');
+
+        Route::get('/all/users/student-members', 'studentMembers')->name('student.members');
+
+        Route::get('/all/users/members', 'members')->name('members');
+
         Route::get('/member/{id}', 'memberDetails')->name('member.details');
 
 

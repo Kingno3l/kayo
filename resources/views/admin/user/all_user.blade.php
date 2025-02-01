@@ -29,7 +29,28 @@
                         <div class="card-body">
                             <div class="listjs-table" id="customerList">
                                 <div class="row g-4 mb-3">
-
+                                    <div class="col-sm d-flex justify-content-between align-items-center">
+                                        {{-- <div>
+                                            <a href="your_download_link_here" class="btn btn-success" download>
+                                                <i class="ri-add-line align-bottom me-1"></i> Download
+                                            </a>
+                                        </div>
+                                        <div class="search-box ms-2"> <input type="text" class="form-control search"
+                                                placeholder="Search...">
+                                            <i class="ri-search-line search-icon"></i>
+                                        </div> --}}
+                                    </div>
+                                </div>
+                                {{-- <div class="row g-4 mb-3">
+                                    <div class="col-sm-auto">
+                                        <div>
+                                            <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal"
+                                                id="create-btn" data-bs-target="#showModal"><i
+                                                    class="ri-add-line align-bottom me-1"></i> Add</button>
+                                            <button class="btn btn-soft-danger" onclick="deleteMultiple()"><i
+                                                    class="ri-delete-bin-2-line"></i></button>
+                                        </div>
+                                    </div>
                                     <div class="col-sm">
                                         <div class="d-flex justify-content-sm-end">
                                             <div class="search-box ms-2">
@@ -38,99 +59,77 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="table-responsive table-card mt-3 mb-1">
                                     <table class="table align-middle table-nowrap" id="customerTable">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>S/N</th>
-                                                <th class="text-center sort" data-sort="customer_name">Full Name</th>
-                                                <th class="text-center sort" data-sort="email">Email</th>
-                                                <th class="text-center sort" data-sort="phone">Phone</th>
-                                                <th class="text-center sort" data-sort="date">Joined Date</th>
-                                                
-                                                <th class="text-center sort" data-sort="registration_number">Registration Number</th>
-                                                <th class="text-center sort" data-sort="country">Country</th>
-                                                <th class="text-center sort" data-sort="action">Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="list form-check-all">
-                                            @foreach ($allUser as $key => $item)
-                                                <tr>
-                                                    <td class="id" style="display:none;"><a href="javascript:void(0);"
-                                                            class="fw-medium link-primary">#VZ10</a></td>
-                                                    <td class="text-center">{{ $key + 1 }}</td>
-                                                    <td class="text-center">
-                                                        <div class="d-flex gap-2 align-items-center">
-                                                            <div class="flex-shrink-0">
-                                                                <img src="{{ !empty($item->photo) ? url('uploads/user_images/' . $item->photo) : url('upload/no_image.jpg') }}"
-                                                                    alt="" class="avatar-xs rounded-circle">
-                                                            </div>
-                                                            <div class="flex-grow-1 customer_name">
-                                                                {{ $item->name }}
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center email">{{ $item->email }}</td>
-                                                    <td class="text-center phone">{{ $item->country_code }} {{ $item->phone }}</td>
-                                                    <td class="text-center date">{{ $item->created_at->format('d M, Y') }}</td>
-                                                    
-                                                    @php
-                                                        // Retrieve the country code using the country name
-                                                        $countryCode = isset($countryCodes[$item->country])
-                                                            ? strtolower($countryCodes[$item->country])
-                                                            : 'default';
-                                                    @endphp
+    <thead class="table-light">
+        <tr>
+            <th>S/N</th>
+            <th class="text-center sort" data-sort="customer_name">Full Name</th>
+            <th class="text-center sort" data-sort="email">Email</th>
+            <th class="text-center sort" data-sort="phone">Phone</th>
+            <th class="text-center sort" data-sort="date">Joined Date</th>
+            <th class="text-center sort" data-sort="registration_number">Registration Number</th>
+            <th class="text-center sort" data-sort="country">Country</th>
+            <th class="text-center sort" data-sort="action">Status</th>
+        </tr>
+    </thead>
+    <tbody class="list form-check-all">
+        @foreach ($allUser as $key => $item)
+            <tr>
+                
+                <td class="text-center">{{ $key + 1 }}</td>
+                <td class="text-center">
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="flex-shrink-0">
+                            <img src="{{ !empty($item->photo) ? url('uploads/user_images/' . $item->photo) : url('upload/no_image.jpg') }}"
+                                alt="" class="avatar-xs rounded-circle">
+                        </div>
+                        <div class="flex-grow-1 customer_name">
+                            {{ $item->name }}
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center email">{{ $item->email }}</td>
+                <td class="text-center phone">{{ $item->country_code }} {{ $item->phone }}</td>
+                <td class="text-center date">{{ $item->created_at->format('d M, Y') }}</td>
 
-                                                   <td class="text-center registration_number">
-    {{ str_replace('-', '/', $item->registration_number) }}
-</td>
+                @php
+                    $countryCode = isset($countryCodes[$item->country])
+                        ? strtolower($countryCodes[$item->country])
+                        : 'default';
+                @endphp
 
-                                                    <td class="text-center country">
-                                                        <img src="{{ asset('assets/images/flags/' . $countryCode . '.svg') }}"
-                                                            alt="{{ $item->country }}"
-                                                            style="width: 24px; height: 16px; margin-right: 5px;">
-                                                        {{ $item->country }}
-                                                    </td>
+                <td class="text-center registration_number">
+                    {{ str_replace('-', '/', $item->registration_number) }}
+                </td>
 
+                <td class="text-center country">
+                    <img src="{{ asset('assets/images/flags/' . $countryCode . '.svg') }}"
+                        alt="{{ $item->country }}" style="width: 24px; height: 16px; margin-right: 5px;">
+                    {{ $item->country }}
+                </td>
 
-                                                    <td class="text-center">
-                                                        <div
-                                                            class="form-check form-switch form-switch-right form-switch-md">
-                                                            <label for="user-status-toggle-{{ $item->id }}"
-                                                                class="form-label text-muted">
-                                                                {{-- @if ($item->status == 1)
-                                                                    <span
-                                                                        class="badge bg-success-subtle text-success">Active</span>
-                                                                    Suspend User?
-                                                                @else
-                                                                    <span
-                                                                        class="badge bg-danger-subtle text-danger">Suspended</span>
-                                                                    Activate User?
-                                                                @endif --}}
-                                                                 @if ($item->status == 1)
-                                                                    <span
-                                                                        class="badge bg-success-subtle text-success">Active</span>
-                                                                    
-                                                                @else
-                                                                    <span
-                                                                        class="badge bg-danger-subtle text-danger">Suspended</span>
-                                                                    
-                                                                @endif
-                                                            </label>
-                                                            <input class="form-check-input code-switcher status-toggle"
-                                                                type="checkbox" id="user-status-toggle-{{ $item->id }}"
-                                                                data-user-id="{{ $item->id }}"
-                                                                {{ $item->status ? 'checked' : '' }}>
-                                                        </div>
+                <td class="text-center">
+                    <div class="form-check form-switch form-switch-right form-switch-md">
+                        <label for="user-status-toggle-{{ $item->id }}" class="form-label text-muted">
+                            @if ($item->status == 1)
+                                <span class="badge bg-success-subtle text-success">Active</span>
+                            @else
+                                <span class="badge bg-danger-subtle text-danger">Suspended</span>
+                            @endif
+                        </label>
+                        <input class="form-check-input code-switcher status-toggle" type="checkbox"
+                            id="user-status-toggle-{{ $item->id }}" data-user-id="{{ $item->id }}"
+                            {{ $item->status ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                        </tbody>
-                                    </table>
                                     <div class="noresult" style="display: none">
                                         <div class="text-center">
                                             <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
@@ -144,7 +143,7 @@
                                     </div>
                                 </div>
 
-                                <div class="d-flex justify-content-end">
+                                {{-- <div class="d-flex justify-content-end">
                                     <div class="pagination-wrap hstack gap-2" style="display: flex;">
                                         <a class="page-item pagination-prev disabled" href="javascript:void(0)">
                                             Previous
@@ -159,7 +158,7 @@
                                             Next
                                         </a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div><!-- end card -->
 
@@ -170,7 +169,7 @@
 
 
 
-                        
+
                     </div>
                     <!-- end col -->
                 </div>
@@ -229,64 +228,68 @@
 
     <script>
         $(document).ready(function() {
-    $('.status-toggle').on('change', function() {
-        var userId = $(this).data('user-id');
-        var isChecked = $(this).is(':checked');
-        var toggleSwitch = $(this);
+            $('.status-toggle').on('change', function() {
+                var userId = $(this).data('user-id');
+                var isChecked = $(this).is(':checked');
+                var toggleSwitch = $(this);
 
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: isChecked ? "Yes, activate user!" : "Yes, suspend user!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ route('update.user.status') }}",
-                    method: 'POST',
-                    data: {
-                        user_id: userId,
-                        is_checked: isChecked ? 1 : 0,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        console.log(response); // Log the response to ensure it's received
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: isChecked ? "Yes, activate user!" : "Yes, suspend user!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('update.user.status') }}",
+                            method: 'POST',
+                            data: {
+                                user_id: userId,
+                                is_checked: isChecked ? 1 : 0,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                console.log(
+                                    response
+                                ); // Log the response to ensure it's received
 
-                        if (response['alert-type'] === 'success') {
-                            Swal.fire({
-                                title: "Success!",
-                                text: response.message,
-                                icon: "success"
-                            }).then(() => {
-                            location.reload(); // Reload the page after success
+                                if (response['alert-type'] === 'success') {
+                                    Swal.fire({
+                                        title: "Success!",
+                                        text: response.message,
+                                        icon: "success"
+                                    }).then(() => {
+                                        location
+                                            .reload(); // Reload the page after success
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: response.message,
+                                        icon: "error"
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr
+                                    .responseText); // Log the error for debugging
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "An error occurred while updating the user status.",
+                                    icon: "error"
+                                });
+                                toggleSwitch.prop('checked', !
+                                    isChecked); // Revert toggle on error
+                            }
                         });
-                        } else {
-                            Swal.fire({
-                                title: "Error!",
-                                text: response.message,
-                                icon: "error"
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText); // Log the error for debugging
-                        Swal.fire({
-                            title: "Error!",
-                            text: "An error occurred while updating the user status.",
-                            icon: "error"
-                        });
-                        toggleSwitch.prop('checked', !isChecked); // Revert toggle on error
+                    } else {
+                        toggleSwitch.prop('checked', !isChecked); // Revert toggle if canceled
                     }
                 });
-            } else {
-                toggleSwitch.prop('checked', !isChecked); // Revert toggle if canceled
-            }
+            });
         });
-    });
-});
-
     </script>
 @endsection

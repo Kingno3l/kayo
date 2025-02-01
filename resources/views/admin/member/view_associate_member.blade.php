@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="listjs-table" id="associateMemberList">
-                                <div class="row g-4 mb-3">
+                                {{-- <div class="row g-4 mb-3">
                                     <div class="col-sm">
                                         <div class="d-flex justify-content-sm-end">
                                             <div class="search-box ms-2">
@@ -34,18 +34,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="table-responsive table-card mt-3 mb-1">
-                                    @if($users->isEmpty())
+                                    @if ($users->isEmpty())
                                         <div class="text-center">
                                             <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
                                                 colors="primary:#25a0e2,secondary:#00bd9d" style="width:75px;height:75px">
                                             </lord-icon>
                                             <h5 class="mt-2">Sorry! No Associate Members Found</h5>
-                                            <p class="text-muted mb-0">We've searched all our records, but no associate members were found.</p>
+                                            <p class="text-muted mb-0">We've searched all our records, but no associate
+                                                members were found.</p>
                                         </div>
                                     @else
+                                        {{-- <table class="table align-middle table-nowrap" id="associateMemberTable"> --}}
                                         <table class="table align-middle table-nowrap" id="associateMemberTable">
                                             <thead class="table-light">
                                                 <tr>
@@ -57,11 +59,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="list">
-                                                @foreach($users as $index => $user)
+                                                @foreach ($users as $index => $user)
                                                     <tr>
                                                         <td class="text-center">{{ $index + 1 }}</td>
                                                         <td class="text-center">
-                                                            <a href="{{ route('member.details', $user->id) }}" class="text-primary fw-semibold">
+                                                            <a href="{{ route('member.details', $user->id) }}"
+                                                                class="text-primary fw-semibold">
                                                                 {{ $user->name }}
                                                             </a>
                                                         </td>
@@ -73,6 +76,8 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+
+
                                         </table>
                                     @endif
                                 </div>

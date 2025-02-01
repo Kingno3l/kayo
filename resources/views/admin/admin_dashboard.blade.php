@@ -49,6 +49,28 @@
 <!-- Sweet Alert css-->
     <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 
+
+
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> --}}
+
+<!-- Include DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+<!-- Include jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+
+
 </head>
 
 <body>
@@ -188,6 +210,72 @@
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
+
+<script>
+    $(document).ready(function () {
+        $('#customerTable').DataTable({
+            "paging": true,          // Enable pagination
+            "searching": true,       // Enable search
+            "ordering": true,        // Enable sorting
+            "info": true,            // Show info text
+            "responsive": true,      // Make table responsive
+            "columnDefs": [
+                { "orderable": false, "targets": [7] } // Disable sorting on Status column
+            ],
+            dom: 'Bfrtip', // Include export buttons
+            buttons: [
+                'copy',  // Copy to clipboard
+                'csv',   // Export to CSV
+                'excel', // Export to Excel
+                'pdf',   // Export to PDF
+                'print'  // Print the table
+            ]
+        });
+    });
+
+     $(document).ready(function () {
+        $('#associateMemberTable').DataTable({
+            "paging": true,          // Enable pagination
+            "searching": true,       // Enable search
+            "ordering": true,        // Enable sorting
+            "info": true,            // Show info text
+            "responsive": true,      // Make table responsive
+            "columnDefs": [
+                { "orderable": false, "targets": [4] } // Disable sorting on Status column
+            ],
+            dom: 'Bfrtip', // Include export buttons
+            buttons: [
+                'copy',  // Copy to clipboard
+                'csv',   // Export to CSV
+                'excel', // Export to Excel
+                'pdf',   // Export to PDF
+                'print'  // Print the table
+            ]
+        });
+    });
+
+     $(document).ready(function () {
+        $('#studentMember').DataTable({
+            "paging": true,          // Enable pagination
+            "searching": true,       // Enable search
+            "ordering": true,        // Enable sorting
+            "info": true,            // Show info text
+            "responsive": true,      // Make table responsive
+            "columnDefs": [
+                { "orderable": false, "targets": [3] } // Disable sorting on Status column
+            ],
+            dom: 'Bfrtip', // Include export buttons
+            buttons: [
+                'copy',  // Copy to clipboard
+                'csv',   // Export to CSV
+                'excel', // Export to Excel
+                'pdf',   // Export to PDF
+                'print'  // Print the table
+            ]
+        });
+    });
+</script>
+
 
 </body>
 

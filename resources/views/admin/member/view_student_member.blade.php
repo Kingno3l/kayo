@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="listjs-table" id="customerList">
-                                <div class="row g-4 mb-3">
+                                {{-- <div class="row g-4 mb-3">
                                     <div class="col-sm">
                                         <div class="d-flex justify-content-sm-end">
                                             <div class="search-box ms-2">
@@ -34,11 +34,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <!-- Table -->
                                 <div class="table-responsive table-card mt-3 mb-1">
-                                    <table class="table align-middle table-nowrap" id="customerTable">
+                                    <table class="table align-middle table-nowrap" id="studentMember">
                                         <thead class="table-light">
                                             <tr>
                                                 <th>S/N</th>

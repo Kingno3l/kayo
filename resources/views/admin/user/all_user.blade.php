@@ -68,9 +68,9 @@
             <th>S/N</th>
             <th class="text-center sort" data-sort="customer_name">Full Name</th>
             <th class="text-center sort" data-sort="email">Email</th>
-            <th class="text-center sort" data-sort="phone">Phone</th>
+            {{-- <th class="text-center sort" data-sort="phone">Phone</th> --}}
             <th class="text-center sort" data-sort="date">Joined Date</th>
-            <th class="text-center sort" data-sort="registration_number">Registration Number</th>
+            {{-- <th class="text-center sort" data-sort="registration_number">Registration Number</th> --}}
             <th class="text-center sort" data-sort="country">Country</th>
             <th class="text-center sort" data-sort="action">Status</th>
         </tr>
@@ -92,7 +92,7 @@
                     </div>
                 </td>
                 <td class="text-center email">{{ $item->email }}</td>
-                <td class="text-center phone">{{ $item->country_code }} {{ $item->phone }}</td>
+                {{-- <td class="text-center phone">{{ $item->country_code }} {{ $item->phone }}</td> --}}
                 <td class="text-center date">{{ $item->created_at->format('d M, Y') }}</td>
 
                 @php
@@ -101,9 +101,9 @@
                         : 'default';
                 @endphp
 
-                <td class="text-center registration_number">
+                {{-- <td class="text-center registration_number">
                     {{ str_replace('-', '/', $item->registration_number) }}
-                </td>
+                </td> --}}
 
                 <td class="text-center country">
                     <img src="{{ asset('assets/images/flags/' . $countryCode . '.svg') }}"

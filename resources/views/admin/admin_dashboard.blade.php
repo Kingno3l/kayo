@@ -220,7 +220,7 @@
             "info": true,            // Show info text
             "responsive": true,      // Make table responsive
             "columnDefs": [
-                { "orderable": false, "targets": [7] } // Disable sorting on Status column
+                { "orderable": false, "targets": [5] } // Disable sorting on Status column
             ],
             dom: 'Bfrtip', // Include export buttons
             buttons: [

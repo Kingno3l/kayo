@@ -43,14 +43,16 @@
             <div class="d-flex align-items-center">
 
                 <div class="dropdown ms-1 topbar-head-dropdown header-item">
-                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                    {{-- <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img id="header-lang-img" src="{{ asset('assets/images/flags/us.svg') }}" alt="Header Language"
                             height="20" class="rounded">
-                    </button>
+                    </button> --}}
+                                         <div id="google_translate_element"></div> 
+
                     <div class="dropdown-menu dropdown-menu-end">
 
-                        <!-- item-->
+                        {{-- <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="en"
                             title="English">
                             <img src="{{ asset('assets/images/flags/us.svg') }}" alt="user-image" class="me-2 rounded"
@@ -63,7 +65,7 @@
                             <img src="{{ asset('assets/images/flags/fr.svg') }}" alt="user-image" class="me-2 rounded"
                                 height="18">
                             <span class="align-middle">French</span>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
 

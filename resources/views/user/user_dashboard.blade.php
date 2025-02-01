@@ -55,6 +55,7 @@
 
 <body>
 
+
     <!-- Begin page -->
     <div id="layout-wrapper">
 
@@ -138,8 +139,8 @@
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    
-     <!-- prismjs plugin -->
+
+    <!-- prismjs plugin -->
     <script src="{{ asset('assets/libs/prismjs/prism.js') }}"></script>
     <script src="{{ asset('assets/libs/list.js/list.min.js') }}"></script>
     <script src="{{ asset('assets/libs/list.pagination.js/list.pagination.min.js') }}"></script>
@@ -178,7 +179,7 @@
     <!-- App JS -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
-    
+
 
     <!-- Toastr Notifications -->
     <script>
@@ -203,6 +204,22 @@
             }
         @endif
     </script>
+
+
+    <!-- to your js part -->
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Your website's language
+                includedLanguages: 'fr', // Only show French
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE // Optional: Use a simpler layout
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
 
 
 </body>

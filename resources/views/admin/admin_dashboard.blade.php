@@ -175,6 +175,20 @@
         @endif
     </script>
 
+    <!-- to your js part -->
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Your website's language
+                includedLanguages: 'fr', // Only show French
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE // Optional: Use a simpler layout
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
 </body>
 
 </html>

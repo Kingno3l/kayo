@@ -171,7 +171,7 @@
                                                                 </span>
                                                             </div>
                                                             <input type="url" class="form-control" name="linkedin"
-                                                                placeholder="www.linkedin.com/yourname"
+                                                                placeholder="https://www.linkedin.com/in/yourname"
                                                                 value="{{ old('linkedin', $socials->linkedin ?? '') }}">
                                                         </div>
 
@@ -183,7 +183,7 @@
                                                                 </span>
                                                             </div>
                                                             <input type="url" class="form-control" name="facebook"
-                                                                placeholder="www.facebook.com/yourname"
+                                                                placeholder="https://www.facebook.com/yourname"
                                                                 value="{{ old('facebook', $socials->facebook ?? '') }}">
                                                         </div>
 
@@ -195,7 +195,7 @@
                                                                 </span>
                                                             </div>
                                                             <input type="url" class="form-control" name="instagram"
-                                                                placeholder="www.instagram.com/yourname"
+                                                                placeholder="https://www.instagram.com/yourname"
                                                                 value="{{ old('instagram', $socials->instagram ?? '') }}">
                                                         </div>
 
@@ -207,7 +207,7 @@
                                                                 </span>
                                                             </div>
                                                             <input type="url" class="form-control" name="snapchat"
-                                                                placeholder="www.snapchat.com/yourname"
+                                                                placeholder="https://www.snapchat.com/yourname"
                                                                 value="{{ old('snapchat', $socials->snapchat ?? '') }}">
                                                         </div>
 

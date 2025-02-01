@@ -4,6 +4,8 @@
 @endphp
 
 <header id="page-topbar">
+    
+
     <div class="layout-width">
         <div class="navbar-header">
             <div class="d-flex">
@@ -98,17 +100,18 @@
 
 
                <div class="dropdown ms-1 topbar-head-dropdown header-item">
-                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{-- <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img id="header-lang-img" height="20" class="rounded" src="{{ asset('assets/images/flags/us.svg') }}" alt="">
                         &nbsp;
                         <img id="header-lang-img" src="{{ asset('assets/images/flags/us.svg') }}"  height="20" class="rounded">
                         &nbsp;
                        
 
-                    </button>
+                    </button> --}}
+                     <div id="google_translate_element"></div> 
                     <div class="dropdown-menu dropdown-menu-end" style="">
 
-                        <!-- item-->
+                        {{-- <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
                             <img src="{{ asset('assets/images/flags/us.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">English</span>
@@ -120,7 +123,8 @@
                         <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="fr" title="French">
                             <img src="{{ asset('assets/images/flags/french.svg') }}" alt="user-image" class="me-2 rounded" height="18">
                             <span class="align-middle">français</span>
-                        </a>
+                        </a> --}}
+
 
                         
                     </div>
